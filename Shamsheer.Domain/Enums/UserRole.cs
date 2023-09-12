@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
-namespace Shamsheer.Domain.Enums
+
+namespace Shamsheer.Domain.Enums;
+
+public enum UserRole
 {
-    public enum UserRole
-    {
-        Student,
-        Teacher,
-        Admin,
-        SuperAdmin
-    }
+    Student,
+    Teacher,
+    Admin,
+    SuperAdmin
 }
