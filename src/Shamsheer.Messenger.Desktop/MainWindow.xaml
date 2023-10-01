@@ -122,8 +122,8 @@
                             </Ellipse>
                         </Border>
                         <StackPanel Margin="0 15 0 0">
-                            <TextBlock Text="Muhammadkarim To'xtaboyev" Foreground="Snow" FontSize="13" FontWeight="DemiBold"/>
-                            <TextBlock Text="+998936900722" Foreground="Snow"/>
+                            <TextBlock Text="Default User" Foreground="Snow" FontSize="13" FontWeight="DemiBold"/>
+                            <TextBlock Text="+998707776677" Foreground="Snow"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

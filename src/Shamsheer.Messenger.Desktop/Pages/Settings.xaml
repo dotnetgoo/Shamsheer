@@ -65,7 +65,7 @@
                         </Ellipse>
                     </Border>
                     <StackPanel VerticalAlignment="Center" Margin="15 0 0 0">
-                        <TextBlock Text="Muhammadkarim To'xtaboyev" Foreground="Snow" FontSize="16" FontWeight="DemiBold"/>
+                        <TextBlock Text="Defaul User" Foreground="Snow" FontSize="16" FontWeight="DemiBold"/>
                         <TextBlock Text="online" FontSize="13" Foreground="#48A2F5"/>
                     </StackPanel>
                 </DockPanel>

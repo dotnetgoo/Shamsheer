@@ -21,7 +21,7 @@
         <Grid Grid.Row="0" Background="#17212B">
             <DockPanel>
                 <StackPanel VerticalAlignment="Center" Margin="20 0 0 0">
-                    <TextBlock Text=".NET Uzbekistan" Foreground="Snow" FontSize="15"/>
+                    <TextBlock Text=".NET Andijon" Foreground="Snow" FontSize="15"/>
                     <TextBlock x:Name="memberCountTxt" Text="0 member" FontSize="15" Foreground="#6C7883"/>
                 </StackPanel>
                 <DockPanel HorizontalAlignment="Right" VerticalAlignment="Center">

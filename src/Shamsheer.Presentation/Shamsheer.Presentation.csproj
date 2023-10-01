@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
+  </ItemGroup>
+
 </Project>

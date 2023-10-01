@@ -70,6 +70,13 @@ namespace Shamsheer.Messenger.Desktop
 
         private void OpenMenu_Btn_Click(object sender, RoutedEventArgs e)
         {
+            var boshlash = new Thickness(-280, 0, 0, 0);
+            var tugatish = new Thickness(0, 0, 0, 0);
+            var da = new ThicknessAnimation();
+            da.From = boshlash;
+            da.To = tugatish;
+            da.Duration = TimeSpan.FromMilliseconds(200);
+            MenuGrid.BeginAnimation(MarginProperty, da);
             CloseMenu_Border.Visibility = Visibility.Visible;
         }
 
