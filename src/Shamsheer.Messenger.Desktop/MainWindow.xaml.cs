@@ -1,4 +1,4 @@
-﻿using Shamsheer.Messenger.Desktop.Components;
+using Shamsheer.Messenger.Desktop.Components;
 using Shamsheer.Messenger.Desktop.Models;
 using Shamsheer.Messenger.Desktop.Pages;
 using System;
@@ -179,8 +179,4 @@ namespace Shamsheer.Messenger.Desktop
         }
 
     }
-
-
-
-
 }

@@ -24,6 +24,5 @@ namespace Shamsheer.Management.Desktop
         {
             InitializeComponent();
         }
-
     }
 }

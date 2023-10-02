@@ -10,5 +10,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
   </ItemGroup>
-
 </Project>

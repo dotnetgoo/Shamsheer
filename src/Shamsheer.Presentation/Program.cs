@@ -1,4 +1,4 @@
-﻿using Shamsheer.Data.DbContexts;
+using Shamsheer.Data.DbContexts;
 using Shamsheer.Domain.Entities;
 using System;
 using System.Threading.Tasks;
@@ -15,8 +15,7 @@ class Program
             LastName = "TestFSDFSDF",
             Phone = "+998936900723",
             Password = "PasswordFD",
-        }
-        );
+        });
         await dbContext.SaveChangesAsync();
 
         //foreach (var user in users)

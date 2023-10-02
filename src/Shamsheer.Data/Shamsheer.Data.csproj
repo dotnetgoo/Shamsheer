@@ -23,5 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Shamsheer.Domain\Shamsheer.Domain.csproj" />
   </ItemGroup>
-
 </Project>
