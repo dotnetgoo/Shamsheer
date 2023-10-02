@@ -16,7 +16,7 @@
                 <StackPanel>
                     <Rectangle x:Name="messageRect" Visibility="Collapsed" RadiusX="10" RadiusY="10" Width="150" HorizontalAlignment="Left" Margin="10" Height="150">
                         <Rectangle.Fill>
-                            <ImageBrush x:Name="messageImg" ImageSource="C:\Users\insta\OneDrive\Desktop\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\2.jpg"/>
+                            <ImageBrush x:Name="messageImg" ImageSource="../Images/2.jpg"/>
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock x:Name="textMessageTxt" Text="Message asd swef erg erg erg erg" Margin="10 5 50 20" VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Snow"/>

@@ -60,7 +60,7 @@
                     <Border HorizontalAlignment="Left" Width="70" Height="70" Background="White" CornerRadius="35">
                         <Ellipse Width="70" Height="70">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="C:\Users\insta\OneDrive\Desktop\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\2.jpg" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="../Images/2.jpg" Stretch="Uniform"/>
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
