@@ -83,6 +83,7 @@ namespace Shamsheer.Messenger.Desktop
         private void CloseMenu_Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
             CloseMenu_Border.Visibility = Visibility.Collapsed;
+            menuClose();
         }
 
         private void newGroup_Btn_Click(object sender, RoutedEventArgs e)
