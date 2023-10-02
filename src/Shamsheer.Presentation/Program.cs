@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Shamsheer.Data.DbContexts;
 using Shamsheer.Domain.Entities;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 class Program
@@ -9,18 +11,20 @@ class Program
     {
         var dbContext = new ShamsheerDbContext();
 
-        await dbContext.Users.AddAsync(new User
+        var message = await dbContext.Messages
+            .Include(m => m.To)
+            .ThenInclude(u => u.Assets)
+            .Include(m => m.From)
+            .ThenInclude(u => u.Assets)
+            .Include(m => m.Content)
+            .FirstOrDefaultAsync();
+        if(message != null)
         {
-            FirstName = "TeASDASDst",
-            LastName = "TestFSDFSDF",
-            Phone = "+998936900723",
-            Password = "PasswordFD",
-        });
-        await dbContext.SaveChangesAsync();
-
-        //foreach (var user in users)
-        //{
-        //    Console.WriteLine(user.Id + " " + user.FirstName + " " + user.LastName);
-        //}
+            Console.WriteLine(message.From.FirstName + " dan " + message.To.FirstName + " ga habar: \n" + message.Content.Text);
+            foreach (var asset in message.To.Assets)
+            {
+                Console.WriteLine(asset.Extension + " " + asset.Size);
+            }
+        }
     }
 }

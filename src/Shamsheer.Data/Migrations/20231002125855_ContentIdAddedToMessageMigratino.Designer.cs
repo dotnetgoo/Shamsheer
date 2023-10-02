@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Shamsheer.Data.DbContexts;
@@ -11,9 +12,11 @@ using Shamsheer.Data.DbContexts;
 namespace Shamsheer.Data.Migrations
 {
     [DbContext(typeof(ShamsheerDbContext))]
-    partial class ShamsheerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002125855_ContentIdAddedToMessageMigratino")]
+    partial class ContentIdAddedToMessageMigratino
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,45 +24,6 @@ namespace Shamsheer.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Asset", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text");
-
-                    b.Property<long>("Size")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Asset");
-                });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Message", b =>
                 {
@@ -162,17 +126,6 @@ namespace Shamsheer.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Asset", b =>
-                {
-                    b.HasOne("Shamsheer.Domain.Entities.User", "User")
-                        .WithMany("Assets")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Shamsheer.Domain.Entities.Message", b =>
                 {
                     b.HasOne("Shamsheer.Domain.Entities.MessageContent", "Content")
@@ -204,11 +157,6 @@ namespace Shamsheer.Data.Migrations
                     b.Navigation("Parent");
 
                     b.Navigation("To");
-                });
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Assets");
                 });
 #pragma warning restore 612, 618
         }

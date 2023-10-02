@@ -12,7 +12,7 @@ namespace Shamsheer.Data.DbContexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server=localhost; Port=5432; Database=ShamsheerDb; User Id=postgres; Password=Danger1;");
+            optionsBuilder.UseNpgsql("Server=localhost; Port=5432; Database=ShamsheerDb; User Id=postgres; Password=root;");
         }
 
         public DbSet<User> Users { get; set; }

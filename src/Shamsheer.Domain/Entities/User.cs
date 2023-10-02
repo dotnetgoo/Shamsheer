@@ -15,5 +15,7 @@ namespace Shamsheer.Domain.Entities
         public string Phone { get; set; }
         public string Password { get; set; }
         public UserRole Role { get; set; }
+
+        public ICollection<Asset> Assets { get; set; }
     }
 }
