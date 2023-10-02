@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Shamsheer.Messenger.Desktop.Components.TextMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Shamsheer.Messenger.Desktop.Components"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             HorizontalAlignment="Right"
+             VerticalAlignment="Bottom"
+             Loaded="UserControl_Loaded"
+             >
+    <Grid MinWidth="100" MinHeight="30" MaxWidth="500" Width="auto" Height="auto" Margin="10 3 10 3">
+        <Border Background="#2B5278" CornerRadius="10 20 0 10">
+            <Grid>
+                <StackPanel>
+                    <Rectangle x:Name="messageRect" Visibility="Collapsed" RadiusX="10" RadiusY="10" Width="150" HorizontalAlignment="Left" Margin="10" Height="150">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="messageImg" ImageSource="C:\Users\insta\OneDrive\Desktop\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\2.jpg"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock x:Name="textMessageTxt" Text="Message asd swef erg erg erg erg" Margin="10 5 50 20" VerticalAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Snow"/>
+                </StackPanel>
+                <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0 0 10 5" >
+                    <TextBlock x:Name="textMessageTime" Text="21:00" Foreground="#92CAF4"/>
+                    <md:PackIcon Kind="Tick" Foreground="Snow" Margin="10 0 0 0"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
