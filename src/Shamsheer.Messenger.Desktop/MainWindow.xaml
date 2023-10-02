@@ -95,9 +95,9 @@
                     <Border Visibility="Collapsed" CornerRadius="15" Height="25" Width="210" Background="#1D2C3A">
                         <TextBlock Text="Select to chat a start messaging" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Opacity="0.8" Foreground="#BCFFFF"/>
                     </Border>
-                    <Image Source="C:\Users\insta\OneDrive\Desktop\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\xamarin.png" Stretch="UniformToFill">
+                    <Image Source="https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png" Stretch="UniformToFill">
                         <Image.Effect>
-                            <BlurEffect Radius="50" KernelType="Gaussian"/>
+                            <BlurEffect Radius="5" KernelType="Gaussian"/>
                         </Image.Effect>
                     </Image>
                     <Frame x:Name="_frameChat" Source="pages/ChatPage.xaml" NavigationUIVisibility="Hidden"/>
@@ -117,7 +117,7 @@
                         <Border HorizontalAlignment="Left" Width="50" Height="50" Background="White" CornerRadius="25">
                             <Ellipse Width="50" Height="50">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="C:\Users\insta\OneDrive\Desktop\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\2.jpg" Stretch="Uniform"/>
+                                    <ImageBrush ImageSource="https://i.pinimg.com/736x/b2/36/f4/b236f4e7dc2d7ef2f5c8b6c3f910881c.jpg" Stretch="Uniform"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>

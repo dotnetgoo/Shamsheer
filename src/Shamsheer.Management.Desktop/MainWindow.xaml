@@ -6,46 +6,7 @@
         xmlns:local="clr-namespace:Shamsheer.Management.Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="Red" />
-        </Style>
-    </Window.Resources>
-
-
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="50"/>
-        
-            
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid>
-                <Button/>
-            </Grid>
-        </Grid>
-        
-        <Grid Grid.Column="1">
 
-            <StackPanel x:Name="SideBarMenu">
-                <Button Width="50" Height="50" VerticalAlignment="Top" Content=""/>
-                <Button Width="50" Height="50" VerticalAlignment="Top" Style="{StaticResource {x:Type Button}}"/>
-                <Button Width="50" Height="50" VerticalAlignment="Top" Style="{StaticResource {x:Type Button}}"/>
-                <Button Width="50" Height="50" VerticalAlignment="Top" Style="{StaticResource {x:Type Button}}"/>
-                <Button Width="50" Height="50" VerticalAlignment="Top" Style="{StaticResource {x:Type Button}}"/>
-                <Button Width="50" Height="50" VerticalAlignment="Top" Click="Button_Click" Style="{StaticResource {x:Type Button}}"/>
-            </StackPanel>
-
-
-        </Grid>
     </Grid>
 </Window>
