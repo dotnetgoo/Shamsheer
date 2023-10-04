@@ -10,6 +10,7 @@ namespace Shamsheer.Domain.Entities
     public class MessageContent : Auditable
     { 
         public string Text { get; set; }
-        public long[] FileId { get; set; }
+
+        public long FileId { get; set; }
     }
 }

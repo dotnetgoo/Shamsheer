@@ -18,6 +18,11 @@ namespace Shamsheer.Messenger.Api.Controllers
             _logger = logger;
         }
 
+
+        /// <summary>
+        /// Agferg erg retjgkn re4tb rtb rtebkjr tbklj rtb 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {

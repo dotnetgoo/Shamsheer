@@ -18,6 +18,9 @@ namespace Shamsheer.Domain.Entities
         public Message Parent { get; set; }
         public long? ParentId { get; set; }
         
+        /// <summary>
+        /// ijuhnbik
+        /// </summary>
         public User From { get; set; }
         public long FromId { get; set; }
 
