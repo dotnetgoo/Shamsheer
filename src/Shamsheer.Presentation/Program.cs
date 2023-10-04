@@ -17,14 +17,16 @@ class Program
             .Include(m => m.From)
             .ThenInclude(u => u.Assets)
             .Include(m => m.Content)
+            .Include(m => m.Parent)
+            .ThenInclude(pm => pm.Content)
+            .OrderBy(m => m.Id)
             .FirstOrDefaultAsync();
         if(message != null)
         {
-            Console.WriteLine(message.From.FirstName + " dan " + message.To.FirstName + " ga habar: \n" + message.Content.Text);
-            foreach (var asset in message.To.Assets)
-            {
-                Console.WriteLine(asset.Extension + " " + asset.Size);
-            }
+            Console.WriteLine($"Message: {message.Content.Text}");
+            Console.WriteLine($"From: {message.From.FirstName}");
+            Console.WriteLine($"To: {message.To.FirstName}");
+            Console.WriteLine($"Parent: {message.Parent?.Content.Text}");
         }
     }
 }
