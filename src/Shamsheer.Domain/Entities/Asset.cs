@@ -1,4 +1,5 @@
 ﻿using Shamsheer.Domain.Commons;
+using Shamsheer.Domain.Entities.Chats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Shamsheer.Domain.Entities
 {
     public class Asset : Auditable
     {
-        public long UserId { get; set; }
-        public User User { get; set; }
+        public long ChatId { get; set; }
+        public Chat Chat { get; set; }
 
         public string Name { get; set; }
         public string Path { get; set; }

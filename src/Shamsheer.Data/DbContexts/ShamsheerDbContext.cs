@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shamsheer.Domain.Entities;
+using Shamsheer.Domain.Entities.Chats;
+using Shamsheer.Domain.Entities.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shamsheer.Domain.Enums
+namespace Shamsheer.Domain.Enums.Chats
 {
-    public enum UserRole
+    public enum ChatRole
     {
-        Student,
-        Teacher,
+        Member,
+        Subscriber,
         Admin,
-        SuperAdmin
+        Banned,
+        Restricted,
+        Owner
     }
 }

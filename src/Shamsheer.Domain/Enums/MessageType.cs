@@ -9,10 +9,23 @@ namespace Shamsheer.Domain.Enums
     public enum MessageType
     {
         Text,
-        Voice,
-        CircularVideo,
         Photo,
         Video,
-        File
+        CircularVideo,
+        Audio,
+        Voice,
+        File,
+        Location,
+        Contact,
+        MediaGroup,
+        Poll,
+        Gif,
+        Sticker,
+        PhotoAndText,
+        VideoAndText,
+        AudioAndText,
+        FileAndText,
+        GifAndText,
+        MediaGroupAndText
     }
 }
