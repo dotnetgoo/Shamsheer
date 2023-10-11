@@ -11,13 +11,11 @@ namespace Shamsheer.Data.DbContexts
 {
     public class ShamsheerDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ShamsheerDbContext(DbContextOptions<ShamsheerDbContext> options)
+            : base(options)
         {
-            //optionsBuilder.UseNpgsql("Server=localhost; Port=5432; Database=ShamsheerDb; User Id=postgres; Password=root;");
-            optionsBuilder.UseInMemoryDatabase("ShamsheerDb");
+            
         }
-
         public DbSet<User> Users { get; set; }
-        public DbSet<Message> Messages { get; set; }
     }
 }

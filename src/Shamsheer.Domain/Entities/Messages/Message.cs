@@ -15,9 +15,6 @@ namespace Shamsheer.Domain.Entities.Messages
         public MessageType Type { get; set; }
         public FormatType FormatType { get; set; }
 
-        public long ContentId { get; set; }
-        public MessageContent Content { get; set; }
-
         public Message Parent { get; set; }
         public long? ParentId { get; set; }
         public User From { get; set; }
