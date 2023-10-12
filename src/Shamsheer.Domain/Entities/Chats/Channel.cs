@@ -1,4 +1,5 @@
-﻿using Shamsheer.Domain.Enums.Chats;
+﻿using Shamsheer.Domain.Entities.Assets;
+using Shamsheer.Domain.Enums.Chats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Shamsheer.Domain.Entities.Chats
         public ChatAccessType AccessType { get; set; }
         public string InviteLink { get; set; }
         public ICollection<UserChannel> Subscribers { get; set; }
+        public ICollection<ChannelAsset> Assets { get; set; }
     }
 }

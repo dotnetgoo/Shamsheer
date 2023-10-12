@@ -1,4 +1,5 @@
 ﻿using Shamsheer.Domain.Commons;
+using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Domain.Enums.Chats;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ namespace Shamsheer.Domain.Entities.Chats
         public ChatAccessType AccessType { get; set; }
         public string InviteLink { get; set; }
         public ICollection<UserGroup> Members { get; set; }
+        public ICollection<GroupAsset> Assets { get; set; }
     }
 }
