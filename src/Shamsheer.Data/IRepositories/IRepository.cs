@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using Shamsheer.Domain.Commons;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shamsheer.Data.IRepositories;
 
-public interface IRepository<TEntity>
+public interface IRepository<TEntity> where TEntity : Auditable
 {
-    public Task<bool> SaveChangeAsync();
-    public Task<bool> RemoveAsync(long id);
+    public Task<bool> DeleteAsync(long id);
     public IQueryable<TEntity> SelectAll();
     public Task<TEntity> SelectByIdAsync(long id);
     public Task<TEntity> InsertAsync(TEntity entity);
