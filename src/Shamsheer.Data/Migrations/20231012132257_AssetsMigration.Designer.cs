@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Shamsheer.Data.DbContexts;
@@ -11,9 +12,11 @@ using Shamsheer.Data.DbContexts;
 namespace Shamsheer.Data.Migrations
 {
     [DbContext(typeof(ShamsheerDbContext))]
-    partial class ShamsheerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012132257_AssetsMigration")]
+    partial class AssetsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,91 +142,7 @@ namespace Shamsheer.Data.Migrations
                     b.ToTable("UserAssets");
                 });
 
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("AccessType")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ChatType")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("InviteLink")
-                        .HasColumnType("text");
-
-                    b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("Channels");
-                });
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Group", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("AccessType")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ChatType")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("InviteLink")
-                        .HasColumnType("text");
-
-                    b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.User", b =>
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Chat", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,19 +159,8 @@ namespace Shamsheer.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -263,7 +171,11 @@ namespace Shamsheer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Chats");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Chat");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.UserChannel", b =>
@@ -400,6 +312,85 @@ namespace Shamsheer.Data.Migrations
                     b.ToTable("MessageContents");
                 });
 
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
+                {
+                    b.HasBaseType("Shamsheer.Domain.Entities.Chats.Chat");
+
+                    b.Property<int>("AccessType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("InviteLink")
+                        .HasColumnType("text");
+
+                    b.Property<long>("OwnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasDiscriminator().HasValue("Channel");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Group", b =>
+                {
+                    b.HasBaseType("Shamsheer.Domain.Entities.Chats.Chat");
+
+                    b.Property<int>("AccessType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("InviteLink")
+                        .HasColumnType("text");
+
+                    b.Property<long>("OwnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Chats", t =>
+                        {
+                            t.Property("AccessType")
+                                .HasColumnName("Group_AccessType");
+
+                            t.Property("InviteLink")
+                                .HasColumnName("Group_InviteLink");
+
+                            t.Property("OwnerId")
+                                .HasColumnName("Group_OwnerId");
+
+                            t.Property("Title")
+                                .HasColumnName("Group_Title");
+                        });
+
+                    b.HasDiscriminator().HasValue("Group");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.User", b =>
+                {
+                    b.HasBaseType("Shamsheer.Domain.Entities.Chats.Chat");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
             modelBuilder.Entity("Shamsheer.Domain.Entities.Assets.ChannelAsset", b =>
                 {
                     b.HasOne("Shamsheer.Domain.Entities.Chats.Channel", "Channel")
@@ -431,28 +422,6 @@ namespace Shamsheer.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
-                {
-                    b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Group", b =>
-                {
-                    b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.UserChannel", b =>
@@ -527,6 +496,28 @@ namespace Shamsheer.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Message");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
+                {
+                    b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Group", b =>
+                {
+                    b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
