@@ -9,8 +9,8 @@ namespace Shamsheer.Data.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable
 {
-    ShamsheerDbContext dbContext;
-    DbSet<TEntity> dbSet;
+    private readonly ShamsheerDbContext dbContext;
+    private readonly DbSet<TEntity> dbSet;
 
     public Repository()
     {
@@ -18,31 +18,39 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
         this.dbSet = dbContext.Set<TEntity>();
     }
 
-    public async Task<TEntity> InsertAsync(TEntity entitiy)
+    
+    public async Task<TEntity> InsertAsync(TEntity entity)
     {
-        await dbSet.AddAsync(entitiy);
-        await dbContext.SaveChangesAsync();
-        return entitiy;
+        await dbSet.AddAsync(entity);
+        return entity;
     }
+
 
     public async Task<bool> RemoveAsync(long id)
     {
         var entity = await dbSet.FirstOrDefaultAsync(e => e.Id == id);
         dbSet.Remove(entity);
-        await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public IQueryable<TEntity> SelectAllAsync()
+
+    public async Task<bool> SaveChangeAsync()
+        => await this.dbContext.SaveChangesAsync() > 0;
+
+
+    public IQueryable<TEntity> SelectAll()
         => this.dbSet;
+
+
 
     public async Task<TEntity> SelectByIdAsync(long id)
         => await dbSet.FirstOrDefaultAsync(e => e.Id == id);
 
-    public async Task<TEntity> UpdateAsync(TEntity entitiy)
+
+
+    public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        var entities = (dbContext.Update(entitiy)).Entity;
-        await dbContext.SaveChangesAsync();
+        var entities = (dbContext.Update(entity)).Entity;
         return entities;
     }
 }
