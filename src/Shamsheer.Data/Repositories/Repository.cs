@@ -10,26 +10,26 @@ namespace Shamsheer.Data.Repositories;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable
 {
     private readonly ShamsheerDbContext _dbContext;
-    private readonly DbSet<TEntity> dbSet;
+    private readonly DbSet<TEntity> _dbSet;
 
     public Repository(ShamsheerDbContext dbContext)
     {
         this._dbContext = dbContext;
-        this.dbSet = _dbContext.Set<TEntity>();
+        this._dbSet = _dbContext.Set<TEntity>();
     }
 
     
     public async Task<TEntity> InsertAsync(TEntity entity)
     {
-        await this.dbSet.AddAsync(entity);
+        await this._dbSet.AddAsync(entity);
         return entity;
     }
 
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var entity = await this.dbSet.FirstOrDefaultAsync(e => e.Id == id);
-        dbSet.Remove(entity);
+        var entity = await this._dbSet.FirstOrDefaultAsync(e => e.Id == id);
+        _dbSet.Remove(entity);
         return true;
     }
 
@@ -39,12 +39,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
 
 
     public IQueryable<TEntity> SelectAll()
-        => this.dbSet;
+        => this._dbSet;
 
 
 
     public async Task<TEntity> SelectByIdAsync(long id)
-        => await dbSet.FirstOrDefaultAsync(e => e.Id == id);
+        => await this._dbSet.FirstOrDefaultAsync(e => e.Id == id);
 
 
 
