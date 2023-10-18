@@ -1,6 +1,6 @@
-﻿namespace Shamsheer.Service.DTOs.NotificationDto;
+﻿namespace Shamsheer.Service.DTOs.Notification;
 
-public class EmailMessage
+public class EmailMessageDto
 {
     public string Recipent { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
