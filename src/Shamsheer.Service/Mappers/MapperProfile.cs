@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Domain.Entities.Chats;
+using Shamsheer.Service.DTOs.UserAssets;
 using Shamsheer.Service.DTOs.Users;
 using System;
 using System.Collections.Generic;
@@ -13,8 +15,14 @@ namespace Shamsheer.Service.Mappers
     {
         public MapperProfile()
         {
+            // User
             CreateMap<User, UserForCreationDto>().ReverseMap();
             CreateMap<User, UserForUpdateDto>().ReverseMap();
+            CreateMap<User, UserForResultDto>().ReverseMap();
+
+
+            // UserAsset
+            CreateMap<UserAsset, UserAssetForResultDto>().ReverseMap();
         }
     }
 }

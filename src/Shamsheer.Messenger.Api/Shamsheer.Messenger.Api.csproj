@@ -7,13 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11"/>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
+    <ProjectReference Include="..\Shamsheer.Service\Shamsheer.Service.csproj" />
   </ItemGroup>
 
 </Project>

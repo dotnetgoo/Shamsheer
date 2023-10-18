@@ -1,6 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Shamsheer.Service.Mappers;
 using Shamsheer.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
+using Shamsheer.Messenger.Api.Extensions;
+using Shamsheer.Messenger.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCustomService();
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
