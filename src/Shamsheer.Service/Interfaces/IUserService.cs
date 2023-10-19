@@ -10,11 +10,11 @@ namespace Shamsheer.Service.Interfaces
 {
     public interface IUserService
     {
-        Task<User> AddAsync(UserForCreationDto dto);
-        Task<IEnumerable<User>> RetrieveAllAsync();
-        Task<User> RetrieveByIdAsync(long id);
-        Task<User> RetrieveByEmailAsync(string email);
-        Task<User> ModifyAsync(UserForUpdateDto dto);
         Task<bool> RemoveAsync(long id);
+        Task<UserForResultDto> RetrieveByIdAsync(long id);
+        Task<IEnumerable<UserForResultDto>> RetrieveAllAsync();
+        Task<UserForResultDto> AddAsync(UserForCreationDto dto);
+        Task<UserForResultDto> RetrieveByEmailAsync(string email);
+        Task<UserForResultDto> ModifyAsync(long id, UserForUpdateDto dto);
     }
 }

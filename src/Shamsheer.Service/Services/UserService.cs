@@ -1,55 +1,103 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Shamsheer.Data.IRepositories;
-using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.DTOs.Users;
 using Shamsheer.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shamsheer.Service.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using Shamsheer.Domain.Entities.Chats;
 
 namespace Shamsheer.Service.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _userRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository<User> _userRepository;
 
-        public UserService(IRepository<User> userRepository, IMapper mapper)
+        public UserService(IMapper mapper,IRepository<User> userRepository)
         {
-            _userRepository = userRepository;
             _mapper = mapper;
+            _userRepository = userRepository;
         }
 
-        public Task<User> AddAsync(UserForCreationDto dto)
+        public async Task<UserForResultDto> AddAsync(UserForCreationDto dto)
         {
-            throw new NotImplementedException();
+            var users = await this._userRepository.SelectAll()
+                .Where(u => u.Phone == dto.Phone)
+                .FirstOrDefaultAsync();
+
+            if (users is not null)
+                throw new ShamsheerException(409, "User is already exist.");
+
+            var mappedUser = this._mapper.Map<User>(dto);
+            mappedUser.CreatedAt = DateTime.UtcNow;
+
+            var createdUser = await this._userRepository.InsertAsync(mappedUser);
+            return this._mapper.Map<UserForResultDto>(mappedUser);
         }
 
-        public Task<User> ModifyAsync(UserForUpdateDto dto)
+        public async Task<UserForResultDto> ModifyAsync(long id, UserForUpdateDto dto)
         {
-            throw new NotImplementedException();
+            var user = await this._userRepository.SelectAll()
+            .Where(u => u.Id == id)
+            .FirstOrDefaultAsync();
+            if (user is null)
+                throw new ShamsheerException(404, "User not found");
+
+            user.UpdatedAt = DateTime.UtcNow;
+            var person = this._mapper.Map(dto, user);
+
+            await this._userRepository.UpdateAsync(person);
+
+            return this._mapper.Map<UserForResultDto>(person);
         }
 
-        public Task<bool> RemoveAsync(long id)
+        public async Task<bool> RemoveAsync(long id)
         {
-            throw new NotImplementedException();
+            var user = await this._userRepository.SelectAll()
+                .Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+            if (user is null)
+                throw new ShamsheerException(404, "User is not found");
+
+            await this._userRepository.DeleteAsync(id);
+
+            return true;
         }
 
-        public Task<IEnumerable<User>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
         {
-            throw new NotImplementedException();
+            var users = await this._userRepository.SelectAll()
+                .Include(a => a.Assets)
+                .ToListAsync();
+
+            return this._mapper.Map<IEnumerable<UserForResultDto>>(users);
         }
 
-        public Task<User> RetrieveByEmailAsync(string email)
+        public async Task<UserForResultDto> RetrieveByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var user = await this._userRepository.SelectAll()
+                .Where(u => u.Email.ToLower() == email.ToLower())
+                .FirstOrDefaultAsync();
+            if (user is null)
+                throw new ShamsheerException(404, "User Not Found");
+
+            return this._mapper.Map<UserForResultDto>(user);
         }
 
-        public Task<User> RetrieveByIdAsync(long id)
+        public async Task<UserForResultDto> RetrieveByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            var users = await this._userRepository.SelectAll()
+                .Where(u => u.Id == id)
+                .Include(a => a.Assets)
+                .FirstOrDefaultAsync();
+            if (users is null)
+                throw new ShamsheerException(404, "User is not found");
+
+            return this._mapper.Map<UserForResultDto>(users);
         }
     }
 }
