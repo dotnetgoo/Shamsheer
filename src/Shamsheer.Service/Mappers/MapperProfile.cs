@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using Shamsheer.Domain.Entities.Assets;
-using Shamsheer.Domain.Entities.Chats;
-using Shamsheer.Service.DTOs.UserAssets;
 using Shamsheer.Service.DTOs.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shamsheer.Service.DTOs.Groups;
+using Shamsheer.Domain.Entities.Chats;
+using Shamsheer.Domain.Entities.Assets;
+using Shamsheer.Service.DTOs.UserAssets;
+using Shamsheer.Service.DTOs.UserGroup;
 
 namespace Shamsheer.Service.Mappers
 {
@@ -16,13 +13,23 @@ namespace Shamsheer.Service.Mappers
         public MapperProfile()
         {
             // User
-            CreateMap<User, UserForCreationDto>().ReverseMap();
             CreateMap<User, UserForUpdateDto>().ReverseMap();
             CreateMap<User, UserForResultDto>().ReverseMap();
+            CreateMap<User, UserForCreationDto>().ReverseMap();
 
 
             // UserAsset
             CreateMap<UserAsset, UserAssetForResultDto>().ReverseMap();
+
+            // Group
+            CreateMap<Group, GroupForResultDto>().ReverseMap();
+            CreateMap<Group, GroupForUpdateDto>().ReverseMap();
+            CreateMap<Group, GroupForCreationDto>().ReverseMap();
+
+            // UserGroup
+            CreateMap<UserGroup, UserGroupForUpdateDto>().ReverseMap();
+            CreateMap<UserGroup, UserGroupForResultDto>().ReverseMap();
+            CreateMap<UserGroup, UserGroupForCreationDto>().ReverseMap();
         }
     }
 }

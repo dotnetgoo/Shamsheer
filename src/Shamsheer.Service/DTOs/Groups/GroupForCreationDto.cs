@@ -2,12 +2,11 @@
 using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Domain.Enums.Chats;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Shamsheer.Service.DTOs.Groups;
 
-public class GroupForUpdateDto
+public class GroupForCreationDto
 {
-    public ChatAccessType AccessType { get; set; }
-
+    public long OwnerId { get; set; }
+    public string Title { get; set; }
 }

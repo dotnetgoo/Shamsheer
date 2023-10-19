@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Messenger.Api.Helpers;
 using Shamsheer.Service.DTOs.Users;
-using Shamsheer.Service.Interfaces;
+using Shamsheer.Service.Interfaces.Users;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
 
