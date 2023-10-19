@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shamsheer.Service.Interfaces
+namespace Shamsheer.Service.Interfaces.Users
 {
     public interface IUserService
     {
