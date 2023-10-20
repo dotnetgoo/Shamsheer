@@ -8,6 +8,8 @@ using Shamsheer.Service.DTOs.UserGroup;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Service.DTOs.Authorizations.Groups;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
+using Shamsheer.Service.DTOs.Channels;
+using Shamsheer.Service.DTOs.UserChannels;
 
 namespace Shamsheer.Service.Mappers
 {
@@ -39,6 +41,17 @@ namespace Shamsheer.Service.Mappers
 
             // GroupPermission
             CreateMap<GroupPermission,GroupPermissionForResultDto>().ReverseMap();
+
+            //Channel Mapping
+            CreateMap<Channel, ChannelForCreationDto>().ReverseMap();
+            CreateMap<Channel, ChannelForResultDto>().ReverseMap();
+            CreateMap<Channel, ChannelForUpdateDto>().ReverseMap();
+
+            //UserChannel Mapping
+            CreateMap<UserChannel, UserChannelForCreationDto>().ReverseMap();
+            CreateMap<UserChannel, UserChannelForResultDto>().ReverseMap();
+            CreateMap<UserChannel, UserChannelForUpdateDto>().ReverseMap();
+
         }
     }
 }
