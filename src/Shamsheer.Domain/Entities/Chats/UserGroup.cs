@@ -1,10 +1,5 @@
 ﻿using Shamsheer.Domain.Commons;
-using Shamsheer.Domain.Enums.Chats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shamsheer.Domain.Entities.Authorizations.Groups;
 
 namespace Shamsheer.Domain.Entities.Chats
 {
@@ -15,7 +10,8 @@ namespace Shamsheer.Domain.Entities.Chats
 
         public long GroupId { get; set; }
         public Group Group { get; set; }
+        public long RoleId { get; set; }
+        public GroupRole Role  { get; set; }
 
-        public ChatRole Role { get; set; }
     }
 }

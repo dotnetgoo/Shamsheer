@@ -16,6 +16,7 @@ namespace Shamsheer.Domain.Entities.Chats
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        
         public ICollection<UserAsset> Assets { get; set; }
     }
 }

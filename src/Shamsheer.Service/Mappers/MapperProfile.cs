@@ -5,6 +5,9 @@ using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Service.DTOs.UserAssets;
 using Shamsheer.Service.DTOs.UserGroup;
+using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.DTOs.Authorizations.Groups;
+using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 
 namespace Shamsheer.Service.Mappers
 {
@@ -30,6 +33,12 @@ namespace Shamsheer.Service.Mappers
             CreateMap<UserGroup, UserGroupForUpdateDto>().ReverseMap();
             CreateMap<UserGroup, UserGroupForResultDto>().ReverseMap();
             CreateMap<UserGroup, UserGroupForCreationDto>().ReverseMap();
+
+            // GroupRole
+            CreateMap<GroupRole, GroupRoleForResultDto>().ReverseMap();
+
+            // GroupPermission
+            CreateMap<GroupPermission,GroupPermissionForResultDto>().ReverseMap();
         }
     }
 }
