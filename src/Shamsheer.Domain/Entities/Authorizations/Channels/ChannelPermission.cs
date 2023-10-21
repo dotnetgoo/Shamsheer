@@ -1,6 +1,10 @@
-﻿namespace Shamsheer.Domain.Entities.Authorizations.Channels;
+﻿using Shamsheer.Domain.Commons;
+using Shamsheer.Domain.Enums.Chats;
 
-public class ChannelPermission
+namespace Shamsheer.Domain.Entities.Authorizations.Channels;
+
+public class ChannelPermission : Auditable
 {
+    public ChannelPermissionType Type { get; set; }
 
 }
