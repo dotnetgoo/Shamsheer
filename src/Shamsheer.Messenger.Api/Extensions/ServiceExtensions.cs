@@ -8,6 +8,10 @@ using Shamsheer.Service.Services.UserGroups;
 using Shamsheer.Service.Interfaces.UserGroup;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.Services.Authorizations;
+using Shamsheer.Service.Interfaces.Channels;
+using Shamsheer.Service.Services.Channels;
+using Shamsheer.Service.Interfaces.UserChannel;
+using Shamsheer.Service.Services.UserChannels;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -17,13 +21,17 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IGroupService, GroupService>();
+        services.AddScoped<IChannelService,ChannelService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();
         services.AddScoped<IGroupRoleService, GroupRoleService>();
         services.AddScoped<IUserGroupService, UserGroupService>();
+        services.AddScoped<IChannelRepository, ChannelRepository>();
+        services.AddScoped<IUserChannelService,UserChannelService>();
         services.AddScoped<IGroupRoleRepository, GroupRoleRepository>();
         services.AddScoped<IUserGroupRepository, UserGroupRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IUserChannelRepository, UserChannelRepository>();
         services.AddScoped<IGroupPermissionService, GroupPermissionService>();
         services.AddScoped<IGroupPermissionRepository, GroupPermissionRepository>();
     }
