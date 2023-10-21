@@ -63,22 +63,6 @@ public class GroupService : IGroupService
 
         return this.mapper.Map<GroupForResultDto>(mappedGroup);
     }
-
-    public Task<GroupForResultDto> ModifyDescriptionAsync(string description)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<GroupForResultDto> ModifyTitleAsync(string title)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<GroupForResultDto> ModifyUsernameAsync(string username)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<bool> RemoveAsync(long id)
     {
         var group = await this.groupRepository.SelectAll()

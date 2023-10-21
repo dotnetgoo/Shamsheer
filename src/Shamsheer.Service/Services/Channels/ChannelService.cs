@@ -62,22 +62,6 @@ public class ChannelService : IChannelService
 
         return _mapper.Map<ChannelForResultDto>(mapped);
     }
-
-    public Task<ChannelForResultDto> ModifyDescriptionAsync(string description)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ChannelForResultDto> ModifyTitleAsync(string title)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ChannelForResultDto> ModifyUsernameAsync(string username)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<bool> RemoveAsync(long id)
     {
         var channel = await _repository.SelectAll()
