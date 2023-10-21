@@ -27,9 +27,11 @@ public static class ServiceExtensions
         services.AddScoped<IGroupRoleService, GroupRoleService>();
         services.AddScoped<IUserGroupService, UserGroupService>();
         services.AddScoped<IChannelRepository, ChannelRepository>();
+        services.AddScoped<IChannelRoleService, ChannelRoleService>();
         services.AddScoped<IGroupRoleRepository, GroupRoleRepository>();
         services.AddScoped<IUserGroupRepository, UserGroupRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IChannelRoleRepository, ChannelRoleRepository>();
         services.AddScoped<IGroupPermissionService, GroupPermissionService>();
         services.AddScoped<IChannelPermissionService, ChannelPermissionService>();
         services.AddScoped<IGroupPermissionRepository, GroupPermissionRepository>();
