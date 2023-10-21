@@ -61,7 +61,7 @@ public class GroupService : IGroupService
 
         await _groupRepository.UpdateAsync(mappedGroup);
 
-        return _mapper.Map<GroupForResultDto>(mappedGroup);
+        return this.mapper.Map<GroupForResultDto>(mappedGroup);
     }
 
     public async Task<bool> RemoveAsync(long id)
