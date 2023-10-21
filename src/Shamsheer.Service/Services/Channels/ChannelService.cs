@@ -12,19 +12,18 @@ using Shamsheer.Service.DTOs.Channels;
 using Shamsheer.Service.Interfaces.Channels;
 
 namespace Shamsheer.Service.Services.Channels;
-
 public class ChannelService : IChannelService
 {
     private readonly IMapper _mapper;
-    private readonly IChannelRepository _channelRepository;
+    private readonly IChannelRepository _repository;
     private readonly IUserRepository _userRepository;
 
     public ChannelService(IMapper mapper,
-                          IChannelRepository channelRepository,
+                          IChannelRepository repository,
                           IUserRepository userRepository)
     {
         _mapper = mapper;
-        _channelRepository = channelRepository;
+        _repository = repository;
         _userRepository = userRepository;
     }
 
@@ -37,56 +36,71 @@ public class ChannelService : IChannelService
         if (user is null)
             throw new ShamsheerException(404, "User is not found!");
 
+
         var mapped = _mapper.Map<Channel>(dto);
         mapped.ChatType = ChatType.Channel;
         mapped.InviteLink = "";
         mapped.CreatedAt = DateTime.UtcNow;
 
-        var result = await _channelRepository.InsertAsync(mapped);
-
+        var result = await _repository.InsertAsync(mapped);
         return _mapper.Map<ChannelForResultDto>(result);
     }
 
     public async Task<ChannelForResultDto> ModifyAsync(long id, ChannelForUpdateDto dto)
     {
-        var channel = await _channelRepository.SelectAll()
+        var channel = await _repository.SelectAll()
             .Where(ch => ch.Id == id)
             .FirstOrDefaultAsync();
 
         if (channel is null)
             throw new ShamsheerException(404, "Channel is not found!");
 
-        var mappedChannel = _mapper.Map(dto, channel);
-        mappedChannel.UpdatedAt = DateTime.UtcNow;
+        var mapped = _mapper.Map(dto, channel);
+        mapped.UpdatedAt = DateTime.UtcNow;
 
-        await _channelRepository.UpdateAsync(mappedChannel);
+        await _repository.UpdateAsync(mapped);
 
-        return _mapper.Map<ChannelForResultDto>(mappedChannel);
+        return _mapper.Map<ChannelForResultDto>(mapped);
+    }
+
+    public Task<ChannelForResultDto> ModifyDescriptionAsync(string description)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ChannelForResultDto> ModifyTitleAsync(string title)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ChannelForResultDto> ModifyUsernameAsync(string username)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var channel = await _channelRepository.SelectAll()
+        var channel = await _repository.SelectAll()
             .Where(ch => ch.Id == id)
             .FirstOrDefaultAsync();
 
         if (channel is null)
             throw new ShamsheerException(404, "Channel is not found!");
 
-        await _channelRepository.DeleteAsync(id);
+        await _repository.DeleteAsync(id);
         return true;
     }
 
     public async Task<IEnumerable<ChannelForResultDto>> RetrieveAllAsync()
     {
-        var channels = _channelRepository.SelectAll().AsNoTracking();
+        var channels = _repository.SelectAll().AsNoTracking();
 
         return _mapper.Map<IEnumerable<ChannelForResultDto>>(channels);
     }
 
     public async Task<ChannelForResultDto> RetrieveByIdAsync(long id)
     {
-        var channel = await _channelRepository.SelectAll()
+        var channel = await _repository.SelectAll()
             .Where(ch => ch.Id == id)
             .FirstOrDefaultAsync();
 
