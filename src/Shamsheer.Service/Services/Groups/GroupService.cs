@@ -28,7 +28,7 @@ public class GroupService : IGroupService
         this._userRepository = userRepository;
         this._groupRepository = groupRepository;
     }
-    public async Task<GroupForResultDto> AddAsync(GroupForCreationDto dto)
+    public async Task<GroupForResultDto> CreateAsync(GroupForCreationDto dto)
     {
 
         // After implementing PermissionServices
@@ -61,7 +61,7 @@ public class GroupService : IGroupService
 
         await _groupRepository.UpdateAsync(mappedGroup);
 
-        return this.mapper.Map<GroupForResultDto>(mappedGroup);
+        return this._mapper.Map<GroupForResultDto>(mappedGroup);
     }
 
     public async Task<bool> RemoveAsync(long id)
