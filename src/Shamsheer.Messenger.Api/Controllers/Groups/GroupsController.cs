@@ -21,7 +21,7 @@ namespace Shamsheer.Messenger.Api.Controllers.Groups
         {
             Code = 200,
             Message = "Success",
-            Data = await this._groupService.AddAsync(dto)
+            Data = await this._groupService.CreateAsync(dto)
         });
 
         [HttpGet()]
