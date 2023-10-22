@@ -1,4 +1,6 @@
-﻿namespace Shamsheer.Service.DTOs.Users;
+﻿using Shamsheer.Service.DTOs.UserAssets;
+
+namespace Shamsheer.Service.DTOs.Users;
 
 public class UserForUpdateDto
 {
@@ -7,4 +9,5 @@ public class UserForUpdateDto
     public string Email { get; set; }
     public string Phone { get; set; }
     public string Username { get; set; }
+    public UserAssetForCreationDto Assets { get; set; }
 }
