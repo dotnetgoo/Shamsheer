@@ -31,9 +31,14 @@ public class UserAssetService : IUserAssetService
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
-
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
+
+        var asset = await _userAssetRepository.SelectAll()
+            .Where(ua => ua.Path == dto.Path)
+            .FirstOrDefaultAsync();
+        if (asset is not null)
+            throw new ShamsheerException(404, "User Asset is already exist.");
 
         var mappedAsset = _mapper.Map<UserAsset>(dto);
         mappedAsset.UserId = userId;

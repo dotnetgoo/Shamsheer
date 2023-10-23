@@ -6,8 +6,8 @@ namespace Shamsheer.Service.Interfaces.UserAssets;
 
 public interface IUserAssetService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<UserAssetForResultDto> RetrieveByIdAsync(long userId, long id);
-    public Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto);
-    public Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId);
+    Task<bool> RemoveAsync(long id);
+    Task<UserAssetForResultDto> RetrieveByIdAsync(long userId, long id);
+    Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto);
+    Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId);
 }
