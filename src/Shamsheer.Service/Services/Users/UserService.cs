@@ -9,6 +9,8 @@ using Shamsheer.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.Interfaces.Users;
+using Shamsheer.Service.Extensions;
+using Shamsheer.Service.Configurations;
 
 namespace Shamsheer.Service.Services.Users
 {
@@ -42,8 +44,8 @@ namespace Shamsheer.Service.Services.Users
         public async Task<UserForResultDto> ModifyAsync(long id, UserForUpdateDto dto)
         {
             var user = await _userRepository.SelectAll()
-            .Where(u => u.Id == id)
-            .FirstOrDefaultAsync();
+                .Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
             if (user is null)
                 throw new ShamsheerException(404, "User not found");
 
@@ -68,10 +70,11 @@ namespace Shamsheer.Service.Services.Users
             return true;
         }
 
-        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync()
+        public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync(PaginationParams @params)
         {
             var users = await _userRepository.SelectAll()
                 .Include(a => a.Assets)
+                .ToPagedList(@params)
                 .ToListAsync();
 
             return _mapper.Map<IEnumerable<UserForResultDto>>(users);

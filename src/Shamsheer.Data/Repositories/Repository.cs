@@ -41,12 +41,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
     public IQueryable<TEntity> SelectAll()
         => this._dbSet;
 
-
-
     public async Task<TEntity> SelectByIdAsync(long id)
         => await this._dbSet.FirstOrDefaultAsync(e => e.Id == id);
-
-
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
