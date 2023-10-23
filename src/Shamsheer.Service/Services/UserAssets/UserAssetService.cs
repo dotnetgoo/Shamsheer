@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Service.DTOs.UserAssets;
 using Shamsheer.Service.Interfaces.UserAssets;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.UserAssets;
 
@@ -27,7 +29,7 @@ public class UserAssetService : IUserAssetService
     public async Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto)
     {
         //Identify UserId TODO:LOGIC
-        long userId = 0; //Default qiymat berib turildi, aslida jwt tokendan yechib olinadi
+        long userId = 1; //Default qiymat berib turildi, aslida jwt tokendan yechib olinadi
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
@@ -62,7 +64,7 @@ public class UserAssetService : IUserAssetService
         return true;
     }
 
-    public async Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId)
+    public async Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(PaginationParams @params, long userId)
     {
         //TODO:LOGIC pagination logic
         var user = await _userRepository.SelectAll()
@@ -71,10 +73,11 @@ public class UserAssetService : IUserAssetService
 
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
+        var assets = await _userAssetRepository.SelectAll()
+                .ToPagedList(@params)
+                .ToListAsync();
 
-        var mappedAssets = _mapper.Map<IEnumerable<UserAssetForResultDto>>(user.Assets);
-
-        return mappedAssets;
+        return _mapper.Map<IEnumerable<UserAssetForResultDto>>(assets);
     }
 
     public async Task<UserAssetForResultDto> RetrieveByIdAsync(long userId, long id)

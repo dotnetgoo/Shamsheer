@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shamsheer.Messenger.Api.Helpers;
 using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Users;
 using Shamsheer.Service.Extensions;
