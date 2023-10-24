@@ -9,5 +9,4 @@ public class UserForUpdateDto
     public string Email { get; set; }
     public string Phone { get; set; }
     public string Username { get; set; }
-    public UserAssetForCreationDto Assets { get; set; }
 }
