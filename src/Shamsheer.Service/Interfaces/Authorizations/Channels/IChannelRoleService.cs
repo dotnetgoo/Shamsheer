@@ -7,9 +7,9 @@ namespace Shamsheer.Service.Interfaces.Authorizations.Channels;
 
 public interface IChannelRoleService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<ChannelRoleForResultDto> RetrieveByIdAsync(long id);
-    public Task<ChannelRoleForResultDto> CreateAsync(ChatRole chatRole);
-    public Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync();
-    public Task<ChannelRoleForResultDto> ModifyAsync(long id, ChatRole chatRole);
+    Task<bool> RemoveAsync(long id);
+    Task<ChannelRoleForResultDto> RetrieveByIdAsync(long id);
+    Task<ChannelRoleForResultDto> CreateAsync(ChatRole chatRole);
+    Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync();
+    Task<ChannelRoleForResultDto> ModifyAsync(long id, ChatRole chatRole);
 }
