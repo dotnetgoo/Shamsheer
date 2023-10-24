@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddCustomService();
+builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

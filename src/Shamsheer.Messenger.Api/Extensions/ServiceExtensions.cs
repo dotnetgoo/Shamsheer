@@ -14,12 +14,14 @@ using Shamsheer.Service.Interfaces.Channels;
 using Shamsheer.Service.Services.Channels;
 using Shamsheer.Service.Interfaces.UserAssets;
 using Shamsheer.Service.Services.UserAssets;
+using Shamsheer.Service.Interfaces.Commons;
+using Shamsheer.Service.Services.Commons;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void AddCustomService(this IServiceCollection services)
+    public static void AddCustomServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IGroupService, GroupService>();
@@ -29,12 +31,16 @@ public static class ServiceExtensions
         services.AddScoped<IGroupRoleService, GroupRoleService>();
         services.AddScoped<IUserAssetService, UserAssetService>();
         services.AddScoped<IUserGroupService, UserGroupService>();
+        
+        services.AddScoped<IFileService, FileService>();
+
+
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IChannelRepository, ChannelRepository>();
         services.AddScoped<IChannelRoleService, ChannelRoleService>();
         services.AddScoped<IGroupRoleRepository, GroupRoleRepository>();
         services.AddScoped<IUserAssetRepository, UserAssetRepository>();
         services.AddScoped<IUserGroupRepository, UserGroupRepository>();
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IChannelRoleRepository, ChannelRoleRepository>();
         services.AddScoped<IGroupPermissionService, GroupPermissionService>();
         services.AddScoped<IChannelPermissionService, ChannelPermissionService>();

@@ -9,17 +9,8 @@ namespace Shamsheer.Service.Services.Commons;
 
 public class FileService : IFileService
 {
-    private readonly string MEDIA = "Media";
-    private readonly string ROOTPATH;
-
-    public FileService(IWebHostEnvironment env)
+    public async Task<bool> DeleteAsync(string path)
     {
-        ROOTPATH = env.WebRootPath;
-    }
-    public async Task<bool> DeleteImageAsync(string subpath)
-    {
-        string path = Path.Combine(ROOTPATH, subpath);
-
         if (File.Exists(path))
         {
             await Task.Run(() =>
@@ -33,15 +24,24 @@ public class FileService : IFileService
         return false;
     }
 
-    public async Task<string> UploadImageAsync(IFormFile image, string rootpath, string filePath)
+    public async Task<byte[]> DownloadAsync(string path)
     {
-        string newImageName = MediaHelper.MakeImageName(image.FileName, filePath);
-        string subPath = Path.Combine(MEDIA, filePath, rootpath, newImageName);
-        string path = Path.Combine(ROOTPATH, subPath);
-        var stream = new FileStream(path, FileMode.Create);
-        await image.CopyToAsync(stream);
-        stream.Close();
+        if (!File.Exists(path))
+            throw new FileNotFoundException();
 
-        return subPath;
+        return await File.ReadAllBytesAsync(path);
+    }
+
+    public async Task<string> UploadAsync(Stream file, string path)
+    {
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+            
+            await stream.FlushAsync();
+            stream.Close();
+        };        
+
+        return path;
     }
 }
