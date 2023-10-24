@@ -20,7 +20,7 @@ public class UserAssetsController : BaseController
 
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "userId")] long userId)
-        => Ok(await _userAssetService.RetrieveAllAsync(@params, userId));
+        => Ok(await _userAssetService.RetrieveAllAsync(userId, @params));
 
     [HttpGet("{userId},{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "userId")] long userId, [FromRoute(Name = "id")] long id)

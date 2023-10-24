@@ -10,5 +10,5 @@ public interface IUserAssetService
     Task<bool> RemoveAsync(long id);
     Task<UserAssetForResultDto> RetrieveByIdAsync(long userId, long id);
     Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto);
-    Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(PaginationParams @params, long userId);
+    Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId, PaginationParams @params);
 }

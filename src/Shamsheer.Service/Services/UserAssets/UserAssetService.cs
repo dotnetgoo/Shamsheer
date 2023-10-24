@@ -3,14 +3,14 @@ using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Exceptions;
 using Shamsheer.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Service.DTOs.UserAssets;
 using Shamsheer.Service.Interfaces.UserAssets;
-using Shamsheer.Service.Configurations;
-using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.UserAssets;
 
@@ -29,7 +29,7 @@ public class UserAssetService : IUserAssetService
     public async Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto)
     {
         //Identify UserId TODO:LOGIC
-        long userId = 1; //Default qiymat berib turildi, aslida jwt tokendan yechib olinadi
+        long userId = 1; //Actually this one is takes from jwt token, now we need to give default value
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
@@ -64,7 +64,7 @@ public class UserAssetService : IUserAssetService
         return true;
     }
 
-    public async Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(PaginationParams @params, long userId)
+    public async Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId, PaginationParams @params)
     {
         //TODO:LOGIC pagination logic
         var user = await _userRepository.SelectAll()
