@@ -13,6 +13,5 @@ namespace Shamsheer.Domain.Enums.Chats
         Admin,
         Banned,
         Restricted,
-        Owner
     }
 }
