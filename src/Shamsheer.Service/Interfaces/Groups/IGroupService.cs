@@ -7,9 +7,9 @@ namespace Shamsheer.Service.Interfaces.Groups;
 
 public interface IGroupService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<GroupForResultDto> RetrieveByIdAsync(long id);
-    public Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync();
-    public Task<GroupForResultDto> CreateAsync(GroupForCreationDto dto);
-    public Task<GroupForResultDto> ModifyAsync(long id, GroupForUpdateDto dto);
+    Task<bool> RemoveAsync(long id);
+    Task<GroupForResultDto> RetrieveByIdAsync(long id);
+    Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync();
+    Task<GroupForResultDto> CreateAsync(GroupForCreationDto dto);
+    Task<GroupForResultDto> ModifyAsync(long id, GroupForUpdateDto dto);
 }

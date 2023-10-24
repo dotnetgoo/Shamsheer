@@ -8,9 +8,9 @@ namespace Shamsheer.Service.Interfaces.Authorizations;
 
 public interface IGroupPermissionService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<GroupPermissionForResultDto> RetrieveByIdAsync(long id);
-    public Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync();
-    public Task<GroupPermissionForResultDto> CreateAsync(GroupPermissionType type);
-    public Task<GroupPermissionForResultDto> ModifyAsync(long id, GroupPermissionType type);
+    Task<bool> RemoveAsync(long id);
+    Task<GroupPermissionForResultDto> RetrieveByIdAsync(long id);
+    Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync();
+    Task<GroupPermissionForResultDto> CreateAsync(GroupPermissionType type);
+    Task<GroupPermissionForResultDto> ModifyAsync(long id, GroupPermissionType type);
 }

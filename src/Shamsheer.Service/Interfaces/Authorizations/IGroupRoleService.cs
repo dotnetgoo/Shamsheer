@@ -8,9 +8,9 @@ namespace Shamsheer.Service.Interfaces.Authorizations;
 
 public interface IGroupRoleService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<GroupRoleForResultDto> RetrieveByIdAsync(long id);
-    public Task<GroupRoleForResultDto> CreateAsync(ChatRole chatRole);
-    public Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync();
-    public Task<GroupRoleForResultDto> ModifyAsync(long id, ChatRole chatRole);
+    Task<bool> RemoveAsync(long id);
+    Task<GroupRoleForResultDto> RetrieveByIdAsync(long id);
+    Task<GroupRoleForResultDto> CreateAsync(ChatRole chatRole);
+    Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync();
+    Task<GroupRoleForResultDto> ModifyAsync(long id, ChatRole chatRole);
 }

@@ -8,9 +8,9 @@ namespace Shamsheer.Service.Interfaces.Authorizations.Channels;
 
 public interface IChannelPermissionService
 {
-    public Task<bool> RemoveAsync(long id);
-    public Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id);
-    public Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync();
-    public Task<ChannelPermissionForResultDto> CreateAsync(ChannelPermissionType type);
-    public Task<ChannelPermissionForResultDto> ModifyAsync(long id, ChannelPermissionType type);
+    Task<bool> RemoveAsync(long id);
+    Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id);
+    Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync();
+    Task<ChannelPermissionForResultDto> CreateAsync(ChannelPermissionType type);
+    Task<ChannelPermissionForResultDto> ModifyAsync(long id, ChannelPermissionType type);
 }
