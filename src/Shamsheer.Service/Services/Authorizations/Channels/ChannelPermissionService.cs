@@ -4,9 +4,11 @@ using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelPermissions;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 using System;
 using System.Collections.Generic;
@@ -18,18 +20,18 @@ namespace Shamsheer.Service.Services.Authorizations.Channels;
 public class ChannelPermissionService : IChannelPermissionService
 {
     private readonly IMapper mapper;
-    private readonly IChannelPermissionRepository channelPermissionRepository;
+    private readonly IChannelPermissionRepository _channelPermissionRepository;
 
     public ChannelPermissionService(IChannelPermissionRepository channelPermissionRepository, IMapper mapper)
     {
         this.mapper = mapper;
-        this.channelPermissionRepository = channelPermissionRepository;
+        this._channelPermissionRepository = channelPermissionRepository;
     }
 
 
     public async Task<ChannelPermissionForResultDto> CreateAsync(ChannelPermissionType type)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await this._channelPermissionRepository.SelectAll()
             .Where(cp => cp.Type == type)
             .FirstOrDefaultAsync();
         if(channelPermission is not null)
@@ -41,14 +43,14 @@ public class ChannelPermissionService : IChannelPermissionService
             CreatedAt = DateTime.UtcNow,
         };
 
-        var result = await this.channelPermissionRepository.InsertAsync(mappedChannelPermission);   
+        var result = await this._channelPermissionRepository.InsertAsync(mappedChannelPermission);   
 
         return this.mapper.Map<ChannelPermissionForResultDto>(result);
     }
 
     public async Task<ChannelPermissionForResultDto> ModifyAsync(long id, ChannelPermissionType type)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await this._channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -62,14 +64,14 @@ public class ChannelPermissionService : IChannelPermissionService
             Type = type,
             UpdatedAt = DateTime.UtcNow,
         };
-        var mapped = await this.channelPermissionRepository.UpdateAsync(mappedChannelPermission);
+        var mapped = await this._channelPermissionRepository.UpdateAsync(mappedChannelPermission);
 
         return this.mapper.Map<ChannelPermissionForResultDto>(mapped);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await this._channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -77,21 +79,23 @@ public class ChannelPermissionService : IChannelPermissionService
         if (channelPermission is null)
             throw new ShamsheerException(404, "ChannelPermission is not found");
 
-        await this.channelPermissionRepository.DeleteAsync(id);
+        await this._channelPermissionRepository.DeleteAsync(id);
         return true;
     }
 
-    public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var channelPermission = this.channelPermissionRepository.SelectAll()
-            .AsNoTracking();
+        var channelPermissions = await this._channelPermissionRepository.SelectAll()
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
 
-        return this.mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermission);
+        return this.mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermissions);
     }
 
     public async Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await this._channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .FirstOrDefaultAsync();
 

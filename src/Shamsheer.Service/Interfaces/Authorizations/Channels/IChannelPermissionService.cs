@@ -1,4 +1,5 @@
 ﻿using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelPermissions;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ public interface IChannelPermissionService
 {
     Task<bool> RemoveAsync(long id);
     Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id);
-    Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync();
+    Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync(PaginationParams @params);
     Task<ChannelPermissionForResultDto> CreateAsync(ChannelPermissionType type);
     Task<ChannelPermissionForResultDto> ModifyAsync(long id, ChannelPermissionType type);
 }

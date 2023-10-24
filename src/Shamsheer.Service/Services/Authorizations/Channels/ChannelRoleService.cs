@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Service.DTOs.Authorizations.Channels;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.Authorizations.Channels;
 
@@ -77,10 +79,12 @@ public class ChannelRoleService : IChannelRoleService
         return true;
     }
 
-    public async Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var channelRoles = this._channelRoleRepository.SelectAll()
-            .AsNoTracking();
+        var channelRoles = await this._channelRoleRepository.SelectAll()
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
 
         return this._mapper.Map<IEnumerable<ChannelRoleForResultDto>>(channelRoles);
     }

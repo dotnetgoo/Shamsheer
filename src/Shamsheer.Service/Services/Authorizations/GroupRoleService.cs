@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.DTOs.Authorizations.Groups;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.Authorizations;
 
@@ -77,10 +79,12 @@ public class GroupRoleService : IGroupRoleService
         return true;
     }
 
-    public async Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var groupRoles =  this._groupRoleRepository.SelectAll()
-            .AsNoTracking();
+        var groupRoles = await this._groupRoleRepository.SelectAll()
+            .ToPagedList(@params)
+            .AsNoTracking()
+            .ToListAsync();
 
         return this._mapper.Map<IEnumerable<GroupRoleForResultDto>>(groupRoles);
     }

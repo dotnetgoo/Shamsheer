@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Messenger.Api.Helpers;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Channels;
 using Shamsheer.Service.Interfaces.Channels;
 
@@ -25,12 +26,12 @@ namespace Shamsheer.Messenger.Api.Controllers.Channels
             });
 
         [HttpGet]
-        public async Task<IActionResult> GetAllChannelAsync() =>
+        public async Task<IActionResult> GetAllChannelAsync([FromQuery] PaginationParams @params) =>
             Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _service.RetrieveAllAsync()
+                Data = await _service.RetrieveAllAsync(@params)
             });
 
         [HttpGet("{id}")]

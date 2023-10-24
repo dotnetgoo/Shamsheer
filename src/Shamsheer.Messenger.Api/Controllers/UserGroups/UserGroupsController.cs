@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Messenger.Api.Helpers;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Groups;
 using Shamsheer.Service.DTOs.UserGroup;
 using Shamsheer.Service.Interfaces.Groups;
@@ -26,12 +27,12 @@ public class UserGroupsController : BaseController
     });
 
     [HttpGet()]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(new Response()
         {
             Code = 200,
             Message = "Success",
-            Data = await this._userGroupService.RetrieveAllAsync()
+            Data = await this._userGroupService.RetrieveAllAsync(@params)
         });
 
     [HttpGet("{id}")]

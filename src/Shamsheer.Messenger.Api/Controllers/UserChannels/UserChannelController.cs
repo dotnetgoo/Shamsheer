@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Messenger.Api.Helpers;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.UserChannels;
 using Shamsheer.Service.Interfaces.UserChannel;
 
@@ -24,12 +25,12 @@ public class UserChannelController : BaseController
     });
 
     [HttpGet()]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(new Response()
         {
             Code = 200,
             Message = "Success",
-            Data = await this._userChannelService.RetrieveAllAsync()
+            Data = await this._userChannelService.RetrieveAllAsync(@params)
         });
 
     [HttpGet("{id}")]

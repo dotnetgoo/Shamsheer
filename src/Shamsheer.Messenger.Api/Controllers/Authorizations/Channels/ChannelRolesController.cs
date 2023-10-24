@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Messenger.Api.Helpers;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 
@@ -25,12 +26,12 @@ namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Channels
             });
 
         [HttpGet()]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
             => Ok(new Response()
             {
                 Code = 200,
                 Message = "Success",
-                Data = await this.channelRoleService.RetrieveAllAsync()
+                Data = await this.channelRoleService.RetrieveAllAsync(@params)
             });
 
         [HttpGet("{id}")]

@@ -2,6 +2,7 @@
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Messenger.Api.Helpers;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Groups;
 using Shamsheer.Service.Interfaces.Authorizations;
 
@@ -26,12 +27,12 @@ public class GroupRolesController : BaseController
         });
 
     [HttpGet()]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(new Response()
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.RetrieveAllAsync()
+            Data = await this.groupRoleService.RetrieveAllAsync(@params)
         });
 
     [HttpGet("{id}")]
