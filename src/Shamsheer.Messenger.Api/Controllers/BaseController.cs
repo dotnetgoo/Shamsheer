@@ -3,7 +3,7 @@
 namespace Shamsheer.Messenger.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
 }
