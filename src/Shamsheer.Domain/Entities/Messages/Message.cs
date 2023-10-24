@@ -15,12 +15,12 @@ namespace Shamsheer.Domain.Entities.Messages
         public MessageType Type { get; set; }
         public FormatType FormatType { get; set; }
 
-        public Message Parent { get; set; }
         public long? ParentId { get; set; }
-        public User From { get; set; }
+        public Message Parent { get; set; }
         public long FromId { get; set; }
+        public User From { get; set; }
 
-        public User To { get; set; }
         public long ToId { get; set; }
+        public User To { get; set; }
     }
 }
