@@ -1,0 +1,84 @@
+﻿<Page x:Class="Shamsheer.Messenger.Desktop.Pages.QrCodePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Shamsheer.Messenger.Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="QrCodePage" Height="550" Width="800" 
+      Background="#17212B" 
+      MinHeight="550" MinWidth="800">
+
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Border Grid.Column="1" Width="200" 
+                    Height="200" Background="Snow" CornerRadius="7" 
+                    Margin="0 120 0 0">
+                <Image Width="190" Height="190" x:Name="Qr" 
+           />
+            </Border>
+
+            <TextBlock Grid.Column="1" 
+                       Background="Transparent"
+                       FontSize="20" Text="Scan From Mobile Shamsheer"
+                       Foreground="Snow" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" RenderTransformOrigin="0.536,6.3" 
+                       Margin="0,20,0,0"/>
+
+            <TextBlock Grid.Column="1" 
+                       Background="Transparent"
+                       FontSize="14" Text="1.Open Shamsheer on your phone"
+                       Foreground="Snow" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" RenderTransformOrigin="0.536,6.3" 
+                       Margin="0,20,0,0"/>
+
+            <TextBlock Grid.Column="1" 
+                       Background="Transparent"
+                       FontSize="14" Text="2.Go to Settings>Devices>Link Desktop"
+                       Foreground="Snow" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" RenderTransformOrigin="0.536,6.3" 
+                       Margin="35,2,0,0"/>
+
+            <TextBlock Grid.Column="1" 
+                       Background="Transparent"
+                       FontSize="14" Text="3.Scan this image to Log in"
+                       Foreground="Snow" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" RenderTransformOrigin="0.536,6.3" 
+                       Margin="-45,2,0,0"/>
+
+            <Button Width="220"
+                    Height="30" Background="Transparent"
+                    Foreground="#276FD5"
+                    Content="Or log in using your Email"
+                    Margin="20"
+                    BorderBrush="Transparent"/> 
+
+        </StackPanel>
+
+        <Button Grid.Column="2" 
+                x:Name="settingsBtn"
+                Width="70"
+                Height="20" 
+                Background="Transparent"
+                Foreground="#276FD5"
+                Content="Settings"
+                Margin="20"
+                Cursor="Hand"
+                Padding="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top" 
+                BorderBrush="Transparent"/>
+
+    </Grid>
+</Page>
