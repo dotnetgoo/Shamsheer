@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.GroupRolePermissions;
 using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.Authorizations.Groups;
 using System;
 using System.Collections.Generic;
@@ -98,12 +100,14 @@ public class GroupRolePermissionService : IGroupRolePermissionService
         return await _groupRolePermissionRepository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<GroupRolePermissionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<GroupRolePermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var groupRolePermission = _groupRolePermissionRepository.SelectAll()
+        var groupRolePermission = await _groupRolePermissionRepository.SelectAll()
             .Include(grp => grp.Permission)
             .Include(grp => grp.Role)
-            .AsNoTracking();
+            .ToPagedList(@params)
+            .ToListAsync();
+        
 
         return _mapper.Map<IEnumerable<GroupRolePermissionForResultDto>>(groupRolePermission);
     }

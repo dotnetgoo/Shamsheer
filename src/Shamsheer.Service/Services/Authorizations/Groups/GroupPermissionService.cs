@@ -10,6 +10,7 @@ using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
+using Shamsheer.Service.Interfaces.Authorizations.Groups;
 
 namespace Shamsheer.Service.Services.Authorizations.Groups;
 

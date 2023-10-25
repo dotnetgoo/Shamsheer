@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelRolePermissions;
 using Shamsheer.Service.DTOs.UserGroup;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
@@ -20,8 +21,8 @@ namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Channels
             => Ok(await _channelRolePermissionService.CreateAsync(dto));
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
-            => Ok(await _channelRolePermissionService.RetrieveAllAsync());
+        public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+            => Ok(await _channelRolePermissionService.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

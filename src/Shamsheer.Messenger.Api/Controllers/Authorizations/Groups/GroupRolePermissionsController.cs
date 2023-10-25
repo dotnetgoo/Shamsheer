@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelRolePermissions;
 using Shamsheer.Service.DTOs.Authorizations.GroupRolePermissions;
 using Shamsheer.Service.Interfaces.Authorizations.Groups;
 
-namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groops
+namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groups
 {
     public class GroupRolePermissionsController : BaseController
     {
@@ -19,8 +20,8 @@ namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groops
             => Ok(await _groupRolePermissionService.CreateAsync(dto));
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
-            => Ok(await _groupRolePermissionService.RetrieveAllAsync());
+        public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+            => Ok(await _groupRolePermissionService.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

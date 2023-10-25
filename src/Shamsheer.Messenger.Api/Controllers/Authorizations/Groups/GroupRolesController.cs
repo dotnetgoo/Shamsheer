@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Interfaces.Authorizations;
+using Shamsheer.Service.Interfaces.Authorizations.Groups;
 
 namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groups;
 

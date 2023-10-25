@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelRolePermissions;
 using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 using System;
 using System.Collections.Generic;
@@ -93,12 +95,13 @@ public class ChannelRolePermissionService : IChannelRolePermissionService
         return await _channelRolePermissionRepository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<ChannelRolePermissionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ChannelRolePermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var channelRolePermission = _channelRolePermissionRepository.SelectAll()
+        var channelRolePermission = await _channelRolePermissionRepository.SelectAll()
             .Include(crp => crp.Role)
             .Include(crp => crp.Permission)
-            .AsNoTracking();
+            .ToPagedList(@params)
+            .ToListAsync();
 
         return _mapper.Map<IEnumerable<ChannelRolePermissionForResultDto>>(channelRolePermission);
     }

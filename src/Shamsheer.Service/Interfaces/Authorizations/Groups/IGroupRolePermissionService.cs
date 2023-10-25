@@ -1,4 +1,5 @@
-﻿using Shamsheer.Service.DTOs.Authorizations.ChannelRolePermissions;
+﻿using Shamsheer.Service.Configurations;
+using Shamsheer.Service.DTOs.Authorizations.ChannelRolePermissions;
 using Shamsheer.Service.DTOs.Authorizations.GroupRolePermissions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ public interface IGroupRolePermissionService
 {
     Task<bool> RemoveAsync(long id);
     Task<GroupRolePermissionForResultDto> RetrieveByIdAsync(long id);
-    Task<IEnumerable<GroupRolePermissionForResultDto>> RetrieveAllAsync();
+    Task<IEnumerable<GroupRolePermissionForResultDto>> RetrieveAllAsync(PaginationParams @params);
     Task<GroupRolePermissionForResultDto> CreateAsync(GroupRolePermissionForCreationDto dto);
     Task<GroupRolePermissionForResultDto> ModifyAsync(long id, GroupRolePermissionForUpdateDto dto);
 }
