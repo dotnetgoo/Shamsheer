@@ -1,0 +1,142 @@
+﻿<Page x:Class="Shamsheer.Messenger.Desktop.Pages.CodeEntryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="#17212B">
+
+        <Button
+            x:Name="cancelBtn"
+            Margin="10,10,200,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="#2F6EA5"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Click="CancelBtn_Click">
+            <materialDesign:PackIcon Kind="ArrowLeft"/>
+        </Button>
+
+
+
+        <Border Width="300"
+                Height="400"
+                Background="#17212B"
+                CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20"
+                                  Direction="-90" 
+                                  RenderingBias="Quality" 
+                                  ShadowDepth="8" 
+                                  Color="Black"/>
+            </Border.Effect>
+
+            <StackPanel Orientation="Vertical"
+                        Margin="20">
+
+
+
+
+                <TextBlock Text="Enter Code" 
+                           FontSize="25"
+                           Margin="0 10"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontWeight="Bold"
+                           Foreground="Snow"
+                           Padding="10"/>
+
+                <TextBlock
+                    FontSize="14"
+                    FontFamily="Bold"
+                    Margin="0 25 0 0"
+                    Text="A code was sent your Email,"
+                    Foreground="Gray"/>
+
+                <TextBlock
+                    FontSize="14"
+                    FontFamily="Bold"
+                    Margin="0 0 0 0"
+                    Text="enter the code."
+                    Foreground="Gray"/>
+
+                <TextBlock x:Name="CountdownText" 
+                           FontSize="10" Foreground="Snow"
+                           Margin="0 30 -200 0"
+                           Padding="0,2"
+                           HorizontalAlignment="Center" Width="33"/>
+
+                <TextBox x:Name="CodeTextBox"
+                         CaretBrush="Snow"
+                         FontSize="14"
+                         Grid.Row="1"
+                         Padding="0,5"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                         Width="199"
+                         materialDesign:HintAssist.Hint="Code"
+                         Foreground="Snow"
+                         BorderThickness="0,0,0,1"
+                         materialDesign:HintAssist.Foreground="#2F6EA5"
+                         materialDesign:TextFieldAssist.UnderlineBrush="#2F6EA5"
+                         HorizontalAlignment="Left"
+                         Margin="0,-40,10,10"/>
+
+                <Button
+                    x:Name="qrCodeBtn"
+                    Margin="-10 -10 141 0"
+                    Foreground="#2F6EA5"
+                    Background="Transparent"
+                    Content="Send code via Email"
+                    FontSize="12"
+                    BorderBrush="Transparent"
+                    Width="120"
+                    Height="30"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Click="SendCodeAgain_Click"/>
+
+
+                <Button x:Name="sendCodeAgainBtn"
+                    Content="Next"
+                    Foreground="White"
+                    Background="#2F6EA5"
+                    Margin="0,25"
+                    Height="35"
+                    FontSize="14"
+                    Width="250"
+                    Cursor="Hand">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="LoginBorder" Background="{TemplateBinding Background}"
+                                            CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseCaptured" Value="True">
+                                                <Setter Property="Background" Value="#0C9CE9" TargetName="LoginBorder" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <Button.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Snow" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Frame x:Name="_frame" NavigationUIVisibility="Hidden" Navigated="_frame_Navigated"/>
+    </Grid>
+</Page>
