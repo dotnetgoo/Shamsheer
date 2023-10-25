@@ -16,6 +16,7 @@ using Shamsheer.Service.Services.UserAssets;
 using Shamsheer.Service.Interfaces.Commons;
 using Shamsheer.Service.Services.Commons;
 using Shamsheer.Service.Services.Authorizations.Groups;
+using Shamsheer.Service.Helpers;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -33,7 +34,7 @@ public static class ServiceExtensions
         services.AddScoped<IUserGroupService, UserGroupService>();
         
         services.AddScoped<IFileService, FileService>();
-
+        services.AddScoped<WebHostEnviromentHelper, WebHostEnviromentHelper>();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IChannelRepository, ChannelRepository>();
