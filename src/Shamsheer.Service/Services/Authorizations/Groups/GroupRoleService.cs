@@ -7,11 +7,11 @@ using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Exceptions;
 using Shamsheer.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
-using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.DTOs.Authorizations.Groups;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.Interfaces.Authorizations.Groups;
 
-namespace Shamsheer.Service.Services.Authorizations;
+namespace Shamsheer.Service.Services.Authorizations.Groups;
 
 public class GroupRoleService : IGroupRoleService
 {

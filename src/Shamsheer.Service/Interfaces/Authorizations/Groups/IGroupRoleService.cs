@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shamsheer.Service.Interfaces.Authorizations;
+namespace Shamsheer.Service.Interfaces.Authorizations.Groups;
 
 public interface IGroupRoleService
 {

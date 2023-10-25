@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
+    <ProjectReference Include="..\Shamsheer.Domain\Shamsheer.Domain.csproj" />
     <ProjectReference Include="..\Shamsheer.Service\Shamsheer.Service.csproj" />
   </ItemGroup>
 

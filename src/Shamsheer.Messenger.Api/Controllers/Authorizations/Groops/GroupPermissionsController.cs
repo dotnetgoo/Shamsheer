@@ -1,28 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Messenger.Api.Helpers;
-using Shamsheer.Service.DTOs.Groups;
-using Shamsheer.Service.Interfaces.Authorizations;
+using Shamsheer.Service.Interfaces.Authorizations.Groups;
 
-namespace Shamsheer.Messenger.Api.Controllers.Authorizations;
+namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groops;
 
-public class GroupRolesController : BaseController
+public class GroupPermissionsController : BaseController
 {
-    private readonly IGroupRoleService groupRoleService;
 
-    public GroupRolesController(IGroupRoleService groupRoleService)
+    private readonly IGroupPermissionService groupPermissionService;
+
+    public GroupPermissionsController(IGroupPermissionService groupPermissionService)
     {
-        this.groupRoleService = groupRoleService;
+        this.groupPermissionService = groupPermissionService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] ChatRole chatRole)
+    public async Task<IActionResult> PostAsync([FromBody] GroupPermissionType type)
         => Ok(new Response()
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.CreateAsync(chatRole)
+            Data = await groupPermissionService.CreateAsync(type)
         });
 
     [HttpGet()]
@@ -31,7 +30,7 @@ public class GroupRolesController : BaseController
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.RetrieveAllAsync()
+            Data = await groupPermissionService.RetrieveAllAsync()
         });
 
     [HttpGet("{id}")]
@@ -40,16 +39,16 @@ public class GroupRolesController : BaseController
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.RetrieveByIdAsync(id)
+            Data = await groupPermissionService.RetrieveByIdAsync(id)
         });
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] ChatRole chatRole)
+    public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] GroupPermissionType type)
         => Ok(new Response()
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.ModifyAsync(id, chatRole)
+            Data = await groupPermissionService.ModifyAsync(id, type)
         });
 
     [HttpDelete("{id}")]
@@ -58,6 +57,6 @@ public class GroupRolesController : BaseController
         {
             Code = 200,
             Message = "Success",
-            Data = await this.groupRoleService.RemoveAsync(id)
+            Data = await groupPermissionService.RemoveAsync(id)
         });
 }

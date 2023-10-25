@@ -4,7 +4,7 @@ using Shamsheer.Service.DTOs.Authorizations.Groups;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shamsheer.Service.Interfaces.Authorizations;
+namespace Shamsheer.Service.Interfaces.Authorizations.Groups;
 
 public interface IGroupPermissionService
 {
