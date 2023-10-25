@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Service.DTOs.Authorizations.Groups;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Service.Interfaces.Authorizations.Groups;
+using Shamsheer.Service.Interfaces.Authorizations;
+using Shamsheer.Service.DTOs.Authorizations.Groups;
+using Shamsheer.Domain.Entities.Authorizations.Groups;
 
 namespace Shamsheer.Service.Services.Authorizations.Groups;
 
@@ -26,26 +29,30 @@ public class GroupRoleService : IGroupRoleService
 
     public async Task<GroupRoleForResultDto> CreateAsync(ChatRole chatRole)
     {
-        var groupRole = await this._groupRoleRepository.SelectAll()
+
+        var groupRole = await _groupRoleRepository.SelectAll()
             .Where(gr => gr.ChatRole == chatRole)
             .FirstOrDefaultAsync();
 
         if (groupRole is not null)
             throw new ShamsheerException(409, "grouprole is already exixts");
-        
+            
         var mappedGroupRole = new GroupRole()
         {
             ChatRole = chatRole,
             CreatedAt = DateTime.UtcNow
         };
-        var addedGroupRole = await this._groupRoleRepository.InsertAsync(mappedGroupRole);
 
-        return  this._mapper.Map<GroupRoleForResultDto>(addedGroupRole);
+        var addedGroupRole = await _groupRoleRepository.InsertAsync(mappedGroupRole);
+
+        return _mapper.Map<GroupRoleForResultDto>(addedGroupRole);
+
     }
 
     public async Task<GroupRoleForResultDto> ModifyAsync(long id, ChatRole chatRole)
     {
-        var groupRole = await this._groupRoleRepository.SelectAll()
+
+        var groupRole = await _groupRoleRepository.SelectAll()
             .Where(gr => gr.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -59,40 +66,42 @@ public class GroupRoleService : IGroupRoleService
             UpdatedAt = DateTime.UtcNow
         };
 
-        await this._groupRoleRepository.UpdateAsync(result);
+        await _groupRoleRepository.UpdateAsync(result);
 
-        return this._mapper.Map<GroupRoleForResultDto>(result);
+        return _mapper.Map<GroupRoleForResultDto>(result);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var groupRole = await this._groupRoleRepository.SelectAll()
-            .Where (gr => gr.Id == id)
+
+        var groupRole = await _groupRoleRepository.SelectAll()
+            .Where(gr => gr.Id == id)
             .FirstOrDefaultAsync();
         if (groupRole is null)
             throw new ShamsheerException(404, "GroupRole is not found");
 
-        await this._groupRoleRepository.DeleteAsync(id);
+
+        await _groupRoleRepository.DeleteAsync(id);
 
         return true;
     }
 
     public async Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync()
     {
-        var groupRoles =  this._groupRoleRepository.SelectAll()
+        var groupRoles = _groupRoleRepository.SelectAll()
             .AsNoTracking();
 
-        return this._mapper.Map<IEnumerable<GroupRoleForResultDto>>(groupRoles);
+        return _mapper.Map<IEnumerable<GroupRoleForResultDto>>(groupRoles);
     }
 
     public async Task<GroupRoleForResultDto> RetrieveByIdAsync(long id)
     {
-        var groupRole = await this._groupRoleRepository.SelectAll()
+        var groupRole = await _groupRoleRepository.SelectAll()
             .Where(gr => gr.Id == id)
             .FirstOrDefaultAsync();
         if (groupRole is null)
             throw new ShamsheerException(404, "GroupRole is not found");
 
-        return this._mapper.Map<GroupRoleForResultDto>(groupRole);
+        return _mapper.Map<GroupRoleForResultDto>(groupRole);
     }
 }

@@ -7,6 +7,7 @@ using Shamsheer.Service.Interfaces.Groups;
 using Shamsheer.Service.Services.UserGroups;
 using Shamsheer.Service.Interfaces.UserGroup;
 using Shamsheer.Service.Services.Authorizations;
+using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 using Shamsheer.Service.Services.Authorizations.Channels;
 using Shamsheer.Service.Interfaces.Channels;

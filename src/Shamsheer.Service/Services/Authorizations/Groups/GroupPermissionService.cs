@@ -1,15 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Shamsheer.Data.IRepositories;
-using Shamsheer.Domain.Entities.Authorizations.Groups;
-using Shamsheer.Domain.Enums.Chats;
-using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
-using Shamsheer.Service.Exceptions;
-using Shamsheer.Service.Interfaces.Authorizations.Groups;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Shamsheer.Data.IRepositories;
+using Shamsheer.Service.Exceptions;
+using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Interfaces.Authorizations;
+using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 
 namespace Shamsheer.Service.Services.Authorizations.Groups;
 
@@ -29,6 +29,7 @@ public class GroupPermissionService : IGroupPermissionService
         var groupPermission = await _groupPermissionRepository.SelectAll()
             .Where(gp => gp.Type == Type)
             .FirstOrDefaultAsync();
+            
         if (groupPermission is not null)
             throw new ShamsheerException(409, "GroupPermission already exist");
 

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Images\2.jpg" />
+    <None Remove="Images\tg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
@@ -18,5 +19,6 @@
     <Resource Include="Images\2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\tg.jpg" />
   </ItemGroup>
 </Project>

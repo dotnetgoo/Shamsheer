@@ -17,19 +17,19 @@ namespace Shamsheer.Service.Services.Authorizations.Channels;
 
 public class ChannelPermissionService : IChannelPermissionService
 {
-    private readonly IMapper mapper;
-    private readonly IChannelPermissionRepository channelPermissionRepository;
+    private readonly IMapper _mapper;
+    private readonly IChannelPermissionRepository _channelPermissionRepository;
 
     public ChannelPermissionService(IChannelPermissionRepository channelPermissionRepository, IMapper mapper)
     {
-        this.mapper = mapper;
-        this.channelPermissionRepository = channelPermissionRepository;
+        _mapper = mapper;
+        _channelPermissionRepository = channelPermissionRepository;
     }
 
 
     public async Task<ChannelPermissionForResultDto> CreateAsync(ChannelPermissionType type)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await _channelPermissionRepository.SelectAll()
             .Where(cp => cp.Type == type)
             .FirstOrDefaultAsync();
         if(channelPermission is not null)
@@ -41,14 +41,14 @@ public class ChannelPermissionService : IChannelPermissionService
             CreatedAt = DateTime.UtcNow,
         };
 
-        var result = await this.channelPermissionRepository.InsertAsync(mappedChannelPermission);   
+        var result = await _channelPermissionRepository.InsertAsync(mappedChannelPermission);   
 
-        return this.mapper.Map<ChannelPermissionForResultDto>(result);
+        return _mapper.Map<ChannelPermissionForResultDto>(result);
     }
 
     public async Task<ChannelPermissionForResultDto> ModifyAsync(long id, ChannelPermissionType type)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await _channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -62,14 +62,14 @@ public class ChannelPermissionService : IChannelPermissionService
             Type = type,
             UpdatedAt = DateTime.UtcNow,
         };
-        var mapped = await this.channelPermissionRepository.UpdateAsync(mappedChannelPermission);
+        var mapped = await _channelPermissionRepository.UpdateAsync(mappedChannelPermission);
 
-        return this.mapper.Map<ChannelPermissionForResultDto>(mapped);
+        return _mapper.Map<ChannelPermissionForResultDto>(mapped);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await _channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -77,27 +77,27 @@ public class ChannelPermissionService : IChannelPermissionService
         if (channelPermission is null)
             throw new ShamsheerException(404, "ChannelPermission is not found");
 
-        await this.channelPermissionRepository.DeleteAsync(id);
+        await _channelPermissionRepository.DeleteAsync(id);
         return true;
     }
 
     public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync()
     {
-        var channelPermission = this.channelPermissionRepository.SelectAll()
+        var channelPermission = _channelPermissionRepository.SelectAll()
             .AsNoTracking();
 
-        return this.mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermission);
+        return _mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermission);
     }
 
     public async Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id)
     {
-        var channelPermission = await this.channelPermissionRepository.SelectAll()
+        var channelPermission = await _channelPermissionRepository.SelectAll()
             .Where(cp => cp.Id == id)
             .FirstOrDefaultAsync();
 
         if (channelPermission is null)
             throw new ShamsheerException(404, "GroupPermission is not found");
 
-        return this.mapper.Map<ChannelPermissionForResultDto>(channelPermission);
+        return _mapper.Map<ChannelPermissionForResultDto>(channelPermission);
     }
 }
