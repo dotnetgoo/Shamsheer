@@ -4,11 +4,11 @@ using Shamsheer.Service.Interfaces.UserChannel;
 
 namespace Shamsheer.Messenger.Api.Controllers.UserChannels;
 
-public class UserChannelController : BaseController
+public class UserChannelsController : BaseController
 {
     private readonly IUserChannelService _userChannelService;
 
-    public UserChannelController(IUserChannelService userChannelService)
+    public UserChannelsController(IUserChannelService userChannelService)
     {
         _userChannelService = userChannelService;
     }
