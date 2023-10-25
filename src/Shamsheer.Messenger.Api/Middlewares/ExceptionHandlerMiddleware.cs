@@ -7,18 +7,18 @@ namespace Shamsheer.Messenger.Api.Middlewares;
 public class ExceptionHandlerMiddleware
 {
 
-    private readonly RequestDelegate next;
+    private readonly RequestDelegate _next;
 
     public ExceptionHandlerMiddleware(RequestDelegate next)
     { 
-        this.next = next;
+        _next = next;
     }
 
     public async Task Invoke(HttpContext context)
     {
         try
         {
-            await next(context);
+            await _next(context);
         }
         catch (ShamsheerException ex)
         {

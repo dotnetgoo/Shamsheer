@@ -20,13 +20,13 @@ public class ChannelRoleService : IChannelRoleService
 
     public ChannelRoleService(IMapper mapper, IChannelRoleRepository channelRoleRepository)
     {
-        this._mapper = mapper;
-        this._channelRoleRepository = channelRoleRepository;
+        _mapper = mapper;
+        _channelRoleRepository = channelRoleRepository;
     }
 
     public async Task<ChannelRoleForResultDto> CreateAsync(ChatRole chatRole)
     {
-        var channelRole = await this._channelRoleRepository.SelectAll()
+        var channelRole = await _channelRoleRepository.SelectAll()
             .Where(cr => cr.ChatRole == chatRole)
             .FirstOrDefaultAsync();
 
@@ -38,14 +38,14 @@ public class ChannelRoleService : IChannelRoleService
             ChatRole = chatRole,
             CreatedAt = DateTime.UtcNow
         };
-        var addedChannelRole = await this._channelRoleRepository.InsertAsync(mappedChannelRole);
+        var addedChannelRole = await _channelRoleRepository.InsertAsync(mappedChannelRole);
 
-        return this._mapper.Map<ChannelRoleForResultDto>(addedChannelRole);
+        return _mapper.Map<ChannelRoleForResultDto>(addedChannelRole);
     }
 
     public async Task<ChannelRoleForResultDto> ModifyAsync(long id, ChatRole chatRole)
     {
-        var channelRole = await this._channelRoleRepository.SelectAll()
+        var channelRole = await _channelRoleRepository.SelectAll()
             .Where(gr => gr.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -59,30 +59,30 @@ public class ChannelRoleService : IChannelRoleService
             UpdatedAt = DateTime.UtcNow
         };
 
-        await this._channelRoleRepository.UpdateAsync(result);
+        await _channelRoleRepository.UpdateAsync(result);
 
-        return this._mapper.Map<ChannelRoleForResultDto>(result);
+        return _mapper.Map<ChannelRoleForResultDto>(result);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var channelRole = await this._channelRoleRepository.SelectAll()
+        var channelRole = await _channelRoleRepository.SelectAll()
             .Where(gr => gr.Id == id)
             .FirstOrDefaultAsync();
         if (channelRole is null)
             throw new ShamsheerException(404, "ChannelRole is not found");
 
-        await this._channelRoleRepository.DeleteAsync(id);
+        await _channelRoleRepository.DeleteAsync(id);
 
         return true;
     }
 
     public async Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync()
     {
-        var channelRoles = this._channelRoleRepository.SelectAll()
+        var channelRoles = _channelRoleRepository.SelectAll()
             .AsNoTracking();
 
-        return this._mapper.Map<IEnumerable<ChannelRoleForResultDto>>(channelRoles);
+        return _mapper.Map<IEnumerable<ChannelRoleForResultDto>>(channelRoles);
     }
 
     public async Task<ChannelRoleForResultDto> RetrieveByIdAsync(long id)
@@ -93,6 +93,6 @@ public class ChannelRoleService : IChannelRoleService
         if (channelRole is null)
             throw new ShamsheerException(404, "ChannelRole is not found");
 
-        return this._mapper.Map<ChannelRoleForResultDto>(channelRole);
+        return _mapper.Map<ChannelRoleForResultDto>(channelRole);
     }
 }

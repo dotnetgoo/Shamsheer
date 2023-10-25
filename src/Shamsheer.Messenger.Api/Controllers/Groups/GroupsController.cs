@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shamsheer.Messenger.Api.Helpers;
 using Shamsheer.Service.DTOs.Groups;
-using Shamsheer.Service.DTOs.Users;
 using Shamsheer.Service.Interfaces.Groups;
 
 namespace Shamsheer.Messenger.Api.Controllers.Groups
@@ -17,49 +15,23 @@ namespace Shamsheer.Messenger.Api.Controllers.Groups
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] GroupForCreationDto dto)
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._groupService.CreateAsync(dto)
-        });
+        => Ok(await _groupService.CreateAsync(dto));
 
         [HttpGet()]
         public async Task<IActionResult> GetAllAsync()
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this._groupService.RetrieveAllAsync()
-            });
+            => Ok(await _groupService.RetrieveAllAsync());
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this._groupService.RetrieveByIdAsync(id)
-            });
+            => Ok(await _groupService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] GroupForUpdateDto dto)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this._groupService.ModifyAsync(id, dto)
-            });
+            => Ok(await this._groupService.ModifyAsync(id, dto));
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this._groupService.RemoveAsync(id)
-            });
+            => Ok(await _groupService.RemoveAsync(id));
 
-        
     }
 }
