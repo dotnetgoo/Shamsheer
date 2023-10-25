@@ -13,6 +13,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Custom appsettings file
+appsettings.json
+
 # Mono auto generated files
 mono_crash.*
 
@@ -49,6 +52,7 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
@@ -141,6 +145,7 @@ _TeamCity*
 # AxoCover is a Code Coverage Tool
 .axoCover/*
 !.axoCover/settings.json
+
 
 # Coverlet is a free, cross platform Code Coverage Tool
 coverage*.json
