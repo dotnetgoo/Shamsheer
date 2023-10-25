@@ -9,21 +9,16 @@ namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Channels
 {
     public class ChannelRolesController : BaseController
     {
-        private readonly IChannelRoleService channelRoleService;
+        private readonly IChannelRoleService _channelRoleService;
 
         public ChannelRolesController(IChannelRoleService channelRoleService)
         {
-            this.channelRoleService = channelRoleService;
+            _channelRoleService = channelRoleService;
         }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ChatRole chatRole)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this.channelRoleService.CreateAsync(chatRole)
-            });
+            => Ok(await _channelRoleService.CreateAsync(chatRole));
 
         [HttpGet()]
         public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
@@ -36,29 +31,14 @@ namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Channels
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this.channelRoleService.RetrieveByIdAsync(id)
-            });
+            => Ok(await _channelRoleService.RetrieveByIdAsync(id));
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] ChatRole chatRole)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this.channelRoleService.ModifyAsync(id, chatRole)
-            });
+            => Ok(await _channelRoleService.ModifyAsync(id, chatRole));
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this.channelRoleService.RemoveAsync(id)
-            });
+            => Ok(await _channelRoleService.RemoveAsync(id));
     }
 }

@@ -6,7 +6,6 @@ using Shamsheer.Service.Interfaces.Users;
 using Shamsheer.Service.Interfaces.Groups;
 using Shamsheer.Service.Services.UserGroups;
 using Shamsheer.Service.Interfaces.UserGroup;
-using Shamsheer.Service.Services.Authorizations;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 using Shamsheer.Service.Services.Authorizations.Channels;
@@ -16,6 +15,7 @@ using Shamsheer.Service.Interfaces.UserAssets;
 using Shamsheer.Service.Services.UserAssets;
 using Shamsheer.Service.Interfaces.Commons;
 using Shamsheer.Service.Services.Commons;
+using Shamsheer.Service.Services.Authorizations.Groups;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 

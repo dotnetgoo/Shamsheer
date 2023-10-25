@@ -8,6 +8,6 @@ public class ShamsheerException : Exception
 
     public ShamsheerException(int code, string message) : base(message)
     {
-        this.StatusCode = code;
+        StatusCode = code;
     }
 }

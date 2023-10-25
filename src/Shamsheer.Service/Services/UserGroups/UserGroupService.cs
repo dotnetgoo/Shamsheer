@@ -16,10 +16,10 @@ namespace Shamsheer.Service.Services.UserGroups;
 
 public class UserGroupService : IUserGroupService
 {
-    private readonly IMapper mapper;
-    private readonly IUserRepository userRepository;
-    private readonly IGroupRepository groupRepository;
-    private readonly IUserGroupRepository userGroupRepository;
+    private readonly IMapper _mapper;
+    private readonly IUserRepository _userRepository;
+    private readonly IGroupRepository _groupRepository;
+    private readonly IUserGroupRepository _userGroupRepository;
 
     public UserGroupService(
         IMapper mapper, 
@@ -27,71 +27,71 @@ public class UserGroupService : IUserGroupService
         IGroupRepository groupRepository,
         IUserGroupRepository userGroupRepository)
     {
-        this.mapper = mapper;
-        this.userRepository = userRepository;
-        this.groupRepository = groupRepository;
-        this.userGroupRepository = userGroupRepository;
+        _mapper = mapper;
+        _userRepository = userRepository;
+        _groupRepository = groupRepository;
+        _userGroupRepository = userGroupRepository;
     }
 
     public async Task<UserGroupForResultDto> CreateAsync(UserGroupForCreationDto dto)
     {
-        var user = await this.userRepository.SelectAll()
+        var user = await _userRepository.SelectAll()
             .Where(u => u.Id == dto.MemberId)
             .FirstOrDefaultAsync();
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
 
-        var group = await this.groupRepository.SelectAll()
+        var group = await _groupRepository.SelectAll()
             .Where(g => g.Id == dto.GroupId)
             .FirstOrDefaultAsync();
         if (group is null)
             throw new ShamsheerException(404, "Group is not found.");
 
-        var mappedUserGroup = this.mapper.Map<UserGroup>(dto);
+        var mappedUserGroup = _mapper.Map<UserGroup>(dto);
         mappedUserGroup.CreatedAt = DateTime.UtcNow;
 
-        var result = await this.userGroupRepository.InsertAsync(mappedUserGroup);
+        var result = await _userGroupRepository.InsertAsync(mappedUserGroup);
 
-        return this.mapper.Map<UserGroupForResultDto>(result);
+        return _mapper.Map<UserGroupForResultDto>(result);
     }
 
     public async Task<UserGroupForResultDto> ModifyAsync(long id, UserGroupForUpdateDto dto)
     {
-        var userGroup = await this.userGroupRepository.SelectAll()
+        var userGroup = await _userGroupRepository.SelectAll()
             .Where(ug => ug.Id == id)
             .FirstOrDefaultAsync();
         if (userGroup is null)
             throw new ShamsheerException(404, "User group is not found.");
 
-        var user = await this.userRepository.SelectAll()
+        var user = await _userRepository.SelectAll()
             .Where(u => u.Id == dto.MemberId)
             .FirstOrDefaultAsync();
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
 
-        var group = await this.groupRepository.SelectAll()
+        var group = await _groupRepository.SelectAll()
             .Where(g => g.Id == dto.GroupId)
             .FirstOrDefaultAsync();
         if (group is null)
             throw new ShamsheerException(404, "Group is not found.");
 
-        var mappedUserGroup = this.mapper.Map(dto, userGroup);
+        var mappedUserGroup = _mapper.Map(dto, userGroup);
         mappedUserGroup.UpdatedAt = DateTime.UtcNow;
 
-        await this.userGroupRepository.UpdateAsync(mappedUserGroup);
+        await _userGroupRepository.UpdateAsync(mappedUserGroup);
 
-        return this.mapper.Map<UserGroupForResultDto>(mappedUserGroup);
+        return _mapper.Map<UserGroupForResultDto>(mappedUserGroup);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var userGroup = await this.userGroupRepository.SelectAll()
+        var userGroup = await _userGroupRepository.SelectAll()
             .Where(ug => ug.Id == id)
             .FirstOrDefaultAsync();
         if (userGroup is null)
             throw new ShamsheerException(404, "User group is not found.");
 
-        return await this.userGroupRepository.DeleteAsync(id);
+        return await _userGroupRepository.DeleteAsync(id);
     }
 
     public async Task<IEnumerable<UserGroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
@@ -105,12 +105,12 @@ public class UserGroupService : IUserGroupService
             .AsNoTracking()
             .ToListAsync();
 
-        return this.mapper.Map<IEnumerable<UserGroupForResultDto>>(userGroup);
+        return _mapper.Map<IEnumerable<UserGroupForResultDto>>(userGroup);
     }
 
     public async Task<UserGroupForResultDto> RetrieveByIdAsync(long id)
     {
-        var userGroup = await this.userGroupRepository.SelectAll()
+        var userGroup = await _userGroupRepository.SelectAll()
             .Where(ug => ug.Id == id)
             .Include(ug => ug.Member)
             .ThenInclude(u => u.Assets)
@@ -121,6 +121,6 @@ public class UserGroupService : IUserGroupService
         if (userGroup is null)
             throw new ShamsheerException(404, "User group is not found.");
 
-        return this.mapper.Map<UserGroupForResultDto>(userGroup);
+        return _mapper.Map<UserGroupForResultDto>(userGroup);
     }
 }
