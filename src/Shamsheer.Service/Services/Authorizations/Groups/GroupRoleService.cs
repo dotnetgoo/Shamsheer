@@ -81,15 +81,10 @@ public class GroupRoleService : IGroupRoleService
 
     public async Task<IEnumerable<GroupRoleForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-<<<<<<< HEAD:src/Shamsheer.Service/Services/Authorizations/GroupRoleService.cs
         var groupRoles = await this._groupRoleRepository.SelectAll()
-            .ToPagedList(@params)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
-=======
-        var groupRoles = _groupRoleRepository.SelectAll()
-            .AsNoTracking();
->>>>>>> f547e2782442944ef96045807bcde6a4041df003:src/Shamsheer.Service/Services/Authorizations/Groups/GroupRoleService.cs
 
         return _mapper.Map<IEnumerable<GroupRoleForResultDto>>(groupRoles);
     }

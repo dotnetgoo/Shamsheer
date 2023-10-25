@@ -21,12 +21,7 @@ namespace Shamsheer.Messenger.Api.Controllers.Groups
 
         [HttpGet()]
         public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
-            => Ok(new Response()
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await this._groupService.RetrieveAllAsync(@params)
-            });
+            => Ok(await _groupService.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

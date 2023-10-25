@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
 using Shamsheer.Messenger.Api.Helpers;
 using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Groups;
-=======
->>>>>>> f547e2782442944ef96045807bcde6a4041df003
 using Shamsheer.Service.DTOs.UserGroup;
 using Shamsheer.Service.Interfaces.UserGroup;
 
@@ -24,18 +21,8 @@ public class UserGroupsController : BaseController
     => Ok(await _userGroupService.CreateAsync(dto));
 
     [HttpGet()]
-<<<<<<< HEAD
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._userGroupService.RetrieveAllAsync(@params)
-        });
-=======
-    public async Task<IActionResult> GetAllAsync()
-        => Ok(await _userGroupService.RetrieveAllAsync());
->>>>>>> f547e2782442944ef96045807bcde6a4041df003
+        => Ok(await _userGroupService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

@@ -80,8 +80,8 @@ public class ChannelService : IChannelService
     public async Task<IEnumerable<ChannelForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var channels = await _channelRepository.SelectAll()
-            .ToPagedList(@params)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<ChannelForResultDto>>(channels);

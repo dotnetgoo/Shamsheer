@@ -1,5 +1,4 @@
-<<<<<<< HEAD:src/Shamsheer.Service/Services/Authorizations/GroupPermissionService.cs
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
@@ -11,20 +10,8 @@ using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.Authorizations;
 using System;
 using System.Collections.Generic;
-=======
-﻿using System;
-using AutoMapper;
->>>>>>> f547e2782442944ef96045807bcde6a4041df003:src/Shamsheer.Service/Services/Authorizations/Groups/GroupPermissionService.cs
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Shamsheer.Data.IRepositories;
-using Shamsheer.Service.Exceptions;
-using Shamsheer.Domain.Enums.Chats;
-using Shamsheer.Service.Interfaces.Authorizations;
-using Shamsheer.Domain.Entities.Authorizations.Groups;
-using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 
 namespace Shamsheer.Service.Services.Authorizations.Groups;
 
@@ -96,15 +83,10 @@ public class GroupPermissionService : IGroupPermissionService
 
     public async Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-<<<<<<< HEAD:src/Shamsheer.Service/Services/Authorizations/GroupPermissionService.cs
-        var groupPermissions = await this._groupPermissionRepository.SelectAll()
-            .ToPagedList(@params)
+        var groupPermissions = await _groupPermissionRepository.SelectAll()
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
-=======
-        var groupPermissions = _groupPermissionRepository.SelectAll()
-            .AsNoTracking();
->>>>>>> f547e2782442944ef96045807bcde6a4041df003:src/Shamsheer.Service/Services/Authorizations/Groups/GroupPermissionService.cs
 
         return _mapper.Map<IEnumerable<GroupPermissionForResultDto>>(groupPermissions);
     }

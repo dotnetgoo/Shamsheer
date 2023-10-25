@@ -81,8 +81,8 @@ public class GroupService : IGroupService
     public async Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var groups =  await _groupRepository.SelectAll()
-            .ToPagedList(@params)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
 
          return _mapper.Map<IEnumerable<GroupForResultDto>>(groups);    

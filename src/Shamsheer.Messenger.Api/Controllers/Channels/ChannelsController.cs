@@ -20,12 +20,7 @@ namespace Shamsheer.Messenger.Api.Controllers.Channels
 
         [HttpGet]
         public async Task<IActionResult> GetAllChannelAsync([FromQuery] PaginationParams @params) =>
-            Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _service.RetrieveAllAsync(@params)
-            });
+            Ok(await _service.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>

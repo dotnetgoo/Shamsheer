@@ -81,15 +81,10 @@ public class ChannelRoleService : IChannelRoleService
 
     public async Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-<<<<<<< HEAD
-        var channelRoles = await this._channelRoleRepository.SelectAll()
-            .ToPagedList(@params)
+        var channelRoles = await _channelRoleRepository.SelectAll()
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
-=======
-        var channelRoles = _channelRoleRepository.SelectAll()
-            .AsNoTracking();
->>>>>>> f547e2782442944ef96045807bcde6a4041df003
 
         return _mapper.Map<IEnumerable<ChannelRoleForResultDto>>(channelRoles);
     }

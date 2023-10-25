@@ -107,8 +107,8 @@ public class UserChannelService : IUserChannelService
             .ThenInclude(u => u.Assets)
             .Include(uch => uch.Channel)
             .ThenInclude(ch => ch.Owner)
-            .ToPagedList(@params)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<UserChannelForResultDto>>(userChannels);

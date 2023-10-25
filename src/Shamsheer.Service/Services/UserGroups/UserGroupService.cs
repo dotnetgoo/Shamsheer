@@ -96,13 +96,13 @@ public class UserGroupService : IUserGroupService
 
     public async Task<IEnumerable<UserGroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var userGroup = await this.userGroupRepository.SelectAll()
+        var userGroup = await _userGroupRepository.SelectAll()
             .Include(ug => ug.Member)
             .ThenInclude(u =>u.Assets)
             .Include(ug => ug.Group)
             .ThenInclude(g => g.Owner)
-            .ToPagedList(@params)
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<UserGroupForResultDto>>(userGroup);
