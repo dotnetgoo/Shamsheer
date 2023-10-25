@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shamsheer.Messenger.Api.Helpers;
 using Shamsheer.Service.DTOs.UserChannels;
 using Shamsheer.Service.Interfaces.UserChannel;
 
@@ -16,46 +15,21 @@ public class UserChannelController : BaseController
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] UserChannelForCreationDto dto)
-    => Ok(new Response()
-    {
-        Code = 200,
-        Message = "Success",
-        Data = await this._userChannelService.CreateAsync(dto)
-    });
+    => Ok(await _userChannelService.CreateAsync(dto));
 
     [HttpGet()]
     public async Task<IActionResult> GetAllAsync()
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._userChannelService.RetrieveAllAsync()
-        });
+        => Ok(await _userChannelService.RetrieveAllAsync());
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._userChannelService.RetrieveByIdAsync(id)
-        });
+        => Ok(await _userChannelService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserChannelForUpdateDto dto)
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._userChannelService.ModifyAsync(id, dto)
-        });
+        => Ok(await _userChannelService.ModifyAsync(id, dto));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(new Response()
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await this._userChannelService.RemoveAsync(id)
-        });
+        => Ok(await _userChannelService.RemoveAsync(id));
 }
