@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Shamsheer.Data.IRepositories;
-using Shamsheer.Domain.Entities.Authorizations.Groups;
-using Shamsheer.Domain.Enums.Chats;
-using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
-using Shamsheer.Service.Exceptions;
-using Shamsheer.Service.Interfaces.Authorizations;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Shamsheer.Data.IRepositories;
+using Shamsheer.Service.Exceptions;
+using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Interfaces.Authorizations;
+using Shamsheer.Domain.Entities.Authorizations.Groups;
+using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 
-namespace Shamsheer.Service.Services.Authorizations;
+namespace Shamsheer.Service.Services.Authorizations.Groups;
 
 public class GroupPermissionService : IGroupPermissionService
 {
@@ -26,9 +26,10 @@ public class GroupPermissionService : IGroupPermissionService
 
     public async Task<GroupPermissionForResultDto> CreateAsync(GroupPermissionType Type)
     {
-        var groupPermission = await this._groupPermissionRepository.SelectAll()
+        var groupPermission = await _groupPermissionRepository.SelectAll()
             .Where(gp => gp.Type == Type)
             .FirstOrDefaultAsync();
+
         if (groupPermission is not null)
             throw new ShamsheerException(409, "GroupPermission already exist");
 
@@ -38,14 +39,14 @@ public class GroupPermissionService : IGroupPermissionService
             CreatedAt = DateTime.UtcNow,
         };
 
-        var result = await this._groupPermissionRepository.InsertAsync(mappedGroupPermission);
+        var result = await _groupPermissionRepository.InsertAsync(mappedGroupPermission);
 
-        return this._mapper.Map<GroupPermissionForResultDto>(result);
+        return _mapper.Map<GroupPermissionForResultDto>(result);
     }
 
     public async Task<GroupPermissionForResultDto> ModifyAsync(long id, GroupPermissionType Type)
     {
-        var groupPermission = await this._groupPermissionRepository.SelectAll()
+        var groupPermission = await _groupPermissionRepository.SelectAll()
             .Where(gp => gp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -59,14 +60,14 @@ public class GroupPermissionService : IGroupPermissionService
             Type = Type,
             UpdatedAt = DateTime.UtcNow,
         };
-        var mapped = await this._groupPermissionRepository.UpdateAsync(mappedGroupPermission);
+        var mapped = await _groupPermissionRepository.UpdateAsync(mappedGroupPermission);
 
-        return this._mapper.Map<GroupPermissionForResultDto>(mapped);
+        return _mapper.Map<GroupPermissionForResultDto>(mapped);
     }
 
     public async Task<bool> RemoveAsync(long id)
     {
-        var groupPermission = await this._groupPermissionRepository.SelectAll()
+        var groupPermission = await _groupPermissionRepository.SelectAll()
             .Where(gp => gp.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
@@ -74,27 +75,27 @@ public class GroupPermissionService : IGroupPermissionService
         if (groupPermission is null)
             throw new ShamsheerException(404, "group permission is not found");
 
-        await this._groupPermissionRepository.DeleteAsync(id);
+        await _groupPermissionRepository.DeleteAsync(id);
         return true;
     }
 
     public async Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync()
     {
-        var groupPermissions = this._groupPermissionRepository.SelectAll()
+        var groupPermissions = _groupPermissionRepository.SelectAll()
             .AsNoTracking();
 
-        return this._mapper.Map<IEnumerable<GroupPermissionForResultDto>>(groupPermissions);
+        return _mapper.Map<IEnumerable<GroupPermissionForResultDto>>(groupPermissions);
     }
 
     public async Task<GroupPermissionForResultDto> RetrieveByIdAsync(long id)
     {
-        var groupPermission = await this._groupPermissionRepository.SelectAll()
+        var groupPermission = await _groupPermissionRepository.SelectAll()
             .Where(gp => gp.Id == id)
             .FirstOrDefaultAsync();
-            
+
         if (groupPermission is null)
             throw new ShamsheerException(404, "GroupPermission is not found");
 
-        return this._mapper.Map<GroupPermissionForResultDto>(groupPermission);
+        return _mapper.Map<GroupPermissionForResultDto>(groupPermission);
     }
 }
