@@ -83,8 +83,9 @@ public class ChannelPermissionService : IChannelPermissionService
 
     public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync()
     {
-        var channelPermission = _channelPermissionRepository.SelectAll()
-            .AsNoTracking();
+        var channelPermission = await _channelPermissionRepository.SelectAll()
+            .AsNoTracking()
+            .ToListAsync();
 
         return _mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermission);
     }
