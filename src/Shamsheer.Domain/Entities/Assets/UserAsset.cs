@@ -1,10 +1,4 @@
-﻿using Shamsheer.Domain.Commons;
-using Shamsheer.Domain.Entities.Chats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shamsheer.Domain.Entities.Chats;
 
 namespace Shamsheer.Domain.Entities.Assets
 {

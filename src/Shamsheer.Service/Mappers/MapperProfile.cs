@@ -13,6 +13,7 @@ using Shamsheer.Service.DTOs.UserChannels;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
 using Shamsheer.Service.DTOs.Authorizations.ChannelPermissions;
 using Shamsheer.Service.DTOs.Authorizations.Channels;
+using Microsoft.AspNetCore.Http;
 
 namespace Shamsheer.Service.Mappers
 {

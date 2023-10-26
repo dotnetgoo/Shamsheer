@@ -25,6 +25,7 @@
     <Folder Include="wwwroot\Media\ProfilePictures\Groups\" />
     <Folder Include="wwwroot\Media\ProfilePictures\Channels\" />
     <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
+    <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
     <Folder Include="wwwroot\Media\Videos\" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 using Shamsheer.Service.Mappers;
+using Shamsheer.Service.Helpers;
 using Shamsheer.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Messenger.Api.Extensions;
@@ -22,6 +23,9 @@ builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
+
+// Getting full path of wwwroot
+WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

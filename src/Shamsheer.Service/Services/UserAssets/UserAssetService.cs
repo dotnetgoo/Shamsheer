@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Shamsheer.Service.Helpers;
 using System.Collections.Generic;
 using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Exceptions;
@@ -20,13 +23,13 @@ public class UserAssetService : IUserAssetService
     private readonly IUserRepository _userRepository;
     private readonly IUserAssetRepository _userAssetRepository;
 
-    public UserAssetService(IMapper mapper, IUserRepository userRepository, IUserAssetRepository userAssetRepository)
+    public UserAssetService(IMapper mapper, IUserRepository userRepository, IUserAssetRepository userAssetRepository, WebHostEnviromentHelper webHostEnvironment)
     {
         _mapper = mapper;
         _userRepository = userRepository;
         _userAssetRepository = userAssetRepository;
     }
-    public async Task<UserAssetForResultDto> CreateAsync(UserAssetForCreationDto dto)
+    public async Task<UserAssetForResultDto> CreateAsync(IFormFile formFile)
     {
         //Identify UserId TODO:LOGIC
         long userId = 1; //Actually this one is takes from jwt token, now we need to give default value
@@ -36,30 +39,47 @@ public class UserAssetService : IUserAssetService
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
 
-        var asset = await _userAssetRepository.SelectAll()
-            .Where(ua => ua.Path == dto.Path)
-            .FirstOrDefaultAsync();
-        if (asset is not null)
-            throw new ShamsheerException(404, "User Asset is already exist.");
+        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(formFile.FileName);
+        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "ProfilePictures", "Users", fileName);
+        using (var stream = new FileStream(rootPath, FileMode.Create))
+        {
+            await formFile.CopyToAsync(stream);
+            await stream.FlushAsync();
+            stream.Close();
+        }
 
-        var mappedAsset = _mapper.Map<UserAsset>(dto);
-        mappedAsset.UserId = userId;
-        mappedAsset.CreatedAt = DateTime.UtcNow;
+        var mappedAsset = new UserAsset()
+        {
+            UserId = userId,
+            Name = fileName,
+            Path = Path.Combine("Media", "ProfilePictures", "Users", formFile.FileName),
+            Extension = Path.GetExtension(formFile.FileName),
+            Size = formFile.Length,
+            Type = formFile.ContentType,
+            CreatedAt = DateTime.UtcNow
+        };
+
         var result = await _userAssetRepository.InsertAsync(mappedAsset);
 
         return _mapper.Map<UserAssetForResultDto>(result);
     }  
 
-    public async Task<bool> RemoveAsync(long id)
+    public async Task<bool> RemoveAsync(long userId, long id)
     {
+        var user = await _userRepository.SelectAll()
+            .Where(u => u.Id == userId)
+            .FirstOrDefaultAsync();
+        if (user is null)
+            throw new ShamsheerException(404, "User is not found.");
+
         var userAsset = await _userAssetRepository.SelectAll()
             .Where(ur => ur.Id == id)
             .FirstOrDefaultAsync();
-
         if (userAsset is null)
             throw new ShamsheerException(404, "User Asset is not found.");
 
-        await _userAssetRepository.DeleteAsync(id);
+
+        await _userAssetRepository.DeleteAsync(userAsset.Id);
 
         return true;
     }
@@ -89,14 +109,14 @@ public class UserAssetService : IUserAssetService
         if (user is null)
             throw new ShamsheerException(404, "User is not found.");
 
-        var asset = await _userAssetRepository.SelectAll()
+        var userAsset = await _userAssetRepository.SelectAll()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
-        if (asset is null)
+        if (userAsset is null)
             throw new ShamsheerException(404, "User Asset is not found.");
 
-        var mappedAsset = _mapper.Map<UserAssetForResultDto>(asset);
+        var mappedAsset = _mapper.Map<UserAssetForResultDto>(userAsset);
 
         return mappedAsset;
     }
