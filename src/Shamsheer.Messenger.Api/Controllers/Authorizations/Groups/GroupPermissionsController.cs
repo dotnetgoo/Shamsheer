@@ -11,26 +11,26 @@ public class GroupPermissionsController : BaseController
 
     public GroupPermissionsController(IGroupPermissionService groupPermissionService)
     {
-        _groupPermissionService = groupPermissionService;
+        this._groupPermissionService = groupPermissionService;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] GroupPermissionType type)
-        => Ok(await _groupPermissionService.CreateAsync(type));
+        => Ok(await this._groupPermissionService.CreateAsync(type));
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-        => Ok(await _groupPermissionService.RetrieveAllAsync());
+        => Ok(await this._groupPermissionService.RetrieveAllAsync());
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _groupPermissionService.RetrieveByIdAsync(id));
+        => Ok(await this._groupPermissionService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] GroupPermissionType type)
-        => Ok(await _groupPermissionService.ModifyAsync(id, type));
+        => Ok(await this._groupPermissionService.ModifyAsync(id, type));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _groupPermissionService.RemoveAsync(id));
+        => Ok(await this._groupPermissionService.RemoveAsync(id));
 }
