@@ -17,7 +17,7 @@ public class UserChannelsController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] UserChannelForCreationDto dto)
     => Ok(await _userChannelService.CreateAsync(dto));
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await _userChannelService.RetrieveAllAsync());
 
