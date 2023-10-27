@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.UserChannels;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.UserChannel;
 
 namespace Shamsheer.Messenger.Api.Controllers.UserChannels;
@@ -13,13 +15,21 @@ public class UserChannelsController : BaseController
         _userChannelService = userChannelService;
     }
 
+    [HttpGet("Test")]
+    public IActionResult GetNumbers([FromQuery] PaginationParams @params)
+    {
+        var numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        return Ok(numbers.ToPagedList(@params));
+    }
+
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] UserChannelForCreationDto dto)
     => Ok(await _userChannelService.CreateAsync(dto));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
-        => Ok(await _userChannelService.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        => Ok(await _userChannelService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Channels;
 using Shamsheer.Service.Interfaces.Channels;
 
@@ -17,8 +18,8 @@ namespace Shamsheer.Messenger.Api.Controllers.Channels
             Ok(await _service.AddAsync(dto));
 
         [HttpGet]
-        public async Task<IActionResult> GetAllChannelAsync() =>
-            Ok(await _service.RetrieveAllAsync());
+        public async Task<IActionResult> GetAllChannelAsync([FromQuery] PaginationParams @params) =>
+            Ok(await _service.RetrieveAllAsync(@params));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>

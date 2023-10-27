@@ -74,6 +74,7 @@ namespace Shamsheer.Service.Services.Users
         {
             var users = await _userRepository.SelectAll()
                 .Include(a => a.Assets)
+                .AsNoTracking()
                 .ToPagedList(@params)
                 .ToListAsync();
 
