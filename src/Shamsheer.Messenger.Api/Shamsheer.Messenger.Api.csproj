@@ -22,7 +22,6 @@
     <Folder Include="wwwroot\Media\Files\" />
     <Folder Include="wwwroot\Media\Images\" />
     <Folder Include="wwwroot\Media\Audios\" />
-    <Folder Include="wwwroot\Media\ProfilePictures\Groups\" />
     <Folder Include="wwwroot\Media\ProfilePictures\Channels\" />
     <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
     <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
