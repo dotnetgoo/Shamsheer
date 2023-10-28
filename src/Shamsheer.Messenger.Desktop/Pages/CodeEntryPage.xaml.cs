@@ -17,15 +17,8 @@ namespace Shamsheer.Messenger.Desktop.Pages
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate to Page2.xaml
-            NavigationService.Navigate(new Uri("EmailLoginPage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new EmailLoginPage());
         }
-
-        private void _frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            // Bu metodning ishlatish usuli
-        }
-
 
         private void SendCodeAgain_Click(object sender, RoutedEventArgs e)
         {
@@ -60,5 +53,9 @@ namespace Shamsheer.Messenger.Desktop.Pages
             timer.Start();
         }
 
+        private void nextPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new RegistrPage());
+        }
     }
 }
