@@ -10,12 +10,12 @@ public class UserAssetsController : BaseController
 
     public UserAssetsController(IUserAssetService userAssetService)
     {
-        _userAssetService = userAssetService;
+       this._userAssetService = userAssetService;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync(IFormFile formFile)
-        => Ok(await _userAssetService.CreateAsync(formFile));
+        => Ok(await this._userAssetService.CreateAsync(formFile));
 
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute] long userId)
@@ -23,9 +23,9 @@ public class UserAssetsController : BaseController
 
     [HttpGet("{userId} {id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "userId")] long userId, [FromRoute(Name = "id")] long id)
-        => Ok(await _userAssetService.RetrieveByIdAsync(userId, id));
+        => Ok(await this._userAssetService.RetrieveByIdAsync(userId, id));
 
     [HttpDelete("{userId} {id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "userId")] long userId, [FromRoute(Name = "id")] long id)
-        => Ok(await _userAssetService.RemoveAsync(userId, id));
+        => Ok(await this._userAssetService.RemoveAsync(userId, id));
 }
