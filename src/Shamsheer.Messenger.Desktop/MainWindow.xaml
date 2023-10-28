@@ -75,6 +75,8 @@
                 </Button>
             </StackPanel>
         </Border>
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Window>
