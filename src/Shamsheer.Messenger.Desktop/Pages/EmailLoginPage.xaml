@@ -6,8 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="#0E1621"
-        d:Height="450" d:Width="800"
-        MinHeight="300" MinWidth="400">
+        d:Height="450" d:Width="800">
 
     <Grid Background="#17212B">
         <Button
