@@ -10,26 +10,26 @@ public class GroupRolesController : BaseController
 
     public GroupRolesController(IGroupRoleService groupRoleService)
     {
-        _groupRoleService = groupRoleService;
+        this._groupRoleService = groupRoleService;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] ChatRole chatRole)
-        => Ok(await _groupRoleService.CreateAsync(chatRole));
+        => Ok(await this._groupRoleService.CreateAsync(chatRole));
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-        => Ok(await _groupRoleService.RetrieveAllAsync());
+        => Ok(await this._groupRoleService.RetrieveAllAsync());
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _groupRoleService.RetrieveByIdAsync(id));
+        => Ok(await this._groupRoleService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] ChatRole chatRole)
-        => Ok(await _groupRoleService.ModifyAsync(id, chatRole));
+        => Ok(await this._groupRoleService.ModifyAsync(id, chatRole));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _groupRoleService.RemoveAsync(id));
+        => Ok(await this._groupRoleService.RemoveAsync(id));
 }
