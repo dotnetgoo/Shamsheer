@@ -118,7 +118,7 @@
                     Width="170"
                     Height="30"
                     Padding="5"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center" Click="qrCodeBtn_Click"/>
 
                 <TextBox
                     x:Name="CodeTextBox"
@@ -136,6 +136,8 @@
                     Visibility="Collapsed"/>
             </StackPanel>
         </Border>
-        <Frame x:Name="_frame" NavigationUIVisibility="Hidden"/>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Page>
