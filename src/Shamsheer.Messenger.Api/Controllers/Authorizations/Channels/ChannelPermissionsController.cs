@@ -17,7 +17,7 @@ public class ChannelPermissionsController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] ChannelPermissionType type)
         => Ok(await _channelPermissionService.CreateAsync(type));
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await _channelPermissionService.RetrieveAllAsync());
 
