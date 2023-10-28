@@ -11,12 +11,12 @@ public class ChannelPermissionsController : BaseController
 
     public ChannelPermissionsController(IChannelPermissionService channelPermissionService)
     {
-        _channelPermissionService = channelPermissionService;
+        this._channelPermissionService = channelPermissionService;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] ChannelPermissionType type)
-        => Ok(await _channelPermissionService.CreateAsync(type));
+        => Ok(await this._channelPermissionService.CreateAsync(type));
 
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
@@ -24,13 +24,13 @@ public class ChannelPermissionsController : BaseController
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _channelPermissionService.RetrieveByIdAsync(id));
+        => Ok(await this._channelPermissionService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] ChannelPermissionType type)
-        => Ok(await _channelPermissionService.ModifyAsync(id, type));
+        => Ok(await this._channelPermissionService.ModifyAsync(id, type));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _channelPermissionService.RemoveAsync(id));
+        => Ok(await this._channelPermissionService.RemoveAsync(id));
 }

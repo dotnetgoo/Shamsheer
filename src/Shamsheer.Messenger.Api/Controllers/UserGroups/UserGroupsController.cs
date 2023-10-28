@@ -11,28 +11,28 @@ public class UserGroupsController : BaseController
 
     public UserGroupsController(IUserGroupService userGroupService)
     {
-        _userGroupService = userGroupService;
+       this._userGroupService = userGroupService;
     }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] UserGroupForCreationDto dto)
-    => Ok(await _userGroupService.CreateAsync(dto));
+        => Ok(await this._userGroupService.CreateAsync(dto));
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userGroupService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _userGroupService.RetrieveByIdAsync(id));
+        => Ok(await this._userGroupService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserGroupForUpdateDto dto)
-        => Ok(await _userGroupService.ModifyAsync(id, dto));
+        => Ok(await this._userGroupService.ModifyAsync(id, dto));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _userGroupService.RemoveAsync(id));
+        => Ok(await this._userGroupService.RemoveAsync(id));
 
 
 }

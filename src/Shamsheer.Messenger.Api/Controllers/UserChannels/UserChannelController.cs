@@ -12,7 +12,7 @@ public class UserChannelsController : BaseController
 
     public UserChannelsController(IUserChannelService userChannelService)
     {
-        _userChannelService = userChannelService;
+        this._userChannelService = userChannelService;
     }
 
     [HttpGet("Test")]
@@ -25,7 +25,7 @@ public class UserChannelsController : BaseController
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] UserChannelForCreationDto dto)
-    => Ok(await _userChannelService.CreateAsync(dto));
+        => Ok(await this._userChannelService.CreateAsync(dto));
 
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
@@ -33,13 +33,13 @@ public class UserChannelsController : BaseController
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _userChannelService.RetrieveByIdAsync(id));
+        => Ok(await this._userChannelService.RetrieveByIdAsync(id));
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserChannelForUpdateDto dto)
-        => Ok(await _userChannelService.ModifyAsync(id, dto));
+        => Ok(await this._userChannelService.ModifyAsync(id, dto));
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
-        => Ok(await _userChannelService.RemoveAsync(id));
+        => Ok(await this._userChannelService.RemoveAsync(id));
 }
