@@ -2,7 +2,7 @@
 using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 
-namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Channels;
+namespace Shamsheer.Messenger.Api.Controllers.Permissions.Channels;
 
 public class ChannelPermissionsController : BaseController
 {
