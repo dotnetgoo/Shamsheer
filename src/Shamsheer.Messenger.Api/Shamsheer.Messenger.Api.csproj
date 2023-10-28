@@ -1,13 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
+    <ProjectReference Include="..\Shamsheer.Service\Shamsheer.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Media\Files\" />
+    <Folder Include="wwwroot\Media\Images\" />
+    <Folder Include="wwwroot\Media\Audios\" />
+    <Folder Include="wwwroot\Media\ProfilePictures\Channels\" />
+    <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
+    <Folder Include="wwwroot\Media\ProfilePictures\Users\" />
+    <Folder Include="wwwroot\Media\Videos\" />
   </ItemGroup>
 
 </Project>

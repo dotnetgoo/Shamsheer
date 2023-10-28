@@ -3,7 +3,20 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+    <ItemGroup>
+	    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
+    <ProjectReference Include="..\Shamsheer.Domain\Shamsheer.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,92 @@
+﻿<Page x:Class="Shamsheer.Messenger.Desktop.Pages.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Shamsheer.Messenger.Desktop.Components"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      
+      Title="Settings">
+
+    <Grid>
+        <Border x:Name="Border_Background" MouseUp="Border_Background_MouseUp" Background="Black" Opacity="0.3"/>
+        <Grid Background="#17212B" Height="540" Width="450">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Margin="20 0 20 0">
+                    <TextBlock Text="Settings" VerticalAlignment="Center" Foreground="Snow" FontSize="18"/>
+                    <DockPanel HorizontalAlignment="Right">
+                        <md:PopupBox Margin="0 0 10 0" Cursor="Hand">
+                            <md:PopupBox.Style>
+                                <Style TargetType="md:PopupBox">
+                                    <Setter Property="Foreground" Value="#6C7883"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Snow"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </md:PopupBox.Style>
+                            <ListBox Background="#17212B" BorderThickness="0" Width="150" Foreground="Snow">
+                                <ListBoxItem Content="Add Account"/>
+                                <ListBoxItem Content="Edit Profile"/>
+                                <ListBoxItem Content="Log Out"/>
+                            </ListBox>
+                        </md:PopupBox>
+                        <md:PackIcon x:Name="close_Btn" MouseUp="close_Btn_MouseUp" Cursor="Hand" Kind="WindowClose" VerticalAlignment="Center" Width="25" Height="25" >
+                            <md:PackIcon.Style>
+                                <Style TargetType="md:PackIcon">
+                                    <Setter Property="Foreground" Value="#6C7883"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Snow"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </md:PackIcon.Style>
+                        </md:PackIcon>
+                    </DockPanel>
+                </DockPanel>
+                <DockPanel Grid.Row="1" Margin="20 0 20 0">
+                    <Border HorizontalAlignment="Left" Width="70" Height="70" Background="White" CornerRadius="35">
+                        <Ellipse Width="70" Height="70">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="../Images/2.jpg" Stretch="Uniform"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center" Margin="15 0 0 0">
+                        <TextBlock Text="Defaul User" Foreground="Snow" FontSize="16" FontWeight="DemiBold"/>
+                        <TextBlock Text="online" FontSize="13" Foreground="#48A2F5"/>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border BorderThickness="6" VerticalAlignment="Top" BorderBrush="#232E3C"/>
+                <StackPanel Margin="0 10 0 0">
+                    <local:MenuButton Text="Edit Profile" Icon="InformationCircle" FontWeight="Regular"/>
+                    <local:MenuButton Text="Notifications" Icon="Notifications" FontWeight="Regular"/>
+                    <local:MenuButton Text="Privacy and Security" Icon="Lock" FontWeight="Regular"/>
+                    <local:MenuButton Text="Chat Settings" Icon="Chat" FontWeight="Regular"/>
+                    <local:MenuButton Text="Folders" Icon="Folder" FontWeight="Regular"/>
+                    <local:MenuButton Text="Advanced" Icon="TrackChanges" FontWeight="Regular"/>
+                    <Grid>
+                        <local:MenuButton Text="Language" Icon="AlphabetACircle" FontWeight="Regular"/>
+                        <TextBlock Text="English" FontSize="15" Foreground="#48A2F5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 30 0"/>
+                    </Grid>
+                    <Border BorderThickness="6" BorderBrush="#232E3C" Margin="0 15 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

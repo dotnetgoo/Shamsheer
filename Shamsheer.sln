@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{97C59321-095C-40E4-BAB4-28CE05A10994}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Presentation", "src\Shamsheer.Presentation\Shamsheer.Presentation.csproj", "{3F580BB6-AA39-4ECD-BC56-834B250CCA57}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Domain", "src\Shamsheer.Domain\Shamsheer.Domain.csproj", "{6B97A5F1-F3FF-4390-A06B-F2D344A7D103}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Service", "src\Shamsheer.Service\Shamsheer.Service.csproj", "{0B114627-A999-4F08-89B9-ACE22380B836}"
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3F580BB6-AA39-4ECD-BC56-834B250CCA57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F580BB6-AA39-4ECD-BC56-834B250CCA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F580BB6-AA39-4ECD-BC56-834B250CCA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F580BB6-AA39-4ECD-BC56-834B250CCA57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B97A5F1-F3FF-4390-A06B-F2D344A7D103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B97A5F1-F3FF-4390-A06B-F2D344A7D103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B97A5F1-F3FF-4390-A06B-F2D344A7D103}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -64,7 +58,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3F580BB6-AA39-4ECD-BC56-834B250CCA57} = {97C59321-095C-40E4-BAB4-28CE05A10994}
 		{6B97A5F1-F3FF-4390-A06B-F2D344A7D103} = {97C59321-095C-40E4-BAB4-28CE05A10994}
 		{0B114627-A999-4F08-89B9-ACE22380B836} = {97C59321-095C-40E4-BAB4-28CE05A10994}
 		{9845DC12-7369-41CA-86AC-8FA29EB2B691} = {97C59321-095C-40E4-BAB4-28CE05A10994}
