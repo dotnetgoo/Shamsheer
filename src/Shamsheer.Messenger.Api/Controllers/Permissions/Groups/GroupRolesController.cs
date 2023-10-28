@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Authorizations;
 
 namespace Shamsheer.Messenger.Api.Controllers.Permissions.Groups;
@@ -18,8 +19,8 @@ public class GroupRolesController : BaseController
         => Ok(await this._groupRoleService.CreateAsync(chatRole));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
-        => Ok(await this._groupRoleService.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        => Ok(await _groupRoleService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)

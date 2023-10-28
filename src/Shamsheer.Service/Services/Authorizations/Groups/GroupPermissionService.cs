@@ -10,6 +10,8 @@ using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Interfaces.Authorizations;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.Authorizations.Groups;
 
@@ -79,10 +81,12 @@ public class GroupPermissionService : IGroupPermissionService
         return true;
     }
 
-    public async Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<GroupPermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var groupPermissions = _groupPermissionRepository.SelectAll()
-            .AsNoTracking();
+        var groupPermissions = await _groupPermissionRepository.SelectAll()
+            .AsNoTracking()
+            .ToPagedList(@params)
+            .ToListAsync();
 
         return _mapper.Map<IEnumerable<GroupPermissionForResultDto>>(groupPermissions);
     }

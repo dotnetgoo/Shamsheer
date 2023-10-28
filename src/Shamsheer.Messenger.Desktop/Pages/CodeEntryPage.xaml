@@ -86,7 +86,7 @@
                          Margin="0,-40,10,10"/>
 
                 <Button
-                    x:Name="qrCodeBtn"
+                    x:Name="sendCodeAgainBtn"
                     Margin="-10 -10 141 0"
                     Foreground="#2F6EA5"
                     Background="Transparent"
@@ -100,7 +100,7 @@
                     Click="SendCodeAgain_Click"/>
 
 
-                <Button x:Name="sendCodeAgainBtn"
+                <Button x:Name="nextPageBtn"
                     Content="Next"
                     Foreground="White"
                     Background="#2F6EA5"
@@ -108,7 +108,7 @@
                     Height="35"
                     FontSize="14"
                     Width="250"
-                    Cursor="Hand">
+                    Cursor="Hand" Click="nextPageBtn_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
@@ -137,6 +137,9 @@
                 </Button>
             </StackPanel>
         </Border>
-        <Frame x:Name="_frame" NavigationUIVisibility="Hidden" Navigated="_frame_Navigated"/>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
+
     </Grid>
 </Page>

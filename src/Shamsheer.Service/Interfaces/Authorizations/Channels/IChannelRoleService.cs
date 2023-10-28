@@ -1,4 +1,5 @@
 ﻿using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.Channels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,6 +11,6 @@ public interface IChannelRoleService
     Task<bool> RemoveAsync(long id);
     Task<ChannelRoleForResultDto> RetrieveByIdAsync(long id);
     Task<ChannelRoleForResultDto> CreateAsync(ChatRole chatRole);
-    Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync();
+    Task<IEnumerable<ChannelRoleForResultDto>> RetrieveAllAsync(PaginationParams @params);
     Task<ChannelRoleForResultDto> ModifyAsync(long id, ChatRole chatRole);
 }

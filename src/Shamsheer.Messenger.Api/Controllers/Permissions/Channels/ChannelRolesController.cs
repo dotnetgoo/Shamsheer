@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 
 namespace Shamsheer.Messenger.Api.Controllers.Permissions.Channels;
@@ -18,8 +19,8 @@ public class ChannelRolesController : BaseController
         => Ok(await _channelRoleService.CreateAsync(chatRole));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
-        => Ok(await _channelRoleService.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        => Ok(await _channelRoleService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
