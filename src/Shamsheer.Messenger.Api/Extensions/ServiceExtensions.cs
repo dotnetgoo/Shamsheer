@@ -19,6 +19,8 @@ using Shamsheer.Service.Services.Authorizations.Groups;
 using Shamsheer.Service.Helpers;
 using Shamsheer.Service.Interfaces.GroupAssets;
 using Shamsheer.Service.Services.GroupAssets;
+using Shamsheer.Service.Interfaces.ChannelAssets;
+using Shamsheer.Service.Services.ChannelAssets;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -35,8 +37,10 @@ public static class ServiceExtensions
         services.AddScoped<IUserAssetService, UserAssetService>();
         services.AddScoped<IUserGroupService, UserGroupService>();
         services.AddScoped<IGroupAssetService, GroupAssetService>();
+        services.AddScoped<IChannelAssetService, ChannelAssetService>();
         services.AddScoped<IGroupAssetRepository, GroupAssetRepository>();
-        
+        services.AddScoped<IChannelAssetRepository, ChannelAssetRepository>();
+
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<WebHostEnviromentHelper, WebHostEnviromentHelper>();
 

@@ -25,6 +25,8 @@ public class GroupAssetsController : BaseController
     public async Task<IActionResult> GetAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RetrieveByIdAsync(groupId, id));
 
+
+
     [HttpDelete("{groupId} {id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RemoveAsync(groupId, id));
