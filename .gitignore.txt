@@ -1,2 +1,2 @@
-# Folder wwwroot
+# folder wwwroot
 wwwroot/
