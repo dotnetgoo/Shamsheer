@@ -1,2 +1,2 @@
 # folder wwwroot
-wwwroot/
+wwwroot/Media
