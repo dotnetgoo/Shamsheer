@@ -113,7 +113,7 @@
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     Width="303"
                     Height="55"
-                    materialDesign:HintAssist.Hint = "Last Lame" FontSize="17"
+                    materialDesign:HintAssist.Hint = "Last Name" FontSize="17"
                     Foreground="Snow"
                     CaretBrush="#2F4668"
                     BorderThickness="0,0,0,1"
@@ -145,7 +145,7 @@
                                     <ControlTemplate TargetType="{x:Type Button}">
 
                                         <Border x:Name="LoginBorder" Background="{TemplateBinding Background}"
-                                                CornerRadius="16">
+                                                CornerRadius="4">
                                             <ContentPresenter HorizontalAlignment="Center"
                                        VerticalAlignment="Center" />
                                         </Border>

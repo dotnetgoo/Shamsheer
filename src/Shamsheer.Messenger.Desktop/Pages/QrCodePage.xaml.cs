@@ -29,5 +29,10 @@ namespace Shamsheer.Messenger.Desktop.Pages
         {
             MainFrame.Navigate(new EmailLoginPage());
         }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new MainWindow());
+        }
     }
 }

@@ -136,8 +136,9 @@
                     Visibility="Collapsed"/>
             </StackPanel>
         </Border>
-
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Grid>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
 
     </Grid>
 </Page>

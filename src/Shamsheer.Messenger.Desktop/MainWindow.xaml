@@ -13,7 +13,7 @@
             <StackPanel HorizontalAlignment="Center" 
                         VerticalAlignment="Center">
                 <Image x:Name="ImagePicture" 
-                       Source="C:\Users\Jasurbek Abdunazarov\Desktop\Contributer\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\tg.jpg" 
+                       Source="Images\tg.jpg" 
                        Stretch="UniformToFill" 
                        Margin="0 -115 0 0"/>
 
@@ -75,8 +75,10 @@
                 </Button>
             </StackPanel>
         </Border>
-        
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
+        <Grid>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
 
     </Grid>
 </Window>

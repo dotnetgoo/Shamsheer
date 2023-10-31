@@ -4,12 +4,27 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Shamsheer.Messenger.Desktop.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800"
       Title="QrCodePage" 
       Background="#17212B">
 
     <Grid>
+
+        <Button
+             x:Name="cancelBtn"
+             Margin="10,10,200,0"
+             HorizontalAlignment="Left"
+             VerticalAlignment="Top"
+             Foreground="#2F6EA5"
+             Background="Transparent"
+             BorderBrush="Transparent"
+             Click="CancelBtn_Click">
+            <materialDesign:PackIcon Kind="ArrowLeft"/>
+        </Button>
+
+
         <Border Background="Snow" CornerRadius="7"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
@@ -54,7 +69,7 @@
                     Foreground="#276FD5"
                     Content="Or log in using your Email"
                     HorizontalAlignment="Center"
-                    Margin="20,400,14,0"
+                    Margin="20,300,14,0"
                     BorderBrush="Transparent" Click="Button_Click"/>
 
 
@@ -73,8 +88,9 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top" 
                 BorderBrush="Transparent"/>
-
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Grid>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
 
     </Grid>
 </Page>
