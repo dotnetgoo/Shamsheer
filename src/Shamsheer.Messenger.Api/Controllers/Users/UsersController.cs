@@ -9,6 +9,7 @@ using Shamsheer.Service.Configurations.Filters;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
 
+[Authorize]
 public class UsersController : BaseController
 {
     private readonly IUserService _userService;
@@ -42,11 +43,11 @@ public class UsersController : BaseController
         return Unauthorized();
     }
 
-    [HttpPost]
+    [HttpPost, AllowAnonymous]
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
-    [HttpGet]
+    [HttpGet, Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));
 
@@ -58,6 +59,7 @@ public class UsersController : BaseController
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserForUpdateDto dto)
         => Ok(await _userService.ModifyAsync(id, dto));
 
+    [Authorize("Department")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
         => Ok(await _userService.RemoveAsync(id));
