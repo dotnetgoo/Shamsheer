@@ -5,6 +5,7 @@ using Shamsheer.Domain.Entities.Messages;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
+using Shamsheer.Data.EntityConfigurations;
 
 namespace Shamsheer.Data.DbContexts;
 
@@ -34,11 +35,7 @@ public class ShamsheerDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-        modelBuilder.Entity<UserGroup>()
-            .HasOne(g => g.Group)
-            .WithMany(m => m.Members)
-            .HasForeignKey(g => g.MemberId);
+        modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
         modelBuilder.Entity<UserChannel>()
             .HasOne(c => c.Channel)
@@ -59,7 +56,6 @@ public class ShamsheerDbContext : DbContext
             .HasOne(c => c.Channel)
             .WithMany(a => a.Assets)
             .HasForeignKey(c => c.ChannelId);
-
     }
     public void Configure(EntityTypeBuilder<Group> modelBuilder)
     {

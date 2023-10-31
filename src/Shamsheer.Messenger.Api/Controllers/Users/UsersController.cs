@@ -5,6 +5,7 @@ using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using Shamsheer.Service.Configurations.Filters;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
 
@@ -64,4 +65,9 @@ public class UsersController : BaseController
     [HttpGet("email")]
     public async Task<IActionResult> GetByEmailAsync(string email)
         => Ok(await _userService.RetrieveByEmailAsync(email));
+
+
+    [HttpGet("by-property")]
+    public async Task<IActionResult> GetByPropertyAsync(GetFilter filter)
+        => Ok(await _userService.RetrieveByFilterAsync(filter));
 }
