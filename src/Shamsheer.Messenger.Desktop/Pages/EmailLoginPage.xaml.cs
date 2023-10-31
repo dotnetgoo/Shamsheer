@@ -27,12 +27,17 @@ namespace Shamsheer.Messenger.Desktop.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("CodeEntryPage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new CodeEntryPage());
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("QrCodePage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new QrCodePage());
+        }
+
+        private void qrCodeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new QrCodePage());
         }
     }
 }

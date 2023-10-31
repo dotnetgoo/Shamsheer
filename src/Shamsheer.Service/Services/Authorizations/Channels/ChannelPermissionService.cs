@@ -4,9 +4,11 @@ using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Domain.Enums.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Authorizations.ChannelPermissions;
 using Shamsheer.Service.DTOs.Authorizations.GroupPermissions;
 using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.Authorizations.Channels;
 using System;
 using System.Collections.Generic;
@@ -81,13 +83,14 @@ public class ChannelPermissionService : IChannelPermissionService
         return true;
     }
 
-    public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ChannelPermissionForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var channelPermission = await _channelPermissionRepository.SelectAll()
+        var channelPermissions = await _channelPermissionRepository.SelectAll()
             .AsNoTracking()
+            .ToPagedList(@params)
             .ToListAsync();
 
-        return _mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermission);
+        return _mapper.Map<IEnumerable<ChannelPermissionForResultDto>>(channelPermissions);
     }
 
     public async Task<ChannelPermissionForResultDto> RetrieveByIdAsync(long id)

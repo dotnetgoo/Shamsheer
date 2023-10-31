@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Domain.Entities.Chats;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.UserGroup;
 using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.UserGroup;
 using System;
 using System.Collections.Generic;
@@ -92,16 +94,18 @@ public class UserGroupService : IUserGroupService
         return await _userGroupRepository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<UserGroupForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<UserGroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var userGroup =  _userGroupRepository.SelectAll()
+        var userGroups = await _userGroupRepository.SelectAll()
             .Include(ug => ug.Member)
             .ThenInclude(u =>u.Assets)
             .Include(ug => ug.Group)
             .ThenInclude(g => g.Owner)
-            .AsNoTracking();
+            .AsNoTracking()
+            .ToPagedList(@params)
+            .ToListAsync();
 
-        return _mapper.Map<IEnumerable<UserGroupForResultDto>>(userGroup);
+        return _mapper.Map<IEnumerable<UserGroupForResultDto>>(userGroups);
     }
 
     public async Task<UserGroupForResultDto> RetrieveByIdAsync(long id)

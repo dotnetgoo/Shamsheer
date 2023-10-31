@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.DTOs.Channels;
 using Shamsheer.Service.Interfaces.Channels;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.Channels;
 public class ChannelService : IChannelService
@@ -75,9 +77,12 @@ public class ChannelService : IChannelService
         return true;
     }
 
-    public async Task<IEnumerable<ChannelForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<ChannelForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var channels = _repository.SelectAll().AsNoTracking();
+        var channels = await _repository.SelectAll()
+            .AsNoTracking()
+            .ToPagedList(@params)
+            .ToListAsync();
 
         return _mapper.Map<IEnumerable<ChannelForResultDto>>(channels);
     }

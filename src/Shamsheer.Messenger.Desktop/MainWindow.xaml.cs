@@ -1,3 +1,4 @@
+using Shamsheer.Messenger.Desktop.Pages;
 using System;
 using System.Windows;
 
@@ -15,7 +16,7 @@ namespace Shamsheer.Messenger.Desktop
 
         private void startMessagingBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("QrCodePage.xaml", UriKind.Relative));
+            MainFrame.Navigate(new QrCodePage());
         }
     }
 }

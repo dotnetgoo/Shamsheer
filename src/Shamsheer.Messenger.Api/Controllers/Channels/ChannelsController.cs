@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Channels;
 using Shamsheer.Service.Interfaces.Channels;
 
@@ -17,8 +18,8 @@ public class ChannelsController : BaseController
         Ok(await this._service.AddAsync(dto));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllChannelAsync() =>
-        Ok(await this._service.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllChannelAsync([FromQuery] PaginationParams @params) =>
+        Ok(await _service.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] long id) =>

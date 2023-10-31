@@ -10,6 +10,8 @@ using Shamsheer.Service.DTOs.Groups;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.Interfaces.Groups;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.Groups;
 
@@ -76,10 +78,12 @@ public class GroupService : IGroupService
         return true;
     }
 
-    public async Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        //   Do pagination logic
-        var groups =  _groupRepository.SelectAll().AsNoTracking();
+        var groups =  await _groupRepository.SelectAll()
+            .AsNoTracking()
+            .ToPagedList(@params)
+            .ToListAsync();
 
          return _mapper.Map<IEnumerable<GroupForResultDto>>(groups);    
     }

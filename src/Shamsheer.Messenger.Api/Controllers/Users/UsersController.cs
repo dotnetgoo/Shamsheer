@@ -5,9 +5,11 @@ using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using Shamsheer.Service.Configurations.Filters;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
 
+[Authorize]
 public class UsersController : BaseController
 {
     private readonly IUserService _userService;
@@ -41,11 +43,11 @@ public class UsersController : BaseController
         return Unauthorized();
     }
 
-    [HttpPost]
+    [HttpPost, AllowAnonymous]
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
-    [HttpGet]
+    [HttpGet, Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));
 
@@ -57,6 +59,7 @@ public class UsersController : BaseController
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserForUpdateDto dto)
         => Ok(await _userService.ModifyAsync(id, dto));
 
+    [Authorize("Department")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
         => Ok(await _userService.RemoveAsync(id));
@@ -64,4 +67,9 @@ public class UsersController : BaseController
     [HttpGet("email")]
     public async Task<IActionResult> GetByEmailAsync(string email)
         => Ok(await _userService.RetrieveByEmailAsync(email));
+
+
+    [HttpGet("by-property")]
+    public async Task<IActionResult> GetByPropertyAsync(GetFilter filter)
+        => Ok(await _userService.RetrieveByFilterAsync(filter));
 }

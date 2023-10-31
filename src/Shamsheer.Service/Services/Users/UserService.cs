@@ -11,6 +11,8 @@ using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.Interfaces.Users;
 using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Configurations.Filters;
+using System.Reflection;
 
 namespace Shamsheer.Service.Services.Users
 {
@@ -74,6 +76,7 @@ namespace Shamsheer.Service.Services.Users
         {
             var users = await _userRepository.SelectAll()
                 .Include(a => a.Assets)
+                .AsNoTracking()
                 .ToPagedList(@params)
                 .ToListAsync();
 
@@ -95,6 +98,24 @@ namespace Shamsheer.Service.Services.Users
         {
             var users = await _userRepository.SelectAll()
                 .Where(u => u.Id == id)
+                .Include(a => a.Assets)
+                .FirstOrDefaultAsync();
+            if (users is null)
+                throw new ShamsheerException(404, "User is not found");
+
+            return _mapper.Map<UserForResultDto>(users);
+        }
+
+        public async Task<UserForResultDto> RetrieveByFilterAsync(GetFilter filter)
+        {
+            var props = typeof(User).GetProperties(BindingFlags.Public).Select(p => p.Name);
+            if (!props.Contains(filter.Property))
+                throw new ShamsheerException(400, "Property not found");
+
+            // something
+
+            var users = await _userRepository.SelectAll()
+                .Where(u => u.Id.ToString() == filter.Property)
                 .Include(a => a.Assets)
                 .FirstOrDefaultAsync();
             if (users is null)

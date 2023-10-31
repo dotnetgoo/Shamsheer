@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Shamsheer.Service.DTOs.UserChannels;
 using Shamsheer.Domain.Entities.Chats;
 using Shamsheer.Service.Interfaces.UserChannel;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Extensions;
 
 namespace Shamsheer.Service.Services.UserChannels;
 public class UserChannelService : IUserChannelService
@@ -98,16 +100,19 @@ public class UserChannelService : IUserChannelService
         return await _userChannelRepository.DeleteAsync(id);
     }
 
-    public async Task<IEnumerable<UserChannelForResultDto>> RetrieveAllAsync()
+    public async Task<IEnumerable<UserChannelForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
-        var userChannel = _userChannelRepository.SelectAll()
+        // There is some mistake
+        var userChannels = await _userChannelRepository.SelectAll()
             .Include(uch => uch.Subscriber)
             .ThenInclude(u => u.Assets)
             .Include(uch => uch.Channel)
             .ThenInclude(ch => ch.Owner)
-            .AsNoTracking();
+            .AsNoTracking()
+            .ToPagedList(@params)
+            .ToListAsync();
 
-        return _mapper.Map<IEnumerable<UserChannelForResultDto>>(userChannel);
+        return _mapper.Map<IEnumerable<UserChannelForResultDto>>(userChannels);
     }
 
     public async Task<UserChannelForResultDto> RetrieveByIdAsync(long id)

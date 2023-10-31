@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.Groups;
 using Shamsheer.Service.Interfaces.Groups;
 
@@ -18,8 +19,8 @@ public class GroupsController : BaseController
         => Ok(await this._groupService.CreateAsync(dto));
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
-        => Ok(await this._groupService.RetrieveAllAsync());
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
+        => Ok(await _groupService.RetrieveAllAsync(@params));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
