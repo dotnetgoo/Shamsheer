@@ -46,6 +46,8 @@ public static class ServiceExtensions
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<WebHostEnviromentHelper, WebHostEnviromentHelper>();
 
+        services.AddScoped<IEmailService, EmailService>();
+
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IChannelRepository, ChannelRepository>();
         services.AddScoped<IChannelRoleService, ChannelRoleService>();
