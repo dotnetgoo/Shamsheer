@@ -21,7 +21,7 @@ namespace Shamsheer.Service.Extensions
                 throw new ArgumentOutOfRangeException(nameof(@params.PageSize), "The page size must be greater than or equal to 1.");
             }
 
-            return source.Take((@params.PageSize * (@params.PageIndex - 1))..(@params.PageSize * (@params.PageIndex - 1) + @params.PageSize));
+            return source.Skip(@params.PageSize * (@params.PageIndex - 1)).Take(@params.PageSize);
         }
 
         public static IEnumerable<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> source, PaginationParams @params)
@@ -35,8 +35,7 @@ namespace Shamsheer.Service.Extensions
             {
                 throw new ArgumentOutOfRangeException(nameof(@params.PageSize), "The page size must be greater than or equal to 1.");
             }
-
-            return source.Take((@params.PageSize * (@params.PageIndex - 1))..(@params.PageSize * (@params.PageIndex - 1) + @params.PageSize));
+            return source.Skip(@params.PageSize * (@params.PageIndex - 1)).Take(@params.PageSize);
         }
 
     }
