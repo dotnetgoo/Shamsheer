@@ -12,8 +12,8 @@ using Shamsheer.Data.DbContexts;
 namespace Shamsheer.Data.Migrations
 {
     [DbContext(typeof(ShamsheerDbContext))]
-    [Migration("20231013135436_PasswordDeletedFromUserMigration")]
-    partial class PasswordDeletedFromUserMigration
+    [Migration("20231101052705_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Extension")
                         .HasColumnType("text");
 
@@ -57,6 +60,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChannelId");
@@ -74,6 +80,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Extension")
                         .HasColumnType("text");
@@ -96,6 +105,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
@@ -113,6 +125,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Extension")
                         .HasColumnType("text");
@@ -132,6 +147,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -140,6 +158,188 @@ namespace Shamsheer.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserAssets");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelPermission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChannelPermissions");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelRole", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("ChatRole")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChannelRoles");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelRolePermission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("ChannelRolesPermissions");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Groups.GroupPermission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupPermissions");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRole", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("ChatRole")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupRoles");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRolePermission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("GroupRolesPermissions");
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
@@ -159,6 +359,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -173,6 +376,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Username")
                         .HasColumnType("text");
@@ -201,6 +407,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -215,6 +424,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Username")
                         .HasColumnType("text");
@@ -240,6 +452,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -258,12 +473,37 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Username")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            ChatType = 0,
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3846),
+                            Email = "toxtaboyev.m@icloud.com",
+                            FirstName = "Mukhammadkarim",
+                            LastName = "Tukhtaboev",
+                            Phone = "+998936090722"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            ChatType = 0,
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3849),
+                            Email = "jm7uzdev@gmail.com",
+                            FirstName = "Jaloliddin",
+                            LastName = "G'anijonov",
+                            Phone = "+998911243901"
+                        });
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.UserChannel", b =>
@@ -277,11 +517,17 @@ namespace Shamsheer.Data.Migrations
                     b.Property<long>("ChannelId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("ChannelRoleId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("SubscriberId")
                         .HasColumnType("bigint");
@@ -289,9 +535,14 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChannelId");
+
+                    b.HasIndex("ChannelRoleId");
 
                     b.HasIndex("SubscriberId");
 
@@ -309,23 +560,34 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("GroupId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("MemberId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
+                    b.Property<long>("MemberId1")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
-
                     b.HasIndex("MemberId");
+
+                    b.HasIndex("MemberId1");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("UserGroups");
                 });
@@ -340,6 +602,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("FormatType")
                         .HasColumnType("integer");
@@ -358,6 +623,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -387,11 +655,17 @@ namespace Shamsheer.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("MessageId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -433,6 +707,44 @@ namespace Shamsheer.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelRolePermission", b =>
+                {
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelPermission", "Permission")
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRolePermission", b =>
+                {
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Groups.GroupPermission", "Permission")
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>
                 {
                     b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Owner")
@@ -463,6 +775,10 @@ namespace Shamsheer.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Channels.ChannelRole", "ChannelRole")
+                        .WithMany()
+                        .HasForeignKey("ChannelRoleId");
+
                     b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Subscriber")
                         .WithMany()
                         .HasForeignKey("SubscriberId")
@@ -471,6 +787,8 @@ namespace Shamsheer.Data.Migrations
 
                     b.Navigation("Channel");
 
+                    b.Navigation("ChannelRole");
+
                     b.Navigation("Subscriber");
                 });
 
@@ -478,19 +796,27 @@ namespace Shamsheer.Data.Migrations
                 {
                     b.HasOne("Shamsheer.Domain.Entities.Chats.Group", "Group")
                         .WithMany("Members")
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId")
+                        .HasForeignKey("MemberId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Group");
 
                     b.Navigation("Member");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Messages.Message", b =>
