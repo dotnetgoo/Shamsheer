@@ -485,7 +485,7 @@ namespace Shamsheer.Data.Migrations
                         {
                             Id = 1L,
                             ChatType = 0,
-                            CreatedAt = new DateTime(2023, 10, 31, 13, 1, 6, 428, DateTimeKind.Utc).AddTicks(6058),
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3846),
                             Email = "toxtaboyev.m@icloud.com",
                             FirstName = "Mukhammadkarim",
                             LastName = "Tukhtaboev",
@@ -495,7 +495,7 @@ namespace Shamsheer.Data.Migrations
                         {
                             Id = 2L,
                             ChatType = 0,
-                            CreatedAt = new DateTime(2023, 10, 31, 13, 1, 6, 428, DateTimeKind.Utc).AddTicks(6062),
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3849),
                             Email = "jm7uzdev@gmail.com",
                             FirstName = "Jaloliddin",
                             LastName = "G'anijonov",

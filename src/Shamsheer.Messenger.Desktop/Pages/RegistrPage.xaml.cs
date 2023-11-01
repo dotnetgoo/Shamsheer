@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shamsheer.Messenger.Desktop.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,9 @@ namespace Shamsheer.Messenger.Desktop.Pages
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var homeWindow = new Home();
+            homeWindow.Show();
+            Window.GetWindow(this)?.Close();
         }
     }
 }
