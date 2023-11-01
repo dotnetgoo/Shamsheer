@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Shamsheer.Data\Shamsheer.Data.csproj" />
     <ProjectReference Include="..\Shamsheer.Service\Shamsheer.Service.csproj" />
+    <ProjectReference Include="..\Shamsheer.Shared\Shamsheer.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
