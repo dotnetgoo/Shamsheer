@@ -9,7 +9,7 @@ using Shamsheer.Service.Configurations.Filters;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
 
-[Authorize]
+
 public class UsersController : BaseController
 {
     private readonly IUserService _userService;
@@ -18,12 +18,12 @@ public class UsersController : BaseController
     public UsersController(IUserService userService, IConfiguration configuration)
     {
         _userService = userService;
-        _configuration=configuration;
+        _configuration = configuration;
     }
 
     [HttpGet("Test")]
     public IActionResult GetNumbers([FromQuery] PaginationParams @params)
-    {   
+    {
         string credentialsBase64 = Request.Headers["Authorization"].ToString().Split(' ')[1];
         string credentials = Encoding.UTF8.GetString(Convert.FromBase64String(credentialsBase64));
         string username = credentials.Split('.')[0];
@@ -47,7 +47,8 @@ public class UsersController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
-    [HttpGet, Authorize(Roles = "Admin,User")]
+    [Authorize]
+    [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));
 
@@ -59,7 +60,6 @@ public class UsersController : BaseController
     public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] UserForUpdateDto dto)
         => Ok(await _userService.ModifyAsync(id, dto));
 
-    [Authorize("Department")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] long id)
         => Ok(await _userService.RemoveAsync(id));

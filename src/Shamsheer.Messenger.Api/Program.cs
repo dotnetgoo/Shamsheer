@@ -20,6 +20,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
+//JWT
+builder.Services.AddJwtService(builder.Configuration);
+//Swagger
+builder.Services.AddSwaggerService();
+
 
 builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
