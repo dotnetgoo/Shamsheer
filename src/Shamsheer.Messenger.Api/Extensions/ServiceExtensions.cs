@@ -1,4 +1,4 @@
-﻿using Shamsheer.Data.Repositories;
+using Shamsheer.Data.Repositories;
 using Shamsheer.Data.IRepositories;
 using Shamsheer.Service.Services.Users;
 using Shamsheer.Service.Services.Groups;
@@ -22,6 +22,8 @@ using Shamsheer.Service.Services.GroupAssets;
 using Shamsheer.Service.Interfaces.ChannelAssets;
 using Shamsheer.Service.Services.ChannelAssets;
 
+
+
 namespace Shamsheer.Messenger.Api.Extensions;
 
 public static class ServiceExtensions
@@ -29,6 +31,7 @@ public static class ServiceExtensions
     public static void AddCustomServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IGroupService, GroupService>();
         services.AddScoped<IChannelService, ChannelService>();
         services.AddScoped<IUserRepository, UserRepository>();
@@ -40,6 +43,8 @@ public static class ServiceExtensions
         services.AddScoped<IChannelAssetService, ChannelAssetService>();
         services.AddScoped<IGroupAssetRepository, GroupAssetRepository>();
         services.AddScoped<IChannelAssetRepository, ChannelAssetRepository>();
+
+      
 
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<WebHostEnviromentHelper, WebHostEnviromentHelper>();
@@ -55,5 +60,62 @@ public static class ServiceExtensions
         services.AddScoped<IChannelPermissionService, ChannelPermissionService>();
         services.AddScoped<IGroupPermissionRepository, GroupPermissionRepository>();
         services.AddScoped<IChannelPermissionRepository, ChannelPermissionRepository>();
+
+    }
+
+    public static void AddJwtService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+                ClockSkew = TimeSpan.Zero
+            };
+        });
+    }
+
+    public static void AddSwaggerService(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shamsheer.Api", Version = "v1" });
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Description =
+                    "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[]{ }
+            }
+        });
+        });
     }
 }
