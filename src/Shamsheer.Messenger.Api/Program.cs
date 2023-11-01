@@ -20,6 +20,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AAA", builder => builder.WithOrigins("https://82.215.96.174").AllowAnyHeader().AllowAnyMethod());
+});
+
 
 builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
@@ -39,6 +44,8 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseCors("AAA");
 
 app.UseAuthentication();
 app.UseAuthorization();
