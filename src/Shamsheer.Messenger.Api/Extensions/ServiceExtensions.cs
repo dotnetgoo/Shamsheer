@@ -24,6 +24,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Shamsheer.Service.Interfaces.Emails;
+using Shamsheer.Service.Services.Emails;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -34,6 +36,7 @@ public static class ServiceExtensions
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IGroupService, GroupService>();
+        services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IChannelService, ChannelService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();
