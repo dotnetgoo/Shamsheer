@@ -1,5 +1,6 @@
 ﻿using Shamsheer.Messenger.Desktop.Components;
 using Shamsheer.Messenger.Desktop.Models;
+using Shamsheer.Messenger.Desktop.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +15,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shamsheer.Messenger.Desktop.Pages
+namespace Shamsheer.Messenger.Desktop.Windows
 {
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Home : Page
+    public partial class Home : Window
     {
-        private Window ParentWindow => Window.GetWindow(this);
         public Home()
         {
             InitializeComponent();
         }
 
+        List<User> GLOBAL_USERS = new List<User>();
         private void drag_grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -38,34 +38,34 @@ namespace Shamsheer.Messenger.Desktop.Pages
             }
             else
             {
-                ParentWindow?.DragMove();
+                this.DragMove();
             }
         }
 
         private void minimize_btn_Click(object sender, RoutedEventArgs e)
         {
-            ParentWindow.WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         private void maximize_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (ParentWindow.WindowState == WindowState.Normal)
+            if (this.WindowState == WindowState.Normal)
             {
                 windowGrid.Margin = new Thickness(8, 10, 10, 10);
-                ParentWindow.WindowStyle = WindowStyle.SingleBorderWindow;
-                ParentWindow.WindowState = WindowState.Maximized;
-                ParentWindow.WindowStyle = WindowStyle.None;
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                WindowState = WindowState.Maximized;
+                WindowStyle = WindowStyle.None;
             }
             else
             {
-                ParentWindow.WindowState = WindowState.Normal;
+                this.WindowState = WindowState.Normal;
                 windowGrid.Margin = new Thickness(0);
             }
         }
 
         private void close_btn_Click(object sender, RoutedEventArgs e)
         {
-            ParentWindow.Close();
+            this.Close();
         }
 
         private void OpenMenu_Btn_Click(object sender, RoutedEventArgs e)
@@ -139,7 +139,6 @@ namespace Shamsheer.Messenger.Desktop.Pages
                 });
             });
             thread.Start();
-
         }
 
         public void menuClose()
@@ -159,23 +158,6 @@ namespace Shamsheer.Messenger.Desktop.Pages
         private async void searchTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
             string text = searchTxt.Text.ToLower();
-
-
-            //foreach (var user in all)
-            //{
-            //    await Task.Run(() =>
-            //    {
-            //        this.Dispatcher.Invoke(() =>
-            //        {
-            //            var pri = new Private();
-            //            pri.username.Text = user.firstname + " " + user.lastname;
-            //            pri.friend_name.Text = user.friend_name;
-            //            pri.friend_message.Text = user.friend_message;
-            //            pri.updated_at.Text = user.updated_at.ToString();
-            //            usersPanel.Items.Add(pri);
-            //        });
-            //    });
-            //}
         }
     }
 }
