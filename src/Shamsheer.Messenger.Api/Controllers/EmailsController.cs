@@ -4,9 +4,7 @@ using Shamsheer.Service.Interfaces.Emails;
 
 namespace Shamsheer.Messenger.Api.Controllers
 {
-        [ApiController]
-        [Route("Api/[controller]")]
-        public class EmailsController : ControllerBase
+        public class EmailsController : BaseController
         {
             private readonly IEmailService _emailService;
             public EmailsController(IEmailService emailService)
@@ -14,10 +12,10 @@ namespace Shamsheer.Messenger.Api.Controllers
                 _emailService = emailService;
             }
             [HttpPost]
-            public async Task<IActionResult> SenMessage(EmailVerification message)
+            public async Task<IActionResult> SendMessageAsync(EmailVerification message)
             {
-                await _emailService.SendMessage(message);
-                return Ok(message);
+                await _emailService.SendMessageAsync(message);
+                return Ok();
             }
 
         }

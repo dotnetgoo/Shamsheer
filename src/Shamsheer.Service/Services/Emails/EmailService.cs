@@ -14,7 +14,7 @@ namespace Shamsheer.Service.Services.Emails
         {
             this._configuration = configuration.GetSection("Email");
         }
-        public async Task SendMessage(EmailVerification message)
+        public async Task SendMessageAsync(EmailVerification message)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_configuration["EmailAddress"]));
@@ -36,6 +36,5 @@ namespace Shamsheer.Service.Services.Emails
 
             await smtp.DisconnectAsync(true);
         }
-
     }
 }

@@ -5,5 +5,5 @@ namespace Shamsheer.Service.Interfaces.Emails;
 
 public interface IEmailService
 {
-    public Task SendMessage(EmailVerification verification);
+    public Task SendMessageAsync(EmailVerification verification);
 }
