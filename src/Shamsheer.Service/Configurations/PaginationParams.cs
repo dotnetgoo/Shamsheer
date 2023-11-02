@@ -8,7 +8,13 @@ namespace Shamsheer.Service.Configurations
 {
     public class PaginationParams
     {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; } = 20;
+        private const int _maxPageSize = 20;
+        private int _pageSize;
+        public int PageSize
+        {
+            set => _pageSize = value > _maxPageSize ? _maxPageSize : value;
+            get => _pageSize == 0 ? 10 : _pageSize;
+        }
+        public int PageIndex { get; set; } = 1;
     }
 }
