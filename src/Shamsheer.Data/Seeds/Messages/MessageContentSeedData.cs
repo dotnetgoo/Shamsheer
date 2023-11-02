@@ -8,7 +8,6 @@ namespace Shamsheer.Data.Seeds.Messages
     {
         public static IEnumerable<MessageContent> GetMockData()
         {
-            // Create sample MessageContent entities
             var messageContents = new List<MessageContent>
             {
                 new MessageContent

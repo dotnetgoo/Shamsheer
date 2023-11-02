@@ -9,7 +9,6 @@ public class ChannelsSeedData
 {
     public static IEnumerable<Channel> GetMockData()
     {
-        // Create sample Channel entities
         var channels = new List<Channel>
         {
             new Channel

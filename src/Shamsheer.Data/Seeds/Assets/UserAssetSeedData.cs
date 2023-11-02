@@ -7,7 +7,6 @@ public class UserAssetSeedData
 {
     public static IEnumerable<UserAsset> GetMockData()
     {
-        // Create sample UserAsset entities
         var userAssets = new List<UserAsset>
         {
             new UserAsset
@@ -18,7 +17,6 @@ public class UserAssetSeedData
             {
                 UserId = 2, // User's ID
             },
-            // Add more UserAsset entities as needed
         };
 
         return userAssets;
