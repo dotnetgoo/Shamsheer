@@ -4,11 +4,9 @@ using Shamsheer.Service.Interfaces.ChannelAssets;
 
 namespace Shamsheer.Messenger.Api.Controllers.ChannelAssets;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ChannelAssetsController : ControllerBase
+public class ChannelAssetsController : BaseController
 {
-    IChannelAssetService _channelAssetService;
+    private readonly IChannelAssetService _channelAssetService;
 
     public ChannelAssetsController(IChannelAssetService channelAssetService)
     {
@@ -17,24 +15,28 @@ public class ChannelAssetsController : ControllerBase
 
 
     [HttpPost]
+
     public async Task<IActionResult>PostAsync(IFormFile file)
         =>Ok( await _channelAssetService.CreateAsync(file));
 
 
-    [HttpGet("{channelId}")]
+    [HttpGet("{channel-id}")]
+
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute] long channelId)
         => Ok(await  _channelAssetService.RetriveAllAsync(channelId,@params));
 
 
-    [HttpGet("{channelId} {id}")]
-    public async Task<IActionResult> GetAsync([FromRoute(Name ="channelId")] long channelId, [FromRoute(Name = "id")] long id)
+    [HttpGet("{channel-id}/{id}")]
+
+    public async Task<IActionResult> GetAsync(long channelId, [FromRoute(Name = "id")] long id)
         =>Ok(await _channelAssetService.RetriveByIdAsync(channelId , id));
 
 
 
 
-    [HttpDelete("{channelId} {id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "channelId")] long channelId, [FromRoute(Name = "id")] long id)
+    [HttpDelete("{channel-id}/{id}")]
+
+    public async Task<IActionResult> DeleteAsync(long channelId, [FromRoute(Name = "id")] long id)
         =>Ok(await _channelAssetService.RemoveAsync(channelId , id));
 
 

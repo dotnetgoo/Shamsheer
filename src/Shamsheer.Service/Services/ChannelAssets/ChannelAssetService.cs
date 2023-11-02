@@ -20,9 +20,9 @@ namespace Shamsheer.Service.Services.ChannelAssets;
 public  class ChannelAssetService : IChannelAssetService
 {
 
-    IMapper _mapper;
-    IChannelRepository _channelRepository;
-    IChannelAssetRepository _channelAssetRepository;
+    private readonly IMapper _mapper;
+    private readonly IChannelRepository _channelRepository;
+    private readonly IChannelAssetRepository _channelAssetRepository;
 
     public ChannelAssetService(IMapper mapper,
                                IChannelRepository channelRepository, 

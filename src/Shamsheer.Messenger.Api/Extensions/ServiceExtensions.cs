@@ -21,8 +21,11 @@ using Shamsheer.Service.Interfaces.GroupAssets;
 using Shamsheer.Service.Services.GroupAssets;
 using Shamsheer.Service.Interfaces.ChannelAssets;
 using Shamsheer.Service.Services.ChannelAssets;
-
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 

@@ -119,7 +119,7 @@ public class ShamsheerDbContext : DbContext
 
     public void Configure(EntityTypeBuilder<Chat> modelBuilder)
     {
-        modelBuilder.ToTable(nameof(Chats));
+        modelBuilder.ToTable(nameof(Chat));
         modelBuilder.HasKey(g => g.Id);
         modelBuilder.Property(g => g.ChatType).IsRequired();
         modelBuilder.Property(g => g.Username).HasMaxLength(64);
