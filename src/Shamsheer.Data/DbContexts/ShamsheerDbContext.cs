@@ -86,7 +86,7 @@ public class ShamsheerDbContext : DbContext
 
     public void Configure(EntityTypeBuilder<Group> modelBuilder)
     {
-        modelBuilder.ToTable("Groups");
+        modelBuilder.ToTable(nameof(Groups));
         modelBuilder.HasKey(g => g.Id);
         modelBuilder.Property(g => g.OwnerId).IsRequired();
         modelBuilder.Property(g => g.Title).HasMaxLength(64);
@@ -111,7 +111,7 @@ public class ShamsheerDbContext : DbContext
 
     public void Configure(EntityTypeBuilder<Chat> modelBuilder)
     {
-        modelBuilder.ToTable("Chats");
+        modelBuilder.ToTable(nameof(Chats));
         modelBuilder.HasKey(g => g.Id);
         modelBuilder.Property(g => g.ChatType).IsRequired();
         modelBuilder.Property(g => g.Username).HasMaxLength(64);
