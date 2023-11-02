@@ -40,10 +40,8 @@ public class ShamsheerDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
-        modelBuilder.Entity<UserChannel>()
-            .HasOne(c => c.Channel)
-            .WithMany(s => s.Subscribers)
-            .HasForeignKey(c => c.ChannelId);
+        modelBuilder.ApplyConfiguration(new UserChannelEntityTypeConfiguration());
+             
 
         modelBuilder.Entity<UserAsset>()
             .HasOne(u => u.User)
