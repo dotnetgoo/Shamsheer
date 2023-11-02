@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using Shamsheer.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Shamsheer.Service.Interfaces.Emails;
+using Shamsheer.Service.Exceptions;
 
 namespace Shamsheer.Service.Services.Emails
 {
-    public class EmailService : IEmailService
+    public class EmailVerificationService : IEmailVerificationService
     {
         private readonly IConfiguration _configuration;
-        public EmailService(IConfiguration configuration)
+        public EmailVerificationService(IConfiguration configuration)
         {
             this._configuration = configuration.GetSection("Email");
         }
@@ -18,7 +19,11 @@ namespace Shamsheer.Service.Services.Emails
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_configuration["EmailAddress"]));
-            email.To.Add(MailboxAddress.Parse(message.To));
+
+            if (message.To.EndsWith("gmail.com"))
+                email.To.Add(MailboxAddress.Parse(message.To));
+            else
+                throw new ShamsheerException(400, "such an email cannot exist");
 
             email.Subject = message.Subject;
 

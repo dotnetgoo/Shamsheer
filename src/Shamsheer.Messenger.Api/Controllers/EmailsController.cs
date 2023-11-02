@@ -6,8 +6,8 @@ namespace Shamsheer.Messenger.Api.Controllers
 {
         public class EmailsController : BaseController
         {
-            private readonly IEmailService _emailService;
-            public EmailsController(IEmailService emailService)
+            private readonly IEmailVerificationService _emailService;
+            public EmailsController(IEmailVerificationService emailService)
             {
                 _emailService = emailService;
             }
