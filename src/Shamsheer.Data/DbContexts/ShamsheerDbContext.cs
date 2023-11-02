@@ -36,35 +36,35 @@ public class ShamsheerDbContext : DbContext
     public DbSet<GroupRolePermission> GroupRolesPermissions { get; set; }
     public DbSet<ChannelRolePermission> ChannelRolesPermissions { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
+    //    modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
-        modelBuilder.Entity<UserChannel>()
-            .HasOne(c => c.Channel)
-            .WithMany(s => s.Subscribers)
-            .HasForeignKey(c => c.ChannelId);
+    //    modelBuilder.Entity<UserChannel>()
+    //        .HasOne(c => c.Channel)
+    //        .WithMany(s => s.Subscribers)
+    //        .HasForeignKey(c => c.ChannelId);
 
-        modelBuilder.Entity<UserAsset>()
-            .HasOne(u => u.User)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(u => u.UserId);
+    //    modelBuilder.Entity<UserAsset>()
+    //        .HasOne(u => u.User)
+    //        .WithMany(a => a.Assets)
+    //        .HasForeignKey(u => u.UserId);
 
-        modelBuilder.Entity<GroupAsset>()
-            .HasOne(g => g.Group)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(g => g.GroupId);
+    //    modelBuilder.Entity<GroupAsset>()
+    //        .HasOne(g => g.Group)
+    //        .WithMany(a => a.Assets)
+    //        .HasForeignKey(g => g.GroupId);
 
-        modelBuilder.Entity<ChannelAsset>()
-            .HasOne(c => c.Channel)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(c => c.ChannelId);
+    //    modelBuilder.Entity<ChannelAsset>()
+    //        .HasOne(c => c.Channel)
+    //        .WithMany(a => a.Assets)
+    //        .HasForeignKey(c => c.ChannelId);
 
-        Task.Run(() =>
-        {
-            SeedUsers(modelBuilder);
-        }).Wait();
-    }
+    //    Task.Run(() =>
+    //    {
+    //        SeedUsers(modelBuilder);
+    //    }).Wait();
+    //}
 
     private void SeedUsers(ModelBuilder builder)
     {
@@ -103,19 +103,19 @@ public class ShamsheerDbContext : DbContext
         modelBuilder.Property(g => g.InviteLink).HasMaxLength(256);
         modelBuilder.Property(g => g.Description).HasMaxLength(256);
 
-    }
-    public void Configure(EntityTypeBuilder<User> modelBuilder)
-    {
-        modelBuilder.ToTable(nameof(Users));
-        modelBuilder.HasKey(g => g.Id);
-        modelBuilder.Property(u => u.Email).HasMaxLength(50);
-        modelBuilder.Property(g => g.ChatType).IsRequired();
-        modelBuilder.Property(g => g.Phone).HasMaxLength(50);
-        modelBuilder.Property(g => g.Username).HasMaxLength(64);
-        modelBuilder.Property(g => g.Description).HasMaxLength(256);
-        modelBuilder.Property(g => g.FirstName).HasMaxLength(50).IsRequired();
-        modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
-    }
+    //}
+    //public void Configure(EntityTypeBuilder<User> modelBuilder)
+    //{
+    //    modelBuilder.ToTable(nameof(Users));
+    //    modelBuilder.HasKey(g => g.Id);
+    //    modelBuilder.Property(u => u.Email).HasMaxLength(50);
+    //    modelBuilder.Property(g => g.ChatType).IsRequired();
+    //    modelBuilder.Property(g => g.Phone).HasMaxLength(50);
+    //    modelBuilder.Property(g => g.Username).HasMaxLength(64);
+    //    modelBuilder.Property(g => g.Description).HasMaxLength(256);
+    //    modelBuilder.Property(g => g.FirstName).HasMaxLength(50).IsRequired();
+    //    modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
+    //}
 
     public void Configure(EntityTypeBuilder<Chat> modelBuilder)
     {
@@ -125,7 +125,7 @@ public class ShamsheerDbContext : DbContext
         modelBuilder.Property(g => g.Username).HasMaxLength(64);
         modelBuilder.Property(g => g.Description).HasMaxLength(256);
 
-    }
+    //}
 
 
 }

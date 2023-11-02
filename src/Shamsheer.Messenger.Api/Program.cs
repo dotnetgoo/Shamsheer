@@ -4,6 +4,9 @@ using Shamsheer.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Messenger.Api.Extensions;
 using Shamsheer.Messenger.Api.Middlewares;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Shamsheer.Messenger.Api.Models;
+using Shamsheer.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +20,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AAA", builder => builder.WithOrigins("https://82.215.96.174").AllowAnyHeader().AllowAnyMethod());
+});
 
 //JWT
 builder.Services.AddJwtService(builder.Configuration);
@@ -28,6 +37,13 @@ builder.Services.AddSwaggerService();
 
 builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+//Configure api url name
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+                                        new ConfigurationApiUrlName()));
+});
 
 var app = builder.Build();
 
@@ -44,6 +60,9 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.InitAccessor();
+app.UseCors("AAA");
 
 app.UseAuthentication();
 app.UseAuthorization();

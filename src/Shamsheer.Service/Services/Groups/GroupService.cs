@@ -42,7 +42,7 @@ public class GroupService : IGroupService
 
         var mappedGroup = _mapper.Map<Group>(dto);
         mappedGroup.ChatType = ChatType.Group;
-        mappedGroup.InviteLink = "";
+        mappedGroup.InviteLink = Guid.NewGuid().ToString("N");
         mappedGroup.CreatedAt = DateTime.UtcNow;
 
         var result = await _groupRepository.InsertAsync(mappedGroup);
@@ -81,6 +81,7 @@ public class GroupService : IGroupService
     public async Task<IEnumerable<GroupForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var groups =  await _groupRepository.SelectAll()
+            .Include(g => g.Owner)
             .AsNoTracking()
             .ToPagedList(@params)
             .ToListAsync();
@@ -92,6 +93,8 @@ public class GroupService : IGroupService
     {
         var group = await _groupRepository.SelectAll()
             .Where (g => g.Id == id)
+            .Include(g => g.Owner)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (group is null)
             throw new ShamsheerException(404, "Group is not found");
