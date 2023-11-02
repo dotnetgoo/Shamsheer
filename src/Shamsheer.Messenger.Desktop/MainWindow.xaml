@@ -2,64 +2,106 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shamsheer.Messenger.Desktop"
         mc:Ignorable="d"
-        Title="Shamsheer"
-        MinHeight="540" MinWidth="430">
+        Background="#17212B"
+        WindowStyle="None"
+        Title="Shamsheer Desktop"
+        Height="550" Width="700" >
 
-    <Grid Background="#17212B">
-        <Border>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="MenuGrid">
+                <SplineThicknessKeyFrame KeyTime="0" Value="-280 0 0 0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="0 0 0 0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="MenuClose" Name="MenuClose">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="MenuGrid">
+                <SplineThicknessKeyFrame KeyTime="0" Value="0 0 0 0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.2" Value="-280 0 0 0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="BorderOpacityIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CloseMenu_Border" From="0" To="0.3" Duration="0:0:0.2"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid x:Name="windowGrid" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="drag_grid" MouseLeftButtonDown="NavBar" Grid.Row="0" Background="#1F2936">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="minimizeButton" Click="minimize_btn_Click" Height="22" Width="25" Padding="0 5 0 0" BorderThickness="0" Background="Transparent">
+                    <md:PackIcon Kind="WindowMinimize" Foreground="#576673" FontWeight="ExtraBold"/>
+                </Button>
+                <Button x:Name="maximize_btn" Click="maximize_btn_Click" Height="22" Width="25" Padding="0" BorderThickness="0" Background="Transparent">
+                    <md:PackIcon Kind="WindowMaximize" Foreground="#576673" FontWeight="ExtraBold"/>
+                </Button>
+                <Button x:Name="close_btn" Click="close_btn_Click" Height="22" Width="25" Padding="0" BorderThickness="0" Background="Transparent">
+                    <md:PackIcon Kind="WindowClose" Foreground="#576673" FontWeight="ExtraBold"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
             <StackPanel HorizontalAlignment="Center" 
-                        VerticalAlignment="Center">
-                <Image x:Name="ImagePicture" 
-                       Source="C:\Users\Jasurbek Abdunazarov\Desktop\Contributer\Shamsheer\src\Shamsheer.Messenger.Desktop\Images\tg.jpg" 
-                       Stretch="UniformToFill" 
-                       Margin="0 -115 0 0"/>
+                    VerticalAlignment="Center">
 
                 <TextBlock Text="Shamsheer Desktop" 
-                           FontSize="25"
-                           HorizontalAlignment="Center"
-                           FontWeight="Bold"
-                           Foreground="Snow"
-                           Margin="0,30,0,0"/>
+                       FontSize="25"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"
+                       Foreground="Snow"
+                       Margin="0,30,0,0"/>
 
                 <TextBlock Text="Welcome to the official Shamsheer Desktop app." 
-                           FontSize="14"
-                           HorizontalAlignment="Center"
-                           Foreground="Gray"
-                           Margin="0,10,0,0"/>
+                       FontSize="14"
+                       HorizontalAlignment="Center"
+                       Foreground="Gray"
+                       Margin="0,10,0,0"/>
 
                 <TextBlock Text="It's fast and secure" 
-                           FontSize="14"
-                           HorizontalAlignment="Center"
-                           Foreground="Gray"
-                           Margin="0,10,0,0"/>
+                       FontSize="14"
+                       HorizontalAlignment="Center"
+                       Foreground="Gray"
+                       Margin="0,10,0,0"/>
 
                 <Button x:Name="startMessagingBtn"
-                        Content="Start  Messaging"
-                        FontSize="16"
-                        Foreground="Snow"
-                        Background="#2F6EA5"
-                        Margin="0 50 0 0"
-                        Height="42"
-                        Width="250"
-                        Cursor="Hand" Click="startMessagingBtn_Click">
+                    Content="Start  Messaging"
+                    FontSize="16"
+                    Foreground="Snow"
+                    Background="#2F6EA5"
+                    Margin="0 50 0 0"
+                    Height="42"
+                    Width="250"
+                    Cursor="Hand" Click="startMessagingBtn_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Border x:Name="Message" Background="{TemplateBinding Background}"
-                                                CornerRadius="5">
+                                            CornerRadius="5">
                                             <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center" />
+                                                          VerticalAlignment="Center" />
                                         </Border>
 
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseCaptured" Value="True">
                                                 <Setter Property="Background" Value="#0C9CE9" 
-                                                        TargetName="Message" />
+                                                    TargetName="Message" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -74,9 +116,7 @@
                     </Button.Resources>
                 </Button>
             </StackPanel>
-        </Border>
-        
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>

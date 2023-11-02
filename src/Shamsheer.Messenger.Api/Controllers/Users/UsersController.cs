@@ -5,8 +5,10 @@ using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Users;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using Shamsheer.Service.Configurations.Filters;
 
 namespace Shamsheer.Messenger.Api.Controllers.Users;
+
 
 public class UsersController : BaseController
 {
@@ -16,12 +18,12 @@ public class UsersController : BaseController
     public UsersController(IUserService userService, IConfiguration configuration)
     {
         _userService = userService;
-        _configuration=configuration;
+        _configuration = configuration;
     }
 
     [HttpGet("test")]
     public IActionResult GetNumbers([FromQuery] PaginationParams @params)
-    {   
+    {
         string credentialsBase64 = Request.Headers["Authorization"].ToString().Split(' ')[1];
         string credentials = Encoding.UTF8.GetString(Convert.FromBase64String(credentialsBase64));
         string username = credentials.Split('.')[0];
@@ -41,10 +43,11 @@ public class UsersController : BaseController
         return Unauthorized();
     }
 
-    [HttpPost]
+    [HttpPost, AllowAnonymous]
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));
@@ -64,4 +67,9 @@ public class UsersController : BaseController
     [HttpGet("email")]
     public async Task<IActionResult> GetByEmailAsync(string email)
         => Ok(await _userService.RetrieveByEmailAsync(email));
+
+
+    [HttpGet("by-property")]
+    public async Task<IActionResult> GetByPropertyAsync(GetFilter filter)
+        => Ok(await _userService.RetrieveByFilterAsync(filter));
 }

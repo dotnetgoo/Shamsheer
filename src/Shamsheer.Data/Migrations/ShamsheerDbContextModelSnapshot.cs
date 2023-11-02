@@ -479,6 +479,28 @@ namespace Shamsheer.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            ChatType = 0,
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3846),
+                            Email = "toxtaboyev.m@icloud.com",
+                            FirstName = "Mukhammadkarim",
+                            LastName = "Tukhtaboev",
+                            Phone = "+998936090722"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            ChatType = 0,
+                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3849),
+                            Email = "jm7uzdev@gmail.com",
+                            FirstName = "Jaloliddin",
+                            LastName = "G'anijonov",
+                            Phone = "+998911243901"
+                        });
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.UserChannel", b =>
@@ -544,6 +566,9 @@ namespace Shamsheer.Data.Migrations
                     b.Property<long>("MemberId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("MemberId1")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
@@ -555,9 +580,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
-
                     b.HasIndex("MemberId");
+
+                    b.HasIndex("MemberId1");
 
                     b.HasIndex("RoleId");
 
@@ -768,13 +793,13 @@ namespace Shamsheer.Data.Migrations
                 {
                     b.HasOne("Shamsheer.Domain.Entities.Chats.Group", "Group")
                         .WithMany("Members")
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId")
+                        .HasForeignKey("MemberId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

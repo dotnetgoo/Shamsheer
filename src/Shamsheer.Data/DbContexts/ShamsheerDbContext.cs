@@ -5,6 +5,10 @@ using Shamsheer.Domain.Entities.Messages;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shamsheer.Domain.Entities.Authorizations.Groups;
 using Shamsheer.Domain.Entities.Authorizations.Channels;
+using Shamsheer.Data.EntityConfigurations;
+using System;
+using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 namespace Shamsheer.Data.DbContexts;
 
@@ -34,11 +38,7 @@ public class ShamsheerDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-        modelBuilder.Entity<UserGroup>()
-            .HasOne(g => g.Group)
-            .WithMany(m => m.Members)
-            .HasForeignKey(g => g.MemberId);
+        modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
         modelBuilder.Entity<UserChannel>()
             .HasOne(c => c.Channel)
@@ -60,7 +60,38 @@ public class ShamsheerDbContext : DbContext
             .WithMany(a => a.Assets)
             .HasForeignKey(c => c.ChannelId);
 
+        Task.Run(() =>
+        {
+            SeedUsers(modelBuilder);
+        }).Wait();
     }
+
+    private void SeedUsers(ModelBuilder builder)
+    {
+        builder.Entity<User>()
+            .HasData(new User[]
+            {
+                new User
+                {
+                    Id = 1,
+                    FirstName = "Mukhammadkarim",
+                    LastName = "Tukhtaboev",
+                    Email = "toxtaboyev.m@icloud.com",
+                    Phone = "+998936090722",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new User
+                {
+                    Id = 2,
+                    FirstName = "Jaloliddin",
+                    LastName = "G'anijonov",
+                    Email = "jm7uzdev@gmail.com",
+                    Phone = "+998911243901",
+                    CreatedAt = DateTime.UtcNow
+                }
+            });
+    }
+
     public void Configure(EntityTypeBuilder<Group> modelBuilder)
     {
         modelBuilder.ToTable("Groups");
@@ -75,7 +106,7 @@ public class ShamsheerDbContext : DbContext
     }
     public void Configure(EntityTypeBuilder<User> modelBuilder)
     {
-        modelBuilder.ToTable("Users");
+        modelBuilder.ToTable(nameof(Users));
         modelBuilder.HasKey(g => g.Id);
         modelBuilder.Property(u => u.Email).HasMaxLength(50);
         modelBuilder.Property(g => g.ChatType).IsRequired();
