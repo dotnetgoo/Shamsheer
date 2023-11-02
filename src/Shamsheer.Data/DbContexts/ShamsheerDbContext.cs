@@ -47,12 +47,10 @@ public class ShamsheerDbContext : DbContext
 
 
         modelBuilder.ApplyConfiguration(new GroupAssetEntityTypeConfiguration());
-             
 
-        modelBuilder.Entity<ChannelAsset>()
-            .HasOne(c => c.Channel)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(c => c.ChannelId);
+
+        modelBuilder.ApplyConfiguration(new ChannelAssetEntityTypeConfiguration());
+             
 
         Task.Run(() =>
         {
