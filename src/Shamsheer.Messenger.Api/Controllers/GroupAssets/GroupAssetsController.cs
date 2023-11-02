@@ -21,11 +21,11 @@ public class GroupAssetsController : BaseController
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "groupId")] long groupId)
         => Ok(await _groupAssetService.RetrieveAllAsync(groupId, @params));
 
-    [HttpGet("{group-id} {id}")]
+    [HttpGet("{group-id}/{id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RetrieveByIdAsync(groupId, id));
 
-    [HttpDelete("{group-id} {id}")]
+    [HttpDelete("{group-id}/{id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RemoveAsync(groupId, id));
 }
