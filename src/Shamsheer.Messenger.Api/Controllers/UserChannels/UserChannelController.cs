@@ -15,7 +15,7 @@ public class UserChannelsController : BaseController
         this._userChannelService = userChannelService;
     }
 
-    [HttpGet("Test")]
+    [HttpGet("test")]
     public IActionResult GetNumbers([FromQuery] PaginationParams @params)
     {
         var numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

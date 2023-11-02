@@ -4,6 +4,8 @@ using Shamsheer.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Shamsheer.Messenger.Api.Extensions;
 using Shamsheer.Messenger.Api.Middlewares;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Shamsheer.Messenger.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,13 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+//Configure api url name
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+                                        new ConfigurationApiUrlName()));
+});
 
 var app = builder.Build();
 

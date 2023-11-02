@@ -17,15 +17,15 @@ public class GroupAssetsController : BaseController
     public async Task<IActionResult> PostAsync(IFormFile formFile)
         => Ok(await _groupAssetService.CreateAsync(formFile));
 
-    [HttpGet("{groupId}")]
-    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute] long groupId)
+    [HttpGet("{group-id}")]
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "groupId")] long groupId)
         => Ok(await _groupAssetService.RetrieveAllAsync(groupId, @params));
 
-    [HttpGet("{groupId} {id}")]
+    [HttpGet("{group-id} {id}")]
     public async Task<IActionResult> GetAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RetrieveByIdAsync(groupId, id));
 
-    [HttpDelete("{groupId} {id}")]
+    [HttpDelete("{group-id} {id}")]
     public async Task<IActionResult> DeleteAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RemoveAsync(groupId, id));
 }
