@@ -21,7 +21,7 @@ public class UsersController : BaseController
         _configuration = configuration;
     }
 
-    [HttpGet("Test")]
+    [HttpGet("test")]
     public IActionResult GetNumbers([FromQuery] PaginationParams @params)
     {
         string credentialsBase64 = Request.Headers["Authorization"].ToString().Split(' ')[1];

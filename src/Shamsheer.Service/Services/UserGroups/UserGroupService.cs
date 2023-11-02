@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Shamsheer.Data.IRepositories;
-using Shamsheer.Domain.Entities.Chats;
-using Shamsheer.Service.Configurations;
-using Shamsheer.Service.DTOs.UserGroup;
-using Shamsheer.Service.Exceptions;
-using Shamsheer.Service.Extensions;
-using Shamsheer.Service.Interfaces.UserGroup;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using AutoMapper;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
+using Shamsheer.Data.IRepositories;
+using Microsoft.EntityFrameworkCore;
+using Shamsheer.Domain.Entities.Chats;
+using Shamsheer.Service.DTOs.UserGroup;
+using Shamsheer.Service.Configurations;
+using Shamsheer.Service.Interfaces.UserGroup;
 
 namespace Shamsheer.Service.Services.UserGroups;
 
