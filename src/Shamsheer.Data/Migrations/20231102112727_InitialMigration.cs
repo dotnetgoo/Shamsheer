@@ -4,8 +4,6 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Shamsheer.Data.Migrations
 {
     /// <inheritdoc />
@@ -389,7 +387,6 @@ namespace Shamsheer.Data.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MemberId = table.Column<long>(type: "bigint", nullable: false),
-                    MemberId1 = table.Column<long>(type: "bigint", nullable: false),
                     GroupId = table.Column<long>(type: "bigint", nullable: false),
                     RoleId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -407,14 +404,14 @@ namespace Shamsheer.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserGroups_Groups_MemberId",
-                        column: x => x.MemberId,
+                        name: "FK_UserGroups_Groups_GroupId",
+                        column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserGroups_Users_MemberId1",
-                        column: x => x.MemberId1,
+                        name: "FK_UserGroups_Users_MemberId",
+                        column: x => x.MemberId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -443,15 +440,6 @@ namespace Shamsheer.Data.Migrations
                         principalTable: "Messages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "ChatType", "CreatedAt", "DeletedBy", "Description", "Email", "FirstName", "LastName", "Phone", "UpdatedAt", "UpdatedBy", "Username" },
-                values: new object[,]
-                {
-                    { 1L, 0, new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3846), null, null, "toxtaboyev.m@icloud.com", "Mukhammadkarim", "Tukhtaboev", "+998936090722", null, null, null },
-                    { 2L, 0, new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3849), null, null, "jm7uzdev@gmail.com", "Jaloliddin", "G'anijonov", "+998911243901", null, null, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -535,14 +523,14 @@ namespace Shamsheer.Data.Migrations
                 column: "SubscriberId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserGroups_GroupId",
+                table: "UserGroups",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_MemberId",
                 table: "UserGroups",
                 column: "MemberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserGroups_MemberId1",
-                table: "UserGroups",
-                column: "MemberId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_RoleId",

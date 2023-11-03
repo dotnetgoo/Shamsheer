@@ -7,4 +7,5 @@ public class UserGroupForCreationDto
 {
     public long MemberId { get; set; }
     public long GroupId { get; set; }
+    public long RoleId { get; set; }
 }

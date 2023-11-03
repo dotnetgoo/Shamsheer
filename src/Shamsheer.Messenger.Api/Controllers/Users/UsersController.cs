@@ -21,7 +21,7 @@ public class UsersController : BaseController
         _configuration = configuration;
     }
 
-    [HttpGet("Test")]
+    [HttpGet("test")]
     public IActionResult GetNumbers([FromQuery] PaginationParams @params)
     {
         string credentialsBase64 = Request.Headers["Authorization"].ToString().Split(' ')[1];
@@ -47,7 +47,7 @@ public class UsersController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
-    [Authorize]
+    
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));

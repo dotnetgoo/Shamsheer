@@ -24,6 +24,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Shamsheer.Service.Interfaces.UserChannel;
+using Shamsheer.Service.Services.UserChannels;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -42,7 +44,7 @@ public static class ServiceExtensions
         services.AddScoped<IUserGroupService, UserGroupService>();
         services.AddScoped<IGroupAssetService, GroupAssetService>();
         services.AddScoped<IGroupAssetRepository, GroupAssetRepository>();
-
+        services.AddScoped<IUserChannelService, UserChannelService>();
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<WebHostEnviromentHelper, WebHostEnviromentHelper>();
 
@@ -57,6 +59,7 @@ public static class ServiceExtensions
         services.AddScoped<IChannelPermissionService, ChannelPermissionService>();
         services.AddScoped<IGroupPermissionRepository, GroupPermissionRepository>();
         services.AddScoped<IChannelPermissionRepository, ChannelPermissionRepository>();
+        services.AddScoped<IUserChannelRepository, UserChannelRepository>();
 
     }
 
