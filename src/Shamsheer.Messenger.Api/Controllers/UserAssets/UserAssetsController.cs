@@ -18,14 +18,14 @@ public class UserAssetsController : BaseController
         => Ok(await this._userAssetService.CreateAsync(formFile));
 
     [HttpGet("{user-id}")]
-    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute] long userId)
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "user-id")] long userId)
         => Ok(await _userAssetService.RetrieveAllAsync(userId, @params));
 
     [HttpGet("{user-id}/{id}")]
-    public async Task<IActionResult> GetAsync([FromRoute(Name = "userId")] long userId, [FromRoute(Name = "id")] long id)
+    public async Task<IActionResult> GetAsync([FromRoute(Name = "user-id")] long userId, [FromRoute(Name = "id")] long id)
         => Ok(await this._userAssetService.RetrieveByIdAsync(userId, id));
 
     [HttpDelete("{user-id}/{id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "userId")] long userId, [FromRoute(Name = "id")] long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "user-id")] long userId, [FromRoute(Name = "id")] long id)
         => Ok(await this._userAssetService.RemoveAsync(userId, id));
 }
