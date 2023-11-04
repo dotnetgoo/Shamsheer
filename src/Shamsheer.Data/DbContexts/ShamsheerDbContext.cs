@@ -20,12 +20,11 @@ public class ShamsheerDbContext : DbContext
         
     }
     public DbSet<User> Users { get; set; }
-    public DbSet<Chat> Chats { get; set; }
     public DbSet<Group> Groups { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Channel> Channels { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
-    public DbSet<UserAsset> UserAssets { get; set; }
+    public DbSet<UserAsset> UserAssets { get; set; }    
     public DbSet<GroupRole> GroupRoles { get; set; }
     public DbSet<GroupAsset> GroupAssets { get; set; }
     public DbSet<UserChannel> UserChannels { get; set; }
@@ -106,16 +105,7 @@ public class ShamsheerDbContext : DbContext
         modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
     }
 
-    public void Configure(EntityTypeBuilder<Chat> modelBuilder)
-    {
-        modelBuilder.ToTable(nameof(Chat));
-        modelBuilder.HasKey(g => g.Id);
-        modelBuilder.Property(g => g.ChatType).IsRequired();
-        modelBuilder.Property(g => g.Username).HasMaxLength(64);
-        modelBuilder.Property(g => g.Description).HasMaxLength(256);
-
-    }
-
+   
 
 }
 
