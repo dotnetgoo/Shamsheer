@@ -24,7 +24,7 @@ public class ShamsheerDbContext : DbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<Channel> Channels { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
-    public DbSet<UserAsset> UserAssets { get; set; }
+    public DbSet<UserAsset> UserAssets { get; set; }    
     public DbSet<GroupRole> GroupRoles { get; set; }
     public DbSet<GroupAsset> GroupAssets { get; set; }
     public DbSet<UserChannel> UserChannels { get; set; }
@@ -40,26 +40,14 @@ public class ShamsheerDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
-        modelBuilder.Entity<UserChannel>()
-            .HasOne(c => c.Channel)
-            .WithMany(s => s.Subscribers)
-            .HasForeignKey(c => c.ChannelId);
+        modelBuilder.ApplyConfiguration(new UserChannelEntityTypeConfiguration());
 
-        modelBuilder.Entity<UserAsset>()
-            .HasOne(u => u.User)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(u => u.UserId);
+        modelBuilder.ApplyConfiguration(new UserAssetEntityTypeConfiguration());
 
-        modelBuilder.Entity<GroupAsset>()
-            .HasOne(g => g.Group)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(g => g.GroupId);
+        modelBuilder.ApplyConfiguration(new GroupAssetEntityTypeConfiguration());
 
-        modelBuilder.Entity<ChannelAsset>()
-            .HasOne(c => c.Channel)
-            .WithMany(a => a.Assets)
-            .HasForeignKey(c => c.ChannelId);
-
+        modelBuilder.ApplyConfiguration(new ChannelAssetEntityTypeConfiguration());
+             
         Task.Run(() =>
         {
             SeedUsers(modelBuilder);
@@ -94,7 +82,7 @@ public class ShamsheerDbContext : DbContext
 
     public void Configure(EntityTypeBuilder<Group> modelBuilder)
     {
-        modelBuilder.ToTable("Groups");
+        modelBuilder.ToTable(nameof(Groups));
         modelBuilder.HasKey(g => g.Id);
         modelBuilder.Property(g => g.OwnerId).IsRequired();
         modelBuilder.Property(g => g.Title).HasMaxLength(64);
@@ -117,16 +105,7 @@ public class ShamsheerDbContext : DbContext
         modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
     }
 
-    public void Configure(EntityTypeBuilder<Chat> modelBuilder)
-    {
-        modelBuilder.ToTable("Chats");
-        modelBuilder.HasKey(g => g.Id);
-        modelBuilder.Property(g => g.ChatType).IsRequired();
-        modelBuilder.Property(g => g.Username).HasMaxLength(64);
-        modelBuilder.Property(g => g.Description).HasMaxLength(256);
-
-    }
-
+   
 
 }
 

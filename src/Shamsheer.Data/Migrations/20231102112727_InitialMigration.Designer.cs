@@ -12,7 +12,7 @@ using Shamsheer.Data.DbContexts;
 namespace Shamsheer.Data.Migrations
 {
     [DbContext(typeof(ShamsheerDbContext))]
-    [Migration("20231101052705_InitialMigration")]
+    [Migration("20231102112727_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -482,28 +482,6 @@ namespace Shamsheer.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ChatType = 0,
-                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3846),
-                            Email = "toxtaboyev.m@icloud.com",
-                            FirstName = "Mukhammadkarim",
-                            LastName = "Tukhtaboev",
-                            Phone = "+998936090722"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            ChatType = 0,
-                            CreatedAt = new DateTime(2023, 11, 1, 5, 27, 4, 903, DateTimeKind.Utc).AddTicks(3849),
-                            Email = "jm7uzdev@gmail.com",
-                            FirstName = "Jaloliddin",
-                            LastName = "G'anijonov",
-                            Phone = "+998911243901"
-                        });
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.UserChannel", b =>
@@ -569,9 +547,6 @@ namespace Shamsheer.Data.Migrations
                     b.Property<long>("MemberId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("MemberId1")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
@@ -583,9 +558,9 @@ namespace Shamsheer.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex("GroupId");
 
-                    b.HasIndex("MemberId1");
+                    b.HasIndex("MemberId");
 
                     b.HasIndex("RoleId");
 
@@ -796,18 +771,18 @@ namespace Shamsheer.Data.Migrations
                 {
                     b.HasOne("Shamsheer.Domain.Entities.Chats.Group", "Group")
                         .WithMany("Members")
-                        .HasForeignKey("MemberId")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Shamsheer.Domain.Entities.Chats.User", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId1")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRole", "Role")
-                        .WithMany()
+                        .WithMany("UserGroups")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -853,6 +828,11 @@ namespace Shamsheer.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Message");
+                });
+
+            modelBuilder.Entity("Shamsheer.Domain.Entities.Authorizations.Groups.GroupRole", b =>
+                {
+                    b.Navigation("UserGroups");
                 });
 
             modelBuilder.Entity("Shamsheer.Domain.Entities.Chats.Channel", b =>

@@ -47,7 +47,7 @@ public class UsersController : BaseController
     public async Task<IActionResult> PostAsync([FromBody] UserForCreationDto dto)
         => Ok(await _userService.AddAsync(dto));
 
-    [Authorize]
+    
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
         => Ok(await _userService.RetrieveAllAsync(@params));

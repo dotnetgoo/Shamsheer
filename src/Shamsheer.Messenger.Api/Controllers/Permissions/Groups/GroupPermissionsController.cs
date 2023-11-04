@@ -3,7 +3,7 @@ using Shamsheer.Domain.Enums.Chats;
 using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.Authorizations;
 
-namespace Shamsheer.Messenger.Api.Controllers.Authorizations.Groups;
+namespace Shamsheer.Messenger.Api.Controllers.Permissions.Groups;
 
 public class GroupPermissionsController : BaseController
 {

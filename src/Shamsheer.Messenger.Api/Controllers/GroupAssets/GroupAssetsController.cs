@@ -17,7 +17,7 @@ public class GroupAssetsController : BaseController
     [HttpPost("{group-id}")]
     public async Task<IActionResult> PostAsync([FromRoute(Name = "group-id")]long groupId, [Required]IFormFile formFile)
         => Ok(await _groupAssetService.CreateAsync(groupId, formFile));
-
+   
     [HttpGet("{group-id}")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "group-id")] long groupId)
         => Ok(await _groupAssetService.RetrieveAllAsync(groupId, @params));
