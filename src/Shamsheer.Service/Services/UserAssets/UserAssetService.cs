@@ -31,8 +31,7 @@ public class UserAssetService : IUserAssetService
     }
     public async Task<UserAssetForResultDto> CreateAsync(IFormFile formFile)
     {
-        //Identify UserId TODO:LOGIC
-        long userId = 1; //Actually this one is takes from jwt token, now we need to give default value
+        long? userId = HttpContextHelper.UserId;
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
@@ -86,7 +85,6 @@ public class UserAssetService : IUserAssetService
 
     public async Task<IEnumerable<UserAssetForResultDto>> RetrieveAllAsync(long userId, PaginationParams @params)
     {
-        //TODO:LOGIC pagination logic
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();

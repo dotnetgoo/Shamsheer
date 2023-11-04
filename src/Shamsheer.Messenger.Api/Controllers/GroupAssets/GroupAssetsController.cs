@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shamsheer.Service.Configurations;
 using Shamsheer.Service.Interfaces.GroupAssets;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shamsheer.Messenger.Api.Controllers.GroupAssets;
 
@@ -13,9 +14,9 @@ public class GroupAssetsController : BaseController
         _groupAssetService = groupAssetService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> PostAsync(IFormFile formFile)
-        => Ok(await _groupAssetService.CreateAsync(formFile));
+    [HttpPost("{group-id}")]
+    public async Task<IActionResult> PostAsync([FromRoute(Name = "group-id")]long groupId, [Required]IFormFile formFile)
+        => Ok(await _groupAssetService.CreateAsync(groupId, formFile));
 
     [HttpGet("{group-id}")]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "group-id")] long groupId)
