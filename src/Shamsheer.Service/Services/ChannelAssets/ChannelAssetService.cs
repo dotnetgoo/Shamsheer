@@ -40,7 +40,7 @@ public  class ChannelAssetService : IChannelAssetService
             .Where(c => c.Id == channelId)
             .FirstOrDefaultAsync();
 
-        if (channel == null)
+        if (channel is null)
             throw new ShamsheerException(404, "Channel is not found");
 
 
@@ -48,7 +48,7 @@ public  class ChannelAssetService : IChannelAssetService
             .Where(c => c.Id == id)
             .FirstOrDefaultAsync();
 
-        if (channelAsste == null)
+        if (channelAsste is null)
             throw new ShamsheerException(404, "Channel is not found");
 
 
@@ -57,14 +57,12 @@ public  class ChannelAssetService : IChannelAssetService
         return true;
     }
 
-    public async Task<ChannelAssetForResultDto> CreateAsync(IFormFile file)
+    public async Task<ChannelAssetForResultDto> CreateAsync(IFormFile file , long channelId)
     {
-        //TODO:LOGIC
-        long channelId = 1; //<= jwt token
         var channel = await _channelRepository.SelectAll()
             .Where(x => x.Id == channelId)
             .FirstOrDefaultAsync();
-        if (channel == null)
+        if (channel is null)
         {
             throw new ShamsheerException(404, "Channel is not found");
         }
@@ -102,7 +100,7 @@ public  class ChannelAssetService : IChannelAssetService
             .Where(c => c.Id == channelId)
         .FirstOrDefaultAsync();
 
-        if (channel == null)
+        if (channel is null)
             throw new ShamsheerException(404, "Channel is not found");
 
         var asset = await _channelAssetRepository.SelectAll()
@@ -118,13 +116,13 @@ public  class ChannelAssetService : IChannelAssetService
             .Where(c => c.Id == channelId)
             .FirstOrDefaultAsync();
 
-        if (channel == null)
+        if (channel is null)
             throw new ShamsheerException(404, "Channel is not found");
             var channelAsset = await _channelAssetRepository.SelectAll()
               .Where(c => c.Id == id)
               .FirstOrDefaultAsync();
 
-            if (channelAsset == null)
+            if (channelAsset is null)
                 throw new ShamsheerException(404, "Channel is not found");
 
             return _mapper.Map<ChannelAssetForResultDto>(channelAsset);

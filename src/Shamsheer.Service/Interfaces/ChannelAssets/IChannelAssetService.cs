@@ -9,7 +9,7 @@ namespace Shamsheer.Service.Interfaces.ChannelAssets;
 public  interface IChannelAssetService
 {
     public Task<bool> RemoveAsync(long channelId, long id);
-    public Task<ChannelAssetForResultDto> CreateAsync(IFormFile file);
+    public Task<ChannelAssetForResultDto> CreateAsync(IFormFile file , long channelId);
     public Task<ChannelAssetForResultDto> RetriveByIdAsync(long channelId, long id);
     public Task<IEnumerable<ChannelAssetForResultDto>> RetriveAllAsync(long channelId, PaginationParams @params);
 
