@@ -29,10 +29,8 @@ public class GroupAssetService : IGroupAssetService
         _groupRepository = groupRepository;
         _groupAssetRepository = groupAssetRepository;
     }
-    public async Task<GroupAssetForResultDto> CreateAsync(IFormFile formFile)
+    public async Task<GroupAssetForResultDto> CreateAsync(long groupId, IFormFile formFile)
     {
-        //Identify GroupId TODO:LOGIC
-        long groupId = 1; //Actually this one is takes from jwt token, now we need to give default value
         var group = await _groupRepository.SelectAll()
             .Where(g => g.Id == groupId)
             .FirstOrDefaultAsync();

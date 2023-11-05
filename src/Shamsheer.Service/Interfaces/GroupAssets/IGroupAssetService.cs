@@ -9,7 +9,7 @@ namespace Shamsheer.Service.Interfaces.GroupAssets;
 public interface IGroupAssetService
 {
     Task<bool> RemoveAsync(long groupId, long id);
-    Task<GroupAssetForResultDto> CreateAsync(IFormFile formFile);
+    Task<GroupAssetForResultDto> CreateAsync(long groupId, IFormFile formFile);
     Task<GroupAssetForResultDto> RetrieveByIdAsync(long groupId, long id);
     Task<IEnumerable<GroupAssetForResultDto>> RetrieveAllAsync(long groupId, PaginationParams @params);
 }
