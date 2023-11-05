@@ -49,7 +49,7 @@ public  class ChannelAssetService : IChannelAssetService
             .FirstOrDefaultAsync();
 
         if (channelAsste is null)
-            throw new ShamsheerException(404, "Channel is not found");
+            throw new ShamsheerException(404, "ChannelAsset is not found");
 
 
         await _channelAssetRepository.DeleteAsync(channelId);
@@ -123,7 +123,7 @@ public  class ChannelAssetService : IChannelAssetService
               .FirstOrDefaultAsync();
 
             if (channelAsset is null)
-                throw new ShamsheerException(404, "Channel is not found");
+                throw new ShamsheerException(404, "ChannelAsset is not found");
 
             return _mapper.Map<ChannelAssetForResultDto>(channelAsset);
     }
