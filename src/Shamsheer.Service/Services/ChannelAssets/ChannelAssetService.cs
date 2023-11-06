@@ -1,18 +1,18 @@
-﻿using AutoMapper;
+﻿using System;
+using System.IO;
+using AutoMapper;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Shamsheer.Service.Helpers;
+using System.Collections.Generic;
 using Shamsheer.Data.IRepositories;
+using Shamsheer.Service.Exceptions;
+using Shamsheer.Service.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Shamsheer.Domain.Entities.Assets;
 using Shamsheer.Service.Configurations;
 using Shamsheer.Service.DTOs.ChannelAssets;
-using Shamsheer.Service.Exceptions;
-using Shamsheer.Service.Helpers;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Shamsheer.Service.Extensions;
 using Shamsheer.Service.Interfaces.ChannelAssets;
 
 namespace Shamsheer.Service.Services.ChannelAssets;
@@ -60,7 +60,7 @@ public  class ChannelAssetService : IChannelAssetService
     public async Task<ChannelAssetForResultDto> CreateAsync(IFormFile file , long channelId)
     {
         var channel = await _channelRepository.SelectAll()
-            .Where(x => x.Id == channelId)
+            .Where(c => c.Id == channelId)
             .FirstOrDefaultAsync();
         if (channel is null)
         {
