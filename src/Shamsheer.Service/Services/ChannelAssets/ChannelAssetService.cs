@@ -57,7 +57,7 @@ public  class ChannelAssetService : IChannelAssetService
         return true;
     }
 
-    public async Task<ChannelAssetForResultDto> CreateAsync(IFormFile file , long channelId)
+    public async Task<ChannelAssetForResultDto> CreateAsync(long channelId , IFormFile file)
     {
         var channel = await _channelRepository.SelectAll()
             .Where(c => c.Id == channelId)
