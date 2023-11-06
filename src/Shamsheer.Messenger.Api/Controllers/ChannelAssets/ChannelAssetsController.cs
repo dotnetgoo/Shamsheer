@@ -17,7 +17,7 @@ public class ChannelAssetsController : BaseController
 
     [HttpPost("{channel-id}")]
     public async Task<IActionResult> PostAsync([FromRoute(Name = "channel-id")] long channelId , [Required] IFormFile file)
-        => Ok(await _channelAssetService.CreateAsync(file , channelId));
+        => Ok(await _channelAssetService.CreateAsync(channelId , file));
 
 
     [HttpGet("{channel-id}")]
