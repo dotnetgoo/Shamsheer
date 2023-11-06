@@ -15,6 +15,7 @@ using Shamsheer.Service.DTOs.Authorizations.ChannelPermissions;
 using Shamsheer.Service.DTOs.Authorizations.Channels;
 using Microsoft.AspNetCore.Http;
 using Shamsheer.Service.DTOs.GroupAssets;
+using Shamsheer.Service.DTOs.ChannelAssets;
 
 namespace Shamsheer.Service.Mappers
 {
@@ -65,6 +66,9 @@ namespace Shamsheer.Service.Mappers
             CreateMap<UserChannel, UserChannelForCreationDto>().ReverseMap();
             CreateMap<UserChannel, UserChannelForResultDto>().ReverseMap();
             CreateMap<UserChannel, UserChannelForUpdateDto>().ReverseMap();
+
+            //ChannelAsset Mapping
+            CreateMap<ChannelAsset,ChannelAssetForResultDto>().ReverseMap();
         }
     }
 }
