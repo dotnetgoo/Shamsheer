@@ -47,7 +47,7 @@ public class ShamsheerDbContext : DbContext
         modelBuilder.ApplyConfiguration(new GroupAssetEntityTypeConfiguration());
 
         modelBuilder.ApplyConfiguration(new ChannelAssetEntityTypeConfiguration());
-             
+
         Task.Run(() =>
         {
             SeedUsers(modelBuilder);
