@@ -38,20 +38,20 @@ public class ShamsheerDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
+        //modelBuilder.ApplyConfiguration(new UserGroupEntityTypeConfiguration());
 
-        modelBuilder.ApplyConfiguration(new UserChannelEntityTypeConfiguration());
+        //modelBuilder.ApplyConfiguration(new UserChannelEntityTypeConfiguration());
 
-        modelBuilder.ApplyConfiguration(new UserAssetEntityTypeConfiguration());
+        //modelBuilder.ApplyConfiguration(new UserAssetEntityTypeConfiguration());
 
-        modelBuilder.ApplyConfiguration(new GroupAssetEntityTypeConfiguration());
+        //modelBuilder.ApplyConfiguration(new GroupAssetEntityTypeConfiguration());
 
-        modelBuilder.ApplyConfiguration(new ChannelAssetEntityTypeConfiguration());
+        //modelBuilder.ApplyConfiguration(new ChannelAssetEntityTypeConfiguration());
 
-        Task.Run(() =>
-        {
-            SeedUsers(modelBuilder);
-        }).Wait();
+        //Task.Run(() =>
+        //{
+        //    SeedUsers(modelBuilder);
+        //}).Wait();
     }
 
     private void SeedUsers(ModelBuilder builder)
@@ -80,30 +80,30 @@ public class ShamsheerDbContext : DbContext
             });
     }
 
-    public void Configure(EntityTypeBuilder<Group> modelBuilder)
-    {
-        modelBuilder.ToTable(nameof(Groups));
-        modelBuilder.HasKey(g => g.Id);
-        modelBuilder.Property(g => g.OwnerId).IsRequired();
-        modelBuilder.Property(g => g.Title).HasMaxLength(64);
-        modelBuilder.Property(g => g.ChatType).IsRequired();
-        modelBuilder.Property(g => g.Username).HasMaxLength(64);
-        modelBuilder.Property(g => g.InviteLink).HasMaxLength(256);
-        modelBuilder.Property(g => g.Description).HasMaxLength(256);
+    //public void Configure(EntityTypeBuilder<Group> modelBuilder)
+    //{
+    //    modelBuilder.ToTable(nameof(Groups));
+    //    modelBuilder.HasKey(g => g.Id);
+    //    modelBuilder.Property(g => g.OwnerId).IsRequired();
+    //    modelBuilder.Property(g => g.Title).HasMaxLength(64);
+    //    modelBuilder.Property(g => g.ChatType).IsRequired();
+    //    modelBuilder.Property(g => g.Username).HasMaxLength(64);
+    //    modelBuilder.Property(g => g.InviteLink).HasMaxLength(256);
+    //    modelBuilder.Property(g => g.Description).HasMaxLength(256);
 
-    }
-    public void Configure(EntityTypeBuilder<User> modelBuilder)
-    {
-        modelBuilder.ToTable(nameof(Users));
-        modelBuilder.HasKey(g => g.Id);
-        modelBuilder.Property(u => u.Email).HasMaxLength(50);
-        modelBuilder.Property(g => g.ChatType).IsRequired();
-        modelBuilder.Property(g => g.Phone).HasMaxLength(50);
-        modelBuilder.Property(g => g.Username).HasMaxLength(64);
-        modelBuilder.Property(g => g.Description).HasMaxLength(256);
-        modelBuilder.Property(g => g.FirstName).HasMaxLength(50).IsRequired();
-        modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
-    }
+    //}
+    //public void Configure(EntityTypeBuilder<User> modelBuilder)
+    //{
+    //    modelBuilder.ToTable(nameof(Users));
+    //    modelBuilder.HasKey(g => g.Id);
+    //    modelBuilder.Property(u => u.Email).HasMaxLength(50);
+    //    modelBuilder.Property(g => g.ChatType).IsRequired();
+    //    modelBuilder.Property(g => g.Phone).HasMaxLength(50);
+    //    modelBuilder.Property(g => g.Username).HasMaxLength(64);
+    //    modelBuilder.Property(g => g.Description).HasMaxLength(256);
+    //    modelBuilder.Property(g => g.FirstName).HasMaxLength(50).IsRequired();
+    //    modelBuilder.Property(g => g.LastName).HasMaxLength(50).HasMaxLength(64);
+    //}
 
    
 

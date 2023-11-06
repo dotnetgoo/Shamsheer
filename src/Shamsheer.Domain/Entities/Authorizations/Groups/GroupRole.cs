@@ -10,7 +10,7 @@ namespace Shamsheer.Domain.Entities.Authorizations.Groups
         public ChatRole ChatRole { get; set; }
 
 
-        public ICollection<UserGroup> UserGroups { get; set; }
+       // public ICollection<GroupRolePermission> GroupRolePermissions { get; set; }
 
     }
 }

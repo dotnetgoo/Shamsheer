@@ -1,4 +1,5 @@
 ﻿using Shamsheer.Domain.Commons;
+using Shamsheer.Domain.Entities.Chats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,8 @@ namespace Shamsheer.Domain.Entities.Authorizations.Groups
         public GroupRole Role { get; set; }
         public long PermissionId { get; set; }
         public GroupPermission Permission { get; set; }
+
+        public long UserGroupId { get; set; }
+        public UserGroup UserGroup { get; set; }
     }
 }
