@@ -11,7 +11,6 @@ namespace Shamsheer.Domain.Entities.Chats
         public long ChannelId { get; set; }
         public Channel Channel { get; set; }
 
-        public long RoleId { get; set; }
-        public ChannelRole ChannelRole { get; set; }
+       
     }
 }
