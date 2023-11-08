@@ -29,10 +29,9 @@ public class UserAssetService : IUserAssetService
         _userRepository = userRepository;
         _userAssetRepository = userAssetRepository;
     }
-    public async Task<UserAssetForResultDto> CreateAsync(IFormFile formFile)
+    public async Task<UserAssetForResultDto> CreateAsync( long userId , IFormFile formFile)
     {
-        //Identify UserId TODO:LOGIC
-        long userId = 1; //Actually this one is takes from jwt token, now we need to give default value
+       
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
