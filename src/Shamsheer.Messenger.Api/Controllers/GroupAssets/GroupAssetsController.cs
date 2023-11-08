@@ -15,18 +15,18 @@ public class GroupAssetsController : BaseController
     }
 
     [HttpPost("{group-id}")]
-    public async Task<IActionResult> PostAsync([FromRoute(Name = "group-id")] long groupId, [Required] IFormFile formFile)
-        => Ok(await _groupAssetService.CreateAsync(groupId,formFile));
-
+    public async Task<IActionResult> PostAsync([FromRoute(Name = "group-id")]long groupId, [Required]IFormFile formFile)
+        => Ok(await _groupAssetService.CreateAsync(groupId, formFile));
+   
     [HttpGet("{group-id}")]
-    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "groupId")] long groupId)
+    public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, [FromRoute(Name = "group-id")] long groupId)
         => Ok(await _groupAssetService.RetrieveAllAsync(groupId, @params));
 
     [HttpGet("{group-id}/{id}")]
-    public async Task<IActionResult> GetAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
+    public async Task<IActionResult> GetAsync([FromRoute(Name = "group-id")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RetrieveByIdAsync(groupId, id));
 
     [HttpDelete("{group-id}/{id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "groupId")] long groupId, [FromRoute(Name = "id")] long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "group-id")] long groupId, [FromRoute(Name = "id")] long id)
         => Ok(await _groupAssetService.RemoveAsync(groupId, id));
 }
