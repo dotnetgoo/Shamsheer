@@ -21,7 +21,7 @@ public class EmailValidationAttribute : ValidationAttribute
             {
                 try
                 {
-                    MailAddress mail = new MailAddress(email);
+                    var mail = new MailAddress(email);
                     return true;
                 }
                 catch (Exception)
