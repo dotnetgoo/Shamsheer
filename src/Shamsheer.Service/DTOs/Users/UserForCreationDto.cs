@@ -8,7 +8,7 @@ public class UserForCreationDto
     public string LastName { get; set; }
 
     [Required]
-    [EmailValidation(ErrorMessage ="Invalid email format!")]
+    [ShEmail(ErrorMessage ="Invalid email format!")]
     public string Email { get; set; }
     public string Phone { get; set; }
 }
