@@ -8,7 +8,7 @@ public class EmailValidationAttribute : ValidationAttribute
 {
     private readonly Regex _emailRegex;
 
-    public EmailValidationAttribute()
+    public ShEmailAttribute()
     {
         _emailRegex = new Regex(@"^(?!.*--)([a-zA-Z0-9_.+-]+)@gmail\.com$", RegexOptions.Compiled);
     }
