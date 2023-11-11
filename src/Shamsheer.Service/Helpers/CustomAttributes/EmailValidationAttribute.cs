@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.ComponentModel.DataAnnotations;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-public class EmailValidationAttribute : ValidationAttribute
+public class ShEmailAttribute : ValidationAttribute
 {
     private readonly Regex _emailRegex;
 
