@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Messenger.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Management.Api", "src\Shamsheer.Management.Api\Shamsheer.Management.Api.csproj", "{6412EDA7-4D98-43DD-A132-24E59B6E592C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shamsheer.Shared", "src\Shamsheer.Shared\Shamsheer.Shared.csproj", "{E10BC5BB-8387-4AA7-A4BD-8ECA19874B8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shamsheer.Shared", "src\Shamsheer.Shared\Shamsheer.Shared.csproj", "{E10BC5BB-8387-4AA7-A4BD-8ECA19874B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7F2EE2F2-6010-4E0C-85F8-C05354E41EEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
