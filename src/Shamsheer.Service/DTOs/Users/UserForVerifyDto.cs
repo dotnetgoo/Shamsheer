@@ -1,7 +1,11 @@
-﻿namespace Shamsheer.Service.DTOs.Users;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Shamsheer.Service.DTOs.Users;
 
 public class UserForVerifyDto
 {
-    public string Email { get; set; } = string.Empty;
+    [Required]
+    [ShEmail(ErrorMessage = "Invalid email format!")]
+    public string Email { get; set; }
     public int Code { get; set; }
 }
