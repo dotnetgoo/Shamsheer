@@ -28,6 +28,8 @@ using Shamsheer.Service.Interfaces.UserChannel;
 using Shamsheer.Service.Services.UserChannels;
 using Shamsheer.Service.Interfaces.ChannelAssets;
 using Shamsheer.Service.Services.ChannelAssets;
+using Shamsheer.Service.Interfaces.Email;
+using Shamsheer.Service.Services.Email;
 
 namespace Shamsheer.Messenger.Api.Extensions;
 
@@ -65,6 +67,9 @@ public static class ServiceExtensions
         services.AddScoped<IChannelPermissionRepository, ChannelPermissionRepository>();
         services.AddScoped<IUserChannelRepository, UserChannelRepository>();
 
+        services.AddMemoryCache();
+
+        services.AddScoped<IEmailVerificationService,EmailVerificationService>();
     }
 
     public static void AddJwtService(this IServiceCollection services, IConfiguration configuration)
