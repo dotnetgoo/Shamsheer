@@ -29,9 +29,11 @@ public class UserAssetService : IUserAssetService
         _userRepository = userRepository;
         _userAssetRepository = userAssetRepository;
     }
-    public async Task<UserAssetForResultDto> CreateAsync(IFormFile formFile)
+    public async Task<UserAssetForResultDto> CreateAsync( long userId , IFormFile formFile)
     {
+
         long? userId = HttpContextHelper.UserId;
+
         var user = await _userRepository.SelectAll()
             .Where(u => u.Id == userId)
             .FirstOrDefaultAsync();
