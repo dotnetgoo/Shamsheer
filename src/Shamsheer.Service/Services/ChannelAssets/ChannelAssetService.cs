@@ -61,6 +61,7 @@ public  class ChannelAssetService : IChannelAssetService
     {
         var channel = await _channelRepository.SelectAll()
             .Where(c => c.Id == channelId)
+            .AsNoTracking()
             .FirstOrDefaultAsync();
         if (channel is null)
         {
@@ -98,13 +99,15 @@ public  class ChannelAssetService : IChannelAssetService
     {
         var channel = await _channelRepository.SelectAll()
             .Where(c => c.Id == channelId)
-        .FirstOrDefaultAsync();
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
 
         if (channel is null)
             throw new ShamsheerException(404, "Channel is not found");
 
         var asset = await _channelAssetRepository.SelectAll()
             .ToPagedList(@params)
+            .AsNoTracking()
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<ChannelAssetForResultDto>>(asset);
@@ -113,14 +116,17 @@ public  class ChannelAssetService : IChannelAssetService
     public async Task<ChannelAssetForResultDto> RetriveByIdAsync(long channelId, long id)
     {
         var channel = await _channelRepository.SelectAll()
-            .Where(c => c.Id == channelId)
-            .FirstOrDefaultAsync();
+           .Where(c => c.Id == channelId)
+           .AsNoTracking()
+           .FirstOrDefaultAsync();
 
-        if (channel is null)
-            throw new ShamsheerException(404, "Channel is not found");
+            if (channel is null)
+                 throw new ShamsheerException(404, "Channel is not found");
+
             var channelAsset = await _channelAssetRepository.SelectAll()
-              .Where(c => c.Id == id)
-              .FirstOrDefaultAsync();
+                .Where(c => c.Id == id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
 
             if (channelAsset is null)
                 throw new ShamsheerException(404, "ChannelAsset is not found");
