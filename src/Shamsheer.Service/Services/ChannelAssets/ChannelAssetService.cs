@@ -44,15 +44,15 @@ public  class ChannelAssetService : IChannelAssetService
             throw new ShamsheerException(404, "Channel is not found");
 
 
-        var channelAsste = await _channelRepository.SelectAll()
+        var channelAsset = await _channelRepository.SelectAll()
             .Where(c => c.Id == id)
             .FirstOrDefaultAsync();
 
-        if (channelAsste is null)
+        if (channelAsset is null)
             throw new ShamsheerException(404, "ChannelAsset is not found");
 
 
-        await _channelAssetRepository.DeleteAsync(channelId);
+        await _channelAssetRepository.DeleteAsync(channelAsset.Id);
 
         return true;
     }
